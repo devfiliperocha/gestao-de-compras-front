@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    [
+      "babel-plugin-styled-components", { "ssr": true, "displayName": true }
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-private-methods"
+  ],
+  "presets": ["next/babel", "@babel/preset-typescript"],
+  "env":{
+    "test": {
+      "plugins":[
+        [
+          "babel-plugin-styled-components", { "ssr": false, "displayName": false }
+        ]
+      ]
+    }
+  }
+}

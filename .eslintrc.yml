@@ -1,0 +1,38 @@
+env:
+  browser: true
+  es2021: true
+  jest: true
+  node: true # evitar avisos pela configuração com commonjs do js
+extends:
+  - "eslint:recommended"
+  - "plugin:react/recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:prettier/recommended"
+parser: "@typescript-eslint/parser"
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 12
+  sourceType: module
+plugins:
+  - react
+  - react-hooks
+  - "@typescript-eslint"
+rules:
+  no-console: 1
+  # Explicitar retorno em todas as funções exportadas, mesmo que o tipo seja implícito. Desabilitado pois o typescript consegue entender o retorno.
+  "@typescript-eslint/explicit-module-boundary-types": off
+
+  react-hooks/exhaustive-deps: warn
+
+  # Regra para verificar o uso de hooks corretamente
+  react-hooks/rules-of-hooks: error
+
+  # Desabilitada para não ficar avisando sobre os props, pois já estamos usando typescript
+  react/prop-types: off
+
+  # Regra que dita que o react para ser utilizado no jsx, precisa ser importado. Desabilitada pois o react já está em escopo global no next
+  react/react-in-jsx-scope: off
+settings:
+  react:
+    version: detect

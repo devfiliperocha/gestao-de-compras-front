@@ -1,0 +1,33 @@
+{
+  "name": "JP Gestão de Compras",
+  "short_name": "JP Gestão de Compras",
+  "icons": [
+    {
+      "src": "/img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/img/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/maskable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "background_color": "#06092B",
+  "description": "Sistema para otimização do fluxo de gestão de compras para órgãos públicos.",
+  "display": "fullscreen",
+  "start_url": "/",
+  "theme_color": "#06092B"
+}
