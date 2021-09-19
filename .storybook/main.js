@@ -8,6 +8,16 @@ module.exports = {
   ],
   webpackFinal: (config) => {
     config.resolve.modules.push(`${process.cwd()}/src`)
-    return config
+    return {
+      ...config,
+        resolve: {
+          ...config.resolve,
+          alias: {
+            ...config.resolve.alias,
+            "@emotion/core": require.resolve('@emotion/react'),
+            "emotion-theming": require.resolve('@emotion/react'),
+          },
+        },
+    }
   }
 }
