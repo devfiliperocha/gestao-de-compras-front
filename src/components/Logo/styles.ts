@@ -11,10 +11,10 @@ const wrapperModifiers = {
     width: 57rem;
   `,
   dark: () => css`
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.palette.primary.main};
   `,
   light: () => css`
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.palette.common.white};
   `,
   hideOnMobile: () => css`
     ${media.lessThan('medium')`
