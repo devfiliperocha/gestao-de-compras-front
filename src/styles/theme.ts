@@ -55,6 +55,12 @@ const material = {
       dark: '#006a96',
       contrastText: '#1D1D1D'
     },
+    accent: {
+      light: '#ffd952',
+      main: '#f5a818',
+      dark: '#bd7900',
+      contrastText: '#1D1D1D'
+    },
     error: {
       light: '#ff7a5d',
       main: '#f54531',
@@ -107,19 +113,19 @@ const material = {
       lineHeight: 1.167,
       letterSpacing: '-0.01562em'
     },
-    h2: {
+    h1_mobile: {
       fontWeight: custom.font.medium,
       fontSize: custom.font.sizes.xxlarge,
       lineHeight: 1.2,
       letterSpacing: '-0.00833em'
     },
-    h3: {
+    h2: {
       fontWeight: custom.font.normal,
       fontSize: custom.font.sizes.xlarge,
       lineHeight: 1.167,
       letterSpacing: '0em'
     },
-    h4: {
+    h3: {
       fontWeight: custom.font.normal,
       fontSize: custom.font.sizes.large,
       lineHeight: 1.235,
