@@ -6,7 +6,7 @@ describe('<Heading/>', () => {
   it('should render a heading with a line to the left side when passed', () => {
     renderWithTheme(<Heading lineLeft>Jp Sistemas</Heading>)
     expect(screen.getByRole('heading', { name: /Jp Sistemas/i })).toHaveStyle({
-      'border-left': '0.5rem solid #F5A818'
+      'border-left': '0.5rem solid #f5a818'
     })
   })
   it('should not render a line to the left side by default', () => {
@@ -14,7 +14,7 @@ describe('<Heading/>', () => {
     expect(
       screen.getByRole('heading', { name: /Jp Sistemas/i })
     ).not.toHaveStyle({
-      'border-left': '0.5rem solid #F5A818'
+      'border-left': '0.5rem solid #f5a818'
     })
   })
 
