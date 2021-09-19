@@ -1,4 +1,4 @@
-export default {
+const custom = {
   grid: {
     container: '108.5rem',
     gutter: '1.9rem'
@@ -22,33 +22,6 @@ export default {
       xxxlarge: '3.8rem'
     }
   },
-  colors: {
-    mainBg: '#F1F1F1',
-    white: '#FCFCFC',
-    black: '#1D1D1D',
-    lightGray: '#F1F1F1',
-    gray: '#656565',
-    mediumGray: '#DEDEDE',
-    darkGray: '#2E2F42',
-    primary: '#204372',
-    mediumPrimary: '#778da3',
-    darkPrimary: '#001d46',
-    lightPrimary: '#526ea1',
-    secondary: '#3E98C7',
-    darkSecondary: '#006a96',
-    lightSecondary: '#77c9fa',
-    accent: '#F5A818',
-    darkAccent: '#bd7900',
-    lightAccent: '#ffd952',
-    background: '#F1F1F1',
-    secondaryBackground: '#DEDEDE',
-    surface: '#FCFCFC',
-    error: '#F54531',
-    success: '#36B369',
-    pending: '#C6F500',
-    textInBackground: '#656565',
-    textInSurface: '#1D1D1D'
-  },
   spacings: {
     xxsmall: '0.8rem',
     xsmall: '1.6rem',
@@ -67,3 +40,136 @@ export default {
     alwaysOnTop: 50
   }
 }
+
+const material = {
+  palette: {
+    primary: {
+      light: '#526ea1',
+      main: '#204372',
+      dark: '#001d46',
+      contrastText: '#FCFCFC'
+    },
+    secondary: {
+      light: '#77c9fa',
+      main: '#3e98c7',
+      dark: '#006a96',
+      contrastText: '#1D1D1D'
+    },
+    accent: {
+      light: '#ffd952',
+      main: '#f5a818',
+      dark: '#bd7900',
+      contrastText: '#1D1D1D'
+    },
+    error: {
+      light: '#ff7a5d',
+      main: '#f54531',
+      dark: '#ba0005',
+      contrastText: '#1D1D1D'
+    },
+    warning: {
+      light: '#fffbb0',
+      main: '#efc880',
+      dark: '#bb9752',
+      contrastText: '#1D1D1D'
+    },
+    info: {
+      light: '#ff7a5d',
+      main: '#f54531',
+      dark: '#ba0005',
+      contrastText: '#1D1D1D'
+    },
+    success: {
+      light: '#6ee698',
+      main: '#36B369',
+      dark: '#00823d',
+      contrastText: '#1D1D1D'
+    },
+    text: {
+      primary: '#1D1D1D',
+      secondary: '#656565'
+    },
+    divider: '#204372',
+    background: {
+      paper: '#FCFCFC',
+      default: '#F1F1F1'
+    },
+    common: {
+      white: '#FCFCFC',
+      black: '#1D1D1D'
+    }
+  },
+  shape: { borderRadius: custom.border.radius },
+  typography: {
+    htmlFontSize: custom.font.sizes.medium,
+    fontFamily: custom.font.family,
+    fontSize: custom.font.sizes.small,
+    fontWeightRegular: custom.font.normal,
+    fontWeightMedium: custom.font.medium,
+    fontWeightBold: custom.font.bold,
+    h1: {
+      fontWeight: custom.font.bold,
+      fontSize: custom.font.sizes.xxxlarge,
+      lineHeight: 1.167,
+      letterSpacing: '-0.01562em'
+    },
+    h1_mobile: {
+      fontWeight: custom.font.medium,
+      fontSize: custom.font.sizes.xxlarge,
+      lineHeight: 1.2,
+      letterSpacing: '-0.00833em'
+    },
+    h2: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.xlarge,
+      lineHeight: 1.167,
+      letterSpacing: '0em'
+    },
+    h3: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.large,
+      lineHeight: 1.235,
+      letterSpacing: '0.00735em'
+    },
+    subtitle1: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.small,
+      lineHeight: 1.75,
+      letterSpacing: '0.00938em'
+    },
+    body1: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.large,
+      lineHeight: 1.5,
+      letterSpacing: '0.00938em'
+    },
+    body2: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.small,
+      lineHeight: 1.43,
+      letterSpacing: '0.01071em'
+    },
+    button: {
+      fontWeight: custom.font.medium,
+      fontSize: custom.font.sizes.medium,
+      lineHeight: 1.75,
+      letterSpacing: '0.02857em',
+      textTransform: 'uppercase'
+    },
+    caption: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.xsmall,
+      lineHeight: 1.66,
+      letterSpacing: '0.03333em'
+    },
+    overline: {
+      fontWeight: custom.font.normal,
+      fontSize: custom.font.sizes.xsmall,
+      lineHeight: 2.66,
+      letterSpacing: '0.08333em',
+      textTransform: 'uppercase'
+    }
+  },
+  ...custom
+}
+export default material
