@@ -3,7 +3,7 @@ import Button from '.'
 
 describe('<Button/>', () => {
   it('should render the button', () => {
-    const { container } = render(<Button />)
+    const { container } = render(<Button>Button</Button>)
     expect(screen.getByRole('button', { name: /Button/i })).toBeInTheDocument()
     expect(container.firstChild).toMatchSnapshot()
   })
