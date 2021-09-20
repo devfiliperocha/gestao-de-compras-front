@@ -1,4 +1,5 @@
 import { Button as ButtonBase, IconProps } from '@material-ui/core'
+import React from 'react'
 import * as S from './styles' /** S = Styles */
 
 type ButtonBaseProps = Partial<typeof ButtonBase>
@@ -34,18 +35,21 @@ export type ButtonProps = {
   variant?: Variants
   leftIcon?: IconProps
   rightIcon?: IconProps
+  onClick?: () => (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Button = ({
   children,
   variant = 'primary',
   leftIcon,
-  rightIcon
+  rightIcon,
+  ...props
 }: ButtonProps) => (
   <S.Wrapper
     {...variantsConfig[variant]}
     endIcon={rightIcon}
     startIcon={leftIcon}
+    {...props}
   >
     {!!children && <span>{children} </span>}
   </S.Wrapper>
