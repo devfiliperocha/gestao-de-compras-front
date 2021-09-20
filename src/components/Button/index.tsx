@@ -18,7 +18,7 @@ const variantsConfig: Record<Variants, ButtonBaseProps> = {
     size: 'medium'
   },
   link: {
-    color: 'accent',
+    color: 'warning',
     variant: 'text',
     size: 'medium'
   },
