@@ -7,6 +7,7 @@ export type ButtonProps = {
   variant?: 'contained' | 'outlined' | 'text'
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode
+  onClick?: () => (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Button = ({
@@ -14,7 +15,8 @@ const Button = ({
   color = 'primary',
   variant = 'contained',
   iconLeft,
-  iconRight
+  iconRight,
+  ...props
 }: ButtonProps) => (
   <S.Wrapper
     color={color}
@@ -22,6 +24,7 @@ const Button = ({
     startIcon={iconLeft}
     endIcon={iconRight}
     disableElevation
+    {...props}
   >
     {!!children && <span>{children} </span>}
   </S.Wrapper>
