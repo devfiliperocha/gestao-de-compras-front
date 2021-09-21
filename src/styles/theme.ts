@@ -43,6 +43,7 @@ const custom = {
 
 const material = {
   palette: {
+    contrastThreshold: 5,
     primary: {
       light: '#526ea1',
       main: '#204372',
@@ -68,15 +69,9 @@ const material = {
       contrastText: '#1D1D1D'
     },
     warning: {
-      light: '#fffbb0',
-      main: '#efc880',
-      dark: '#bb9752',
-      contrastText: '#1D1D1D'
-    },
-    info: {
-      light: '#ff7a5d',
-      main: '#f54531',
-      dark: '#ba0005',
+      light: '#ffd952',
+      main: '#f5a818',
+      dark: '#bd7900',
       contrastText: '#1D1D1D'
     },
     success: {

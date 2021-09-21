@@ -6,30 +6,29 @@ export default {
   title: 'Button',
   component: Button,
   argTypes: {
-    leftIcon: { type: '' },
-    rightIcon: { type: '' }
+    iconLeft: { table: { disable: true } },
+    iconRight: { table: { disable: true } }
   }
 } as Meta
 
-export const Basic: Story<ButtonProps> = (args) => <Button {...args} />
-
+export const Basic: Story<ButtonProps> = (args) => (
+  <Button {...args}>BUTTON</Button>
+)
 export const IconLeft: Story<ButtonProps> = (args) => (
-  <Button {...args} leftIcon={<PlaylistAddCheckOutlined />} />
+  <Button iconLeft={<PlaylistAddCheckOutlined />} {...args}>
+    ICON LEFT
+  </Button>
 )
 export const IconRight: Story<ButtonProps> = (args) => (
-  <Button {...args} rightIcon={<PlaylistAddCheckOutlined />} />
+  <Button iconRight={<PlaylistAddCheckOutlined />} {...args}>
+    ICON RIGHT
+  </Button>
 )
 
-Basic.args = {
-  children: 'BASIC',
-  variant: 'primary'
+const defaultArgs: Pick<ButtonProps, 'color' | 'variant'> = {
+  color: 'primary',
+  variant: 'contained'
 }
-
-IconLeft.args = {
-  children: 'ICON LEFT',
-  variant: 'primary'
-}
-IconRight.args = {
-  children: 'ICON RIGHT',
-  variant: 'primary'
-}
+Basic.args = defaultArgs
+IconLeft.args = defaultArgs
+IconRight.args = defaultArgs
