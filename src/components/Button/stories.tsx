@@ -7,7 +7,8 @@ export default {
   component: Button,
   argTypes: {
     iconLeft: { table: { disable: true } },
-    iconRight: { table: { disable: true } }
+    iconRight: { table: { disable: true } },
+    onClick: { table: { disable: true } }
   }
 } as Meta
 
