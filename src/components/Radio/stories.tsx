@@ -10,3 +10,6 @@ export default {
 export const Basic: Story = (args) => (
   <Radio {...args} onChange={action('Check!')} />
 )
+Basic.args = {
+  checked: false
+}

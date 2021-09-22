@@ -10,3 +10,8 @@ export default {
 export const Basic: Story = (args) => (
   <Checkbox {...args} onChange={action('Check!')} />
 )
+
+Basic.args = {
+  checked: false,
+  indeterminate: false
+}
