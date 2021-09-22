@@ -1,5 +1,5 @@
 import { PlayArrow } from '@material-ui/icons'
-import { screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 import Button from '.'
 
@@ -22,5 +22,13 @@ describe('<Button/>', () => {
       <Button iconRight={<PlayArrow data-testid="icon" />}>Button</Button>
     )
     expect(screen.getByTestId('icon')).toBeInTheDocument()
+  })
+
+  it('should fire click event on click', () => {
+    const handleClick = jest.fn()
+    renderWithTheme(<Button onClick={handleClick}>Button</Button>)
+    const component = screen.getByRole('button')
+    fireEvent.click(component)
+    expect(handleClick).toBeCalledTimes(1)
   })
 })

@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from '.'
+import Button, { ButtonPropsBase } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { PlaylistAddCheckOutlined } from '@material-ui/icons'
 
@@ -12,21 +12,21 @@ export default {
   }
 } as Meta
 
-export const Basic: Story<ButtonProps> = (args) => (
+export const Basic: Story<ButtonPropsBase> = (args) => (
   <Button {...args}>BUTTON</Button>
 )
-export const IconLeft: Story<ButtonProps> = (args) => (
+export const IconLeft: Story<ButtonPropsBase> = (args) => (
   <Button iconLeft={<PlaylistAddCheckOutlined />} {...args}>
     ICON LEFT
   </Button>
 )
-export const IconRight: Story<ButtonProps> = (args) => (
+export const IconRight: Story<ButtonPropsBase> = (args) => (
   <Button iconRight={<PlaylistAddCheckOutlined />} {...args}>
     ICON RIGHT
   </Button>
 )
 
-const defaultArgs: Pick<ButtonProps, 'color' | 'variant'> = {
+const defaultArgs: Pick<ButtonPropsBase, 'color' | 'variant'> = {
   color: 'primary',
   variant: 'contained'
 }
