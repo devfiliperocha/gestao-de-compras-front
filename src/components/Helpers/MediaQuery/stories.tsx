@@ -2,7 +2,7 @@ import MediaQuery from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'MediaQuery',
+  title: 'Design System/Helpers/MediaQuery',
   component: MediaQuery
 } as Meta
 

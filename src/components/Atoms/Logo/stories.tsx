@@ -2,7 +2,7 @@ import Logo, { LogoProps } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Logo',
+  title: 'Design System/Atoms/Logo',
   component: Logo
 } as Meta
 

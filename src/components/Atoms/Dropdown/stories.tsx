@@ -52,7 +52,7 @@ const topFilms = [
 ]
 
 export default {
-  title: 'Dropdown',
+  title: 'Design System/Atoms/Dropdown',
   component: Dropdown,
   argTypes: {
     options: { table: { disable: true } },

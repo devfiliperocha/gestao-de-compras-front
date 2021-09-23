@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0'
 import { PlaylistAddCheckOutlined } from '@material-ui/icons'
 
 export default {
-  title: 'Button',
+  title: 'Design System/Atoms/Button',
   component: Button,
   argTypes: {
     iconLeft: { table: { disable: true } },

@@ -2,7 +2,7 @@ import Main from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Main',
+  title: 'Design System/Pages/Main',
   component: Main
 } as Meta
 

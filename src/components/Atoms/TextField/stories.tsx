@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0'
 import { LockOutlined, PersonOutlined } from '@material-ui/icons'
 
 export default {
-  title: 'TextField',
+  title: 'Design System/Atoms/TextField',
   component: TextField,
   argTypes: {
     value: { table: { disable: true } },

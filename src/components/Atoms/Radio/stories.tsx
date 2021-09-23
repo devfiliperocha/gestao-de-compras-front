@@ -1,14 +1,14 @@
-import Switch from '.'
+import Radio from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'Switch',
-  component: Switch
+  title: 'Design System/Atoms/Radio',
+  component: Radio
 } as Meta
 
 export const Basic: Story = (args) => (
-  <Switch {...args} onChange={action('Check!')} />
+  <Radio {...args} onChange={action('Check!')} />
 )
 Basic.args = {
   checked: false
