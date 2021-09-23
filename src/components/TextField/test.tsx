@@ -13,13 +13,18 @@ describe('<TextField/>', () => {
     renderWithTheme(<TextField value="TESTE" />)
     expect(screen.getByRole('textbox')).toHaveValue('TESTE')
   })
-  it('should fire onChange event on change Input', async () => {
+  it('should fire onChange event on change Input', () => {
     const handleInput = jest.fn()
     renderWithTheme(<TextField onChange={handleInput} />)
     const component = screen.getByRole('textbox')
-    await userEvent.type(component, 'TESTE')
+    userEvent.type(component, 'TESTE')
 
     expect(handleInput).toHaveBeenCalledTimes(5)
     expect(component).toHaveValue('TESTE')
+  })
+
+  it('should render an error message', () => {
+    renderWithTheme(<TextField helperText={'ERRO!'} error={true} />)
+    expect(screen.getByText('ERRO!')).toHaveClass('Mui-error')
   })
 })

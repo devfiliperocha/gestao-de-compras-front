@@ -4,6 +4,8 @@ import * as S from './styles' /** S = Styles */
 
 export type TextFieldPropsBase = {
   value?: string
+  iconLeft?: React.ReactNode
+  iconRight?: React.ReactNode
 } & Pick<
   TextFieldProps,
   'label' | 'error' | 'helperText' | 'onChange' | 'inputProps'
@@ -15,6 +17,8 @@ const TextField = ({
   error = false,
   helperText = '',
   onChange,
+  iconLeft,
+  iconRight,
   ...props
 }: TextFieldPropsBase) => {
   const [atualValue, setValue] = useState(value)
@@ -37,6 +41,10 @@ const TextField = ({
         sx: {
           display: error ? 'block' : 'none'
         }
+      }}
+      InputProps={{
+        startAdornment: iconLeft,
+        endAdornment: iconRight
       }}
       {...props}
     />

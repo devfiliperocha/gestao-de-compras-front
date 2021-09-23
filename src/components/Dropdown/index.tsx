@@ -61,7 +61,7 @@ const Dropdown = ({
         !isLoading && (
           <KeyboardArrowDown
             sx={{ fontSize: 30, padding: '0px' }}
-            color="warning"
+            color="accent"
           />
         )
       }
@@ -76,7 +76,7 @@ const Dropdown = ({
               <>
                 {loading ? (
                   <CircularProgress
-                    color="warning"
+                    color="accent"
                     size={20}
                     sx={{ marginRight: '1rem' }}
                   />
