@@ -2,11 +2,13 @@
 import {
   TextField,
   CircularProgress,
-  AutocompleteChangeReason
+  AutocompleteChangeReason,
+  Box
 } from '@material-ui/core'
 import { KeyboardArrowDown } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import * as S from './styles' /** S = Styles */
+import { useTheme } from '@material-ui/core/styles'
 
 export type DropDownProps = {
   options: ReadonlyArray<unknown>
@@ -32,6 +34,7 @@ const Dropdown = ({
 }: DropDownProps) => {
   const [isLoading, setLoading] = useState(loading)
   const [isOpen, setOpen] = useState(open)
+  const theme = useTheme()
 
   useEffect(() => {
     setLoading(loading)
@@ -86,6 +89,18 @@ const Dropdown = ({
             )
           }}
         />
+      )}
+      renderOption={(props, option: any) => (
+        <li {...props}>
+          <Box
+            sx={{
+              borderBottom: `thin solid ${theme.palette.info.light}`,
+              flexGrow: 1
+            }}
+          >
+            {option[listLabelKey]}
+          </Box>
+        </li>
       )}
     />
   )
