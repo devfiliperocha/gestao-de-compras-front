@@ -21,7 +21,7 @@ const Radio = ({ checked = false, onChange }: RadioPropsBase) => {
       onChange={onChange}
       onClick={() => toggleCheck(isChecked)}
       checked={isChecked}
-      color="warning"
+      color="accent"
     />
   )
 }

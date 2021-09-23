@@ -44,6 +44,26 @@ const GlobalStyles = createGlobalStyle`
       font-family: ${theme.typography.fontFamily};
       font-size: ${theme.typography.htmlFontSize};
     }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: ${theme.palette.background.secondary};
+      border-radius: 100px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: ${theme.palette.primary.main};
+      border-radius: 100px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${theme.palette.primary.dark};
+    }
   `}
 
 `

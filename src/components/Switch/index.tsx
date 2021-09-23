@@ -20,7 +20,7 @@ const Switch = ({ checked = false, onChange }: SwitchPropsBase) => {
       onChange={onChange}
       onClick={() => toggleCheck(isChecked)}
       checked={isChecked}
-      color="warning"
+      color="accent"
     />
   )
 }

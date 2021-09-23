@@ -4,7 +4,14 @@ import * as S from './styles' /** S = Styles */
 
 export type ButtonPropsBase = {
   children?: React.ReactNode
-  color?: 'primary' | 'secondary' | 'info' | 'error' | 'success' | 'warning'
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'info'
+    | 'error'
+    | 'success'
+    | 'warning'
   variant?: 'contained' | 'outlined' | 'text'
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode

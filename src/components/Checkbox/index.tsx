@@ -27,7 +27,7 @@ const Checkbox = ({
       onClick={() => toggleCheck(isChecked)}
       checked={isChecked}
       indeterminate={indeterminate}
-      color="warning"
+      color="accent"
     />
   )
 }
