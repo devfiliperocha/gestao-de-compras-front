@@ -4,7 +4,7 @@ const fontSizes = {
   medium: '1.6rem',
   large: '1.8rem',
   xlarge: '2.0rem',
-  xxlarge: '2.4rem',
+  xxlarge: '2.2rem',
   xxxlarge: '3.8rem'
 }
 const fontWeights = {
@@ -108,8 +108,8 @@ const material = {
       letterSpacing: '-0.00833em'
     },
     h2: {
-      fontWeight: fontWeights.normal,
-      fontSize: fontSizes.xlarge,
+      fontWeight: fontWeights.bold,
+      fontSize: fontSizes.xxlarge,
       lineHeight: 1.167,
       letterSpacing: '0em'
     },
