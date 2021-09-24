@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  TextField,
-  CircularProgress,
-  AutocompleteChangeReason,
-  Box
-} from '@material-ui/core'
-import { KeyboardArrowDown } from '@material-ui/icons'
+import { AutocompleteChangeReason, Box } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 import * as S from './styles' /** S = Styles */
 import { useTheme } from '@material-ui/core/styles'
+import Loading from 'components/Atoms/Loading'
+import Icon from 'components/Atoms/Icon'
+import TextField from 'components/Atoms/TextField'
 
 export type DropDownProps = {
   options: ReadonlyArray<unknown>
@@ -61,35 +58,13 @@ const Dropdown = ({
       clearText="Limpar"
       color="info"
       popupIcon={
-        !isLoading && (
-          <KeyboardArrowDown
-            sx={{ fontSize: 30, padding: '0px' }}
-            color="accent"
-          />
+        !isLoading ? (
+          <Icon name="KeyboardArrowDown" size={30} variant="accent" />
+        ) : (
+          <Loading variant="accent" size={20} />
         )
       }
-      renderInput={(params) => (
-        <TextField
-          color="info"
-          {...params}
-          label={label}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress
-                    color="accent"
-                    size={20}
-                    sx={{ marginRight: '1rem' }}
-                  />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            )
-          }}
-        />
-      )}
+      renderInput={(params) => <TextField {...params} label={label} />}
       renderOption={(props, option: any) => (
         <li {...props}>
           <Box

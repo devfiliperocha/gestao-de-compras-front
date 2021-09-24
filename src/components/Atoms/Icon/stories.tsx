@@ -9,12 +9,12 @@ export default {
     name: {
       control: {
         type: 'select',
-        options: iconTypes
+        options: iconTypes.slice(0, 50)
       }
     }
   },
   args: {
-    name: 'CameraFront',
+    name: 'KeyboardArrowDown',
     size: 40,
     variant: 'primary'
   }

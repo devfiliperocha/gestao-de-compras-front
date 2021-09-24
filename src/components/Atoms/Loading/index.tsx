@@ -6,7 +6,12 @@ export type LoadingProps = {
 }
 
 const Loading = ({ size = 30, variant = 'primary' }: LoadingProps) => (
-  <S.Wrapper color={variant} size={size} />
+  <S.Wrapper
+    color={variant}
+    size={size}
+    sx={{ margin: '0.3rem' }}
+    thickness={5.7}
+  />
 )
 
 export default Loading

@@ -21,7 +21,11 @@ export type IconProps = {
 const Icon = ({ name, size = 30, variant = 'primary', onClick }: IconProps) => {
   const IconComponent = (Icons as any)[name]
   return (
-    <S.Wrapper onClick={onClick} color={variant} sx={{ fontSize: size }}>
+    <S.Wrapper
+      onClick={onClick}
+      color={variant}
+      sx={{ fontSize: size, padding: '0px' }}
+    >
       <IconComponent fontSize="inherit" />
     </S.Wrapper>
   )
