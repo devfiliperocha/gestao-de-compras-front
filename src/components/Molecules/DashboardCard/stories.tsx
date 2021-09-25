@@ -5,7 +5,7 @@ export default {
   title: 'Design System/Molecules/DashboardCard',
   component: DashboardCard,
   args: {
-    icon: 'LocalShippingOutlined',
+    icon: 'VehicleTruckProfile',
     title: 'Fornecedores'
   }
 } as Meta

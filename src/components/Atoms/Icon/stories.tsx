@@ -1,5 +1,11 @@
-import Icon, { IconProps, iconTypes } from '.'
+import Icon, { IconProps } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
+
+import * as IconsRegular from '@styled-icons/fluentui-system-regular'
+import * as IconsFilled from '@styled-icons/fluentui-system-filled'
+
+const iconRegularTypes = Object.keys(IconsRegular)
+const iconFilledTypes = Object.keys(IconsFilled)
 
 export default {
   title: 'Design System/Atoms/Icon',
@@ -9,12 +15,14 @@ export default {
     name: {
       control: {
         type: 'select',
-        options: iconTypes.slice(0, 50)
+        options: iconRegularTypes
+          .slice(0, 10)
+          .concat(iconFilledTypes.slice(0, 10))
       }
     }
   },
   args: {
-    name: 'KeyboardArrowDown',
+    name: 'ArrowDown',
     size: 40,
     variant: 'primary'
   }

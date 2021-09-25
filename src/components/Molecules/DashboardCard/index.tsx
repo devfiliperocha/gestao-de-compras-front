@@ -4,19 +4,18 @@ import Icon from 'components/Atoms/Icon'
 
 export type DashboardCardProps = {
   icon:
-    | 'LocalShippingOutlined'
-    | 'AccountBalanceOutlined'
-    | 'DescriptionOutlined'
-    | 'AccountBalanceOutlined'
-    | 'ReceiptOutlined'
-    | 'InsertChartOutlinedOutlined'
+    | 'VehicleTruckProfile'
+    | 'BuildingGovernment'
+    | 'DocumentOnePage'
+    | 'Receipt'
+    | 'ChartPerson'
   title: string
 }
 
 const DashboardCard = ({ icon, title }: DashboardCardProps) => (
   <S.Wrapper>
     <S.Card>
-      <Icon name={icon} size={85} />
+      <Icon type="regular" name={icon} size={85} />
       <Typography color="primary" variant="h2">
         {title}
       </Typography>

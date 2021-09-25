@@ -1,6 +1,6 @@
 import Button, { ButtonPropsBase } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
-import { PlaylistAddCheckOutlined } from '@material-ui/icons'
+import Icon from 'components/Atoms/Icon'
 
 export default {
   title: 'Design System/Atoms/Button',
@@ -16,12 +16,12 @@ export const Basic: Story<ButtonPropsBase> = (args) => (
   <Button {...args}>BUTTON</Button>
 )
 export const IconLeft: Story<ButtonPropsBase> = (args) => (
-  <Button iconLeft={<PlaylistAddCheckOutlined />} {...args}>
+  <Button iconLeft={<Icon name="AppFolder" variant="white" />} {...args}>
     ICON LEFT
   </Button>
 )
 export const IconRight: Story<ButtonPropsBase> = (args) => (
-  <Button iconRight={<PlaylistAddCheckOutlined />} {...args}>
+  <Button iconRight={<Icon name="AppFolder" variant="white" />} {...args}>
     ICON RIGHT
   </Button>
 )

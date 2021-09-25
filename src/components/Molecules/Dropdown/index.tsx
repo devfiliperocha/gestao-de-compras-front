@@ -59,7 +59,7 @@ const Dropdown = ({
       color="info"
       popupIcon={
         !isLoading ? (
-          <Icon name="KeyboardArrowDown" size={30} variant="accent" />
+          <Icon name="ChevronDown" size={30} variant="accent" />
         ) : (
           <Loading variant="accent" size={20} />
         )

@@ -4,10 +4,10 @@ import DashboardCard from '.'
 
 describe('<DashboardCard/>', () => {
   it('should render the DashboardCard', () => {
-    renderWithTheme(
-      <DashboardCard icon="AccountBalanceOutlined" title="Órgãos" />
+    const { container } = renderWithTheme(
+      <DashboardCard icon="VehicleTruckProfile" title="Órgãos" />
     )
     expect(screen.getByRole('heading', { name: 'Órgãos' })).toBeInTheDocument()
-    expect(screen.getByTestId('AccountBalanceOutlinedIcon')).toBeInTheDocument()
+    expect(container.querySelector('svg')).toBeInTheDocument()
   })
 })
