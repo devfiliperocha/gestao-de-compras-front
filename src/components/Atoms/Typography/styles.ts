@@ -3,6 +3,7 @@ import TypographyBase from '@material-ui/core/Typography'
 
 export const Wrapper = styled(TypographyBase)`
   ${({ theme, color }) => css`
+    word-break: break-all;
     ${color === 'accent' &&
     css`
       color: ${theme.palette.accent.main};

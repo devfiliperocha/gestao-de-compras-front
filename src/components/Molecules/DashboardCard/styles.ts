@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components'
-import DashboardCardBase from '@material-ui/core/Card'
+import { Box as CardBase, ButtonBase } from '@material-ui/core'
 
-export const Wrapper = styled(DashboardCardBase)`
+export const Card = styled(CardBase)`
+  text-align: center;
+`
+export const Wrapper = styled(ButtonBase)`
   ${({ theme }) => css`
     text-align: center;
     padding: 0;
