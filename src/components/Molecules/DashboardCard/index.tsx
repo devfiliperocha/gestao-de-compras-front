@@ -15,10 +15,12 @@ export type DashboardCardProps = {
 
 const DashboardCard = ({ icon, title }: DashboardCardProps) => (
   <S.Wrapper>
-    <Icon name={icon} size={85} />
-    <Typography color="primary" variant="h2">
-      {title}
-    </Typography>
+    <S.Card>
+      <Icon name={icon} size={85} />
+      <Typography color="primary" variant="h2">
+        {title}
+      </Typography>
+    </S.Card>
   </S.Wrapper>
 )
 
