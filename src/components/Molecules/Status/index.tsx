@@ -11,13 +11,19 @@ const Status = ({ text, type }: StatusProps) => (
     disableRipple
     variant="text"
     size="small"
-    color={type}
+    color={type === 'warning' ? 'accent' : type}
     sx={{
       fontSize: 12,
       fontWeight: 'medium',
       textTransform: 'capitalize'
     }}
-    startIcon={<Icon variant={type} size={40} name="Circle" />}
+    startIcon={
+      <Icon
+        variant={type === 'warning' ? 'accent' : type}
+        size={40}
+        name="Circle"
+      />
+    }
   >
     {text}
   </S.Wrapper>

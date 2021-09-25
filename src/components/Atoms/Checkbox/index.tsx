@@ -22,7 +22,6 @@ const Checkbox = ({
 
   return (
     <S.Wrapper
-      size="medium"
       onChange={onChange}
       onClick={() => toggleCheck(isChecked)}
       checked={isChecked}
