@@ -16,6 +16,7 @@ export type IconProps = {
     | 'warning'
     | 'success'
     | 'white'
+    | 'grey'
   onClick?: (event: React.SyntheticEvent) => void
 }
 

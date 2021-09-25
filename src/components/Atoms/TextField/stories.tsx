@@ -1,6 +1,6 @@
 import TextField from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
-import { LockOutlined, PersonOutlined } from '@material-ui/icons'
+import Icon from 'components/Atoms/Icon'
 
 export default {
   title: 'Design System/Atoms/TextField',
@@ -19,17 +19,13 @@ export default {
 export const Basic: Story = (args) => <TextField {...args} />
 export const IconLeft: Story = (args) => (
   <TextField
-    iconLeft={
-      <PersonOutlined color="accent" sx={{ fontSize: 30, padding: '5px' }} />
-    }
+    iconLeft={<Icon variant="grey" name="Person" type="filled" />}
     {...args}
   />
 )
 export const IconRight: Story = (args) => (
   <TextField
-    iconRight={
-      <LockOutlined color="accent" sx={{ fontSize: 30, padding: '5px' }} />
-    }
+    iconRight={<Icon variant="grey" name="LockClosed" type="filled" />}
     {...args}
   />
 )

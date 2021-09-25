@@ -26,6 +26,9 @@ const wrapperModifiers: any = {
   `,
   white: () => css`
     color: ${({ theme }) => theme.palette.common.white};
+  `,
+  grey: () => css`
+    color: ${({ theme }) => theme.palette.text.secondary};
   `
 }
 

@@ -78,6 +78,15 @@ describe('<Icon/>', () => {
     })
   })
 
+  it('should render the Icon with grey success', () => {
+    renderWithTheme(
+      <Icon name="VehicleTruckProfile" data-testid="icon" variant="grey" />
+    )
+    expect(screen.getByTestId('icon')).toHaveStyle({
+      color: '#656565'
+    })
+  })
+  656565
   it('should execute event on trigger click', () => {
     const handleClick = jest.fn()
     renderWithTheme(
