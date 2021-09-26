@@ -1,7 +1,7 @@
 import MediaQuery from 'components/Helpers/MediaQuery'
 import Button from 'components/Atoms/Button'
 import Icon from 'components/Atoms/Icon'
-import { ButtonBase } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import { ListItemComponentProps } from 'components/Molecules/ListItem'
 import { ListLabelItemProps } from 'components/Molecules/ListLabel'
 import Typography from 'components/Atoms/Typography'
@@ -52,14 +52,14 @@ const generateItem = (line: Organs): ListItemComponentProps[] => {
             </div>
           </MediaQuery>
           <MediaQuery lessThan="medium">
-            <ButtonBase>
+            <IconButton>
               <Icon
                 name="NotepadEdit"
                 variant="primary"
                 size={20}
                 type="regular"
               />
-            </ButtonBase>
+            </IconButton>
           </MediaQuery>
         </>
       )
@@ -72,14 +72,14 @@ const generateItem = (line: Organs): ListItemComponentProps[] => {
             <Button>Visualizar</Button>
           </MediaQuery>
           <MediaQuery lessThan="large">
-            <ButtonBase>
+            <IconButton>
               <Icon
                 name="IosArrowRight"
                 type="regular"
                 variant="primary"
                 size={20}
               />
-            </ButtonBase>
+            </IconButton>
           </MediaQuery>
         </>
       )
