@@ -3,7 +3,7 @@ import Icon from 'components/Atoms/Icon'
 
 export type StatusProps = {
   type: 'error' | 'warning' | 'success'
-  text: string
+  text?: string
 }
 
 const Status = ({ text, type }: StatusProps) => (
@@ -25,7 +25,7 @@ const Status = ({ text, type }: StatusProps) => (
       />
     }
   >
-    {text}
+    {!!text && text}
   </S.Wrapper>
 )
 

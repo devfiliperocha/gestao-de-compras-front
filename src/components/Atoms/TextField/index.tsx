@@ -13,7 +13,7 @@ export type TextFieldPropsBase = {
 
 const TextField = ({
   value,
-  label = 'Text',
+  label,
   error = false,
   helperText = '',
   onChange,
@@ -33,7 +33,7 @@ const TextField = ({
       size="small"
       color="info"
       onChange={onChange}
-      label={label}
+      {...(label ? { label } : { hiddenLabel: true })}
       error={error}
       helperText={helperText}
       FormHelperTextProps={{

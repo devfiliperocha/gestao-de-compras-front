@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import ListItemBase from '@material-ui/core/Paper'
+import media from 'styled-media-query'
 
 export const Wrapper = styled(ListItemBase)`
   ${({ theme }) => css`
@@ -19,6 +20,20 @@ export const Wrapper = styled(ListItemBase)`
       padding-left: 2.6rem;
       padding-right: 2.6rem;
       margin: 0;
+      ${media.lessThan('large')`
+        height: 6rem;
+        padding-top: 1.2rem;
+        padding-bottom: 1.5rem;
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;
+      `}
+      ${media.lessThan('medium')`
+        height: 5rem;
+        padding-top: 1.1rem;
+        padding-bottom: 1.1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      `}
     }
   `}
 `

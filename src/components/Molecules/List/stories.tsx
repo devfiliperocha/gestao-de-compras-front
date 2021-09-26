@@ -1,25 +1,37 @@
+import List from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
+import React, { ReactElement } from 'react'
+import { ListLabelItemProps } from 'components/Molecules/ListLabel'
 import Typography from 'components/Atoms/Typography'
+import { ListItemComponentProps } from 'components/Molecules/ListItem'
+import MediaQuery from 'components/Helpers/MediaQuery'
 import Status from 'components/Molecules/Status'
 import Button from 'components/Atoms/Button'
-import { ReactElement } from 'react'
-import { ButtonBase, Grid } from '@material-ui/core'
 import Icon from 'components/Atoms/Icon'
-import Checkbox from 'components/Atoms/Checkbox'
-import ListLabel, { ListLabelItemProps } from 'components/Molecules/ListLabel'
-import ListItem, { ListItemComponentProps } from '.'
-import MediaQuery from 'components/Helpers/MediaQuery'
+import { ButtonBase } from '@material-ui/core'
 
 export default {
-  title: 'Design System/Molecules/ListItem',
-  component: ListItem,
+  title: 'Design System/Molecules/List',
+  component: List,
   argTypes: {
-    items: { table: { disable: true } },
-    spacing: { table: { disable: true } }
+    filterColumn: {
+      type: 'number'
+    },
+    filterValue: {
+      type: 'string'
+    },
+    rows: { table: { disable: true } },
+    header: { table: { disable: true } }
+  },
+  args: {
+    filterable: true,
+    sortable: true,
+    filterValue: '',
+    filterColumn: 0
   }
 } as Meta
 
-export const Vendor: Story = (): ReactElement => {
+export const Vendor: Story = (args): ReactElement => {
   type row = {
     title: string
     status: 'warning' | 'error' | 'success'
@@ -41,6 +53,7 @@ export const Vendor: Story = (): ReactElement => {
   const generateItem = (line: typeof rows[0]): ListItemComponentProps[] => {
     return [
       {
+        value: line.title,
         component: (
           <>
             <MediaQuery greaterThan="medium">
@@ -60,6 +73,7 @@ export const Vendor: Story = (): ReactElement => {
         xs: 7
       },
       {
+        value: line.statusText,
         component: (
           <>
             <MediaQuery greaterThan="medium">
@@ -75,6 +89,7 @@ export const Vendor: Story = (): ReactElement => {
         xs: 2
       },
       {
+        value: '',
         component: (
           <>
             <MediaQuery greaterThan="large">
@@ -91,11 +106,13 @@ export const Vendor: Story = (): ReactElement => {
               </ButtonBase>
             </MediaQuery>
           </>
-        )
+        ),
+        lg: 1
       }
     ]
   }
-  const itemLabelItems: ListLabelItemProps[] = [
+
+  const labelItems: ListLabelItemProps[] = [
     {
       component: (
         <Typography color="primary" variant="overline">
@@ -120,98 +137,10 @@ export const Vendor: Story = (): ReactElement => {
     }
   ]
   return (
-    <Grid container rowSpacing={1} direction="column">
-      <ListLabel items={itemLabelItems} />
-      {rows.map((r, i) => {
-        const items = generateItem(r)
-        return (
-          <Grid key={i} item xs={12}>
-            <ListItem items={items} />
-          </Grid>
-        )
-      })}
-    </Grid>
+    <List
+      header={labelItems}
+      rows={rows.map((r) => generateItem(r))}
+      {...args}
+    />
   )
-}
-
-export const Organ: Story = (): ReactElement => {
-  const items: ListItemComponentProps[] = [
-    {
-      component: (
-        <Typography key={0} color="primary" variant="h2">
-          EEEDF 987 de Paulinia 6
-        </Typography>
-      ),
-      xs: 7,
-      md: 4
-    },
-    {
-      component: (
-        <Button
-          variant="text"
-          key={1}
-          iconLeft={
-            <Icon
-              name="NotepadEdit"
-              variant="primary"
-              size={40}
-              type="regular"
-            />
-          }
-        >
-          Editar Cadastro
-        </Button>
-      )
-    },
-    {
-      component: <Button key={2}>Visualizar</Button>
-    }
-  ]
-  return <ListItem items={items} />
-}
-
-export const Product: Story = (): ReactElement => {
-  const items: ListItemComponentProps[] = [
-    {
-      component: <Checkbox />
-    },
-    {
-      component: (
-        <Typography key={0} color="primary" variant="h2">
-          Papel A4
-        </Typography>
-      ),
-      xs: 4
-    },
-    {
-      component: (
-        <Typography key={0} color="primary" variant="h3">
-          Papeis
-        </Typography>
-      ),
-      xs: 3
-    },
-    {
-      component: (
-        <Button
-          variant="text"
-          key={1}
-          iconLeft={
-            <Icon
-              name="NotepadEdit"
-              variant="primary"
-              size={40}
-              type="regular"
-            />
-          }
-        >
-          Editar Produto
-        </Button>
-      )
-    },
-    {
-      component: <Button key={2}>Visualizar</Button>
-    }
-  ]
-  return <ListItem items={items} />
 }

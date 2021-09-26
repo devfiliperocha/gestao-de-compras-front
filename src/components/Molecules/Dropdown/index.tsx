@@ -9,10 +9,12 @@ import TextField from 'components/Atoms/TextField'
 
 export type DropDownProps = {
   options: ReadonlyArray<unknown>
+  value?: unknown
   loading?: boolean
   open?: boolean
   label?: string
   listLabelKey?: string
+  valueKey?: string
   onChange?: (
     event: React.SyntheticEvent<Element, Event>,
     value: any,
@@ -25,8 +27,10 @@ const Dropdown = ({
   options,
   loading = false,
   open = false,
-  label = 'Selecione',
+  value,
+  label,
   listLabelKey = 'title',
+  valueKey = 'value',
   onChange
 }: DropDownProps) => {
   const [isLoading, setLoading] = useState(loading)
@@ -41,7 +45,9 @@ const Dropdown = ({
 
   return (
     <S.Wrapper
+      disableClearable
       disablePortal
+      value={value}
       onChange={onChange}
       open={isOpen}
       onOpen={() => !isLoading && setOpen(true)}
@@ -49,6 +55,7 @@ const Dropdown = ({
       options={options}
       loading={isLoading}
       getOptionLabel={(option: any): string => option[listLabelKey]}
+      isOptionEqualToValue={(option: any, value) => option[valueKey] === value}
       size="small"
       fullWidth={false}
       openOnFocus

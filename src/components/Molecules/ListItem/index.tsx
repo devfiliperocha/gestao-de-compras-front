@@ -1,15 +1,13 @@
 import * as S from './styles' /** S = Styles */
-import { Grid, GridSize } from '@material-ui/core'
+import { Grid, GridProps } from '@material-ui/core'
 
-export type Item = {
+export type ListItemComponentProps = {
   component: React.ReactNode
-  xs?: GridSize
-  md?: GridSize
-  sm?: GridSize
-}
+  value: string | number
+} & Pick<GridProps, 'xl' | 'xs' | 'md' | 'sm' | 'lg'>
 
 export type ListItemProps = {
-  items: Item[]
+  items: ListItemComponentProps[]
   spacing?: number
 }
 
@@ -23,8 +21,16 @@ const ListItem = ({ items, spacing }: ListItemProps) => {
         justifyContent="space-between"
       >
         {!!items &&
-          items.map((item: Item, i: number) => (
-            <Grid key={i} item xs={item.xs} md={item.sm} sm={item.sm}>
+          items.map((item: ListItemComponentProps, i: number) => (
+            <Grid
+              key={i}
+              item
+              xs={item.xs}
+              md={item.md}
+              sm={item.sm}
+              xl={item.xl}
+              lg={item.lg}
+            >
               {item.component}
             </Grid>
           ))}
