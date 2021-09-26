@@ -4,7 +4,7 @@ import { Grid, GridProps } from '@material-ui/core'
 export type ListItemComponentProps = {
   component: React.ReactNode
   value: string | number
-} & Pick<GridProps, 'xl' | 'xs' | 'md' | 'sm' | 'lg'>
+} & Pick<GridProps, 'xl' | 'xs' | 'md' | 'sm' | 'lg' | 'sx'>
 
 export type ListItemProps = {
   items: ListItemComponentProps[]
@@ -30,6 +30,7 @@ const ListItem = ({ items, spacing }: ListItemProps) => {
               sm={item.sm}
               xl={item.xl}
               lg={item.lg}
+              sx={item.sx}
             >
               {item.component}
             </Grid>

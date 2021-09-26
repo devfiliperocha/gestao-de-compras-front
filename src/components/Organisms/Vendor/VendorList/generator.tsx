@@ -26,25 +26,24 @@ const generateItem = (line: Vendors): ListItemComponentProps[] => {
           </MediaQuery>
         </>
       ),
-      lg: 9,
-      sm: 7,
-      xs: 7
+      sx: {
+        flexGrow: 1
+      }
     },
     {
       value: line.status.type,
       component: (
         <>
           <MediaQuery greaterThan="medium">
-            <Status type={line.status.type} text={line.status.text} />
+            <div style={{ width: '25rem' }}>
+              <Status type={line.status.type} text={line.status.text} />
+            </div>
           </MediaQuery>
           <MediaQuery lessThan="medium">
             <Status type={line.status.type} />
           </MediaQuery>
         </>
-      ),
-      lg: 2,
-      sm: 3,
-      xs: 2
+      )
     },
     {
       value: '',
@@ -64,8 +63,7 @@ const generateItem = (line: Vendors): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 1
+      )
     }
   ]
 }
@@ -77,7 +75,7 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 9,
+    lg: 8,
     sm: 8,
     xs: 8
   },
@@ -88,9 +86,9 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 3,
-    sm: 3,
-    xs: 4
+    sx: {
+      flexGrow: 1
+    }
   }
 ]
 

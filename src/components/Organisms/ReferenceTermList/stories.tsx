@@ -1,6 +1,7 @@
 import ReferenceTermList from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { ReferenceTermsMockData } from 'types/reference-term.mock'
+import { Container } from '@material-ui/core'
 
 export default {
   title: 'Design System/Organisms/ReferenceTermList',
@@ -11,5 +12,7 @@ export default {
 } as Meta
 
 export const Basic: Story = (args) => (
-  <ReferenceTermList {...args} termsData={ReferenceTermsMockData} />
+  <Container maxWidth="lg">
+    <ReferenceTermList {...args} termsData={ReferenceTermsMockData} />
+  </Container>
 )

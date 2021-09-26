@@ -25,29 +25,31 @@ const generateItem = (line: Organs): ListItemComponentProps[] => {
           </MediaQuery>
         </>
       ),
-      lg: 9,
-      sm: 7,
-      xs: 8
+      sx: {
+        flexGrow: 1
+      }
     },
     {
       value: '',
       component: (
         <>
           <MediaQuery greaterThan="medium">
-            <Button
-              variant="text"
-              key={1}
-              iconLeft={
-                <Icon
-                  name="NotepadEdit"
-                  variant="primary"
-                  size={40}
-                  type="regular"
-                />
-              }
-            >
-              Editar Cadastro
-            </Button>
+            <div style={{ width: '25rem' }}>
+              <Button
+                variant="text"
+                key={1}
+                iconLeft={
+                  <Icon
+                    name="NotepadEdit"
+                    variant="primary"
+                    size={40}
+                    type="regular"
+                  />
+                }
+              >
+                Editar Cadastro
+              </Button>
+            </div>
           </MediaQuery>
           <MediaQuery lessThan="medium">
             <ButtonBase>
@@ -60,8 +62,7 @@ const generateItem = (line: Organs): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 2
+      )
     },
     {
       value: '',
@@ -81,8 +82,7 @@ const generateItem = (line: Organs): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 1
+      )
     }
   ]
 }
@@ -94,9 +94,9 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 9,
-    sm: 8,
-    xs: 8
+    sx: {
+      flexGrow: 1
+    }
   }
 ]
 

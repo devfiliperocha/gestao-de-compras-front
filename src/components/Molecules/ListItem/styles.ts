@@ -4,11 +4,9 @@ import media from 'styled-media-query'
 
 export const Wrapper = styled(ListItemBase)`
   ${({ theme }) => css`
-    width: 100%;
-    padding: 0;
-    flex-grow: 1;
-    align-items: center;
     && {
+      width: 100%;
+
       border-radius: 0.8rem;
       background: ${theme.palette.common.white} 0% 0% no-repeat padding-box;
       box-shadow: 0px 0.3rem 0.6rem #00000029;

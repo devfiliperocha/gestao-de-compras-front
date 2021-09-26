@@ -1,6 +1,7 @@
 import VendorList from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { VendorsMockData } from 'types/vendors.mock'
+import { Container } from '@material-ui/core'
 
 export default {
   title: 'Design System/Organisms/VendorList',
@@ -11,5 +12,7 @@ export default {
 } as Meta
 
 export const Basic: Story = (args) => (
-  <VendorList {...args} vendorsData={VendorsMockData} />
+  <Container maxWidth="lg">
+    <VendorList {...args} vendorsData={VendorsMockData} />
+  </Container>
 )

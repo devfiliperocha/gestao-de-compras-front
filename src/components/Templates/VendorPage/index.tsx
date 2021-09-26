@@ -26,12 +26,7 @@ const VendorPage = ({ data = [] }: VendorProps) => {
   ]
   return (
     <S.Wrapper maxWidth="lg">
-      <Grid
-        container
-        direction="column"
-        justifyContent="flex-start"
-        rowSpacing={5}
-      >
+      <Grid container direction="column" rowSpacing={5}>
         <Grid item xs={12}>
           <Grid
             container
@@ -45,7 +40,7 @@ const VendorPage = ({ data = [] }: VendorProps) => {
                 Situação Cadastral
               </Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Dropdown
                 value={situation}
                 options={situations}

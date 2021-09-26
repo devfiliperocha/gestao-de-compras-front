@@ -2,7 +2,7 @@ import { Vendors } from 'types/vendors'
 
 export const VendorsMockData: Vendors[] = [
   {
-    corporateName: 'Little Church',
+    corporateName: 'Little Church Altar',
     fantasyName: '',
     status: {
       type: 'warning',
@@ -18,7 +18,7 @@ export const VendorsMockData: Vendors[] = [
     }
   },
   {
-    corporateName: 'Saint Louize',
+    corporateName: 'Saint Louize Dimas',
     fantasyName: '',
     status: {
       type: 'error',

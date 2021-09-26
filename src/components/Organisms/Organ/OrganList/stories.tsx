@@ -1,6 +1,7 @@
 import OrganList from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { OrgansMockData } from 'types/organ.mock'
+import { Container } from '@material-ui/core'
 
 export default {
   title: 'Design System/Organisms/OrganList',
@@ -11,5 +12,7 @@ export default {
 } as Meta
 
 export const Basic: Story = (args) => (
-  <OrganList {...args} organsData={OrgansMockData} />
+  <Container maxWidth="lg">
+    <OrganList {...args} organsData={OrgansMockData} />
+  </Container>
 )

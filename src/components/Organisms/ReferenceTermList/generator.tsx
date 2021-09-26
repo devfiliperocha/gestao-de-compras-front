@@ -28,9 +28,8 @@ const generateItem = (line: ReferenceTerms): ListItemComponentProps[] => {
           </MediaQuery>
         </>
       ),
-      lg: 5,
-      sm: 3,
-      xs: 8
+      lg: 3,
+      sm: 3
     },
     {
       value: line.organ.corporateName,
@@ -43,29 +42,31 @@ const generateItem = (line: ReferenceTerms): ListItemComponentProps[] => {
           </MediaQuery>
         </>
       ),
-      lg: 4,
-      sm: 4,
-      xs: 'auto'
+      sx: {
+        flexGrow: 1
+      }
     },
     {
       value: '',
       component: (
         <>
           <MediaQuery greaterThan="medium">
-            <Button
-              variant="text"
-              key={1}
-              iconLeft={
-                <Icon
-                  name="NotepadEdit"
-                  variant="primary"
-                  size={40}
-                  type="regular"
-                />
-              }
-            >
-              Editar Termo
-            </Button>
+            <div style={{ width: '25rem' }}>
+              <Button
+                variant="text"
+                key={1}
+                iconLeft={
+                  <Icon
+                    name="NotepadEdit"
+                    variant="primary"
+                    size={40}
+                    type="regular"
+                  />
+                }
+              >
+                Editar Termo
+              </Button>
+            </div>
           </MediaQuery>
           <MediaQuery lessThan="medium">
             <ButtonBase>
@@ -78,8 +79,7 @@ const generateItem = (line: ReferenceTerms): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 2
+      )
     },
     {
       value: '',
@@ -99,8 +99,7 @@ const generateItem = (line: ReferenceTerms): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 1
+      )
     }
   ]
 }
@@ -112,8 +111,8 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 5,
-    sm: 4,
+    lg: 3,
+    sm: 3,
     xs: 7
   },
   {
@@ -123,9 +122,9 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 4,
-    sm: 3,
-    xs: 5
+    sx: {
+      flexGrow: 1
+    }
   }
 ]
 

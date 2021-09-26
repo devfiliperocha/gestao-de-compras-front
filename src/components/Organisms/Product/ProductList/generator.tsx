@@ -29,8 +29,7 @@ const generateItem = (line: Product): ListItemComponentProps[] => {
         </>
       ),
       lg: 5,
-      sm: 5,
-      xs: 8
+      sm: 5
     },
     {
       value: line.group,
@@ -43,29 +42,31 @@ const generateItem = (line: Product): ListItemComponentProps[] => {
           </MediaQuery>
         </>
       ),
-      lg: 4,
-      sm: 3,
-      xs: 'auto'
+      sx: {
+        flexGrow: 1
+      }
     },
     {
       value: line.group,
       component: (
         <>
           <MediaQuery greaterThan="medium">
-            <Button
-              variant="text"
-              key={1}
-              iconLeft={
-                <Icon
-                  name="NotepadEdit"
-                  variant="primary"
-                  size={40}
-                  type="regular"
-                />
-              }
-            >
-              Editar Produto
-            </Button>
+            <div style={{ width: '25rem' }}>
+              <Button
+                variant="text"
+                key={1}
+                iconLeft={
+                  <Icon
+                    name="NotepadEdit"
+                    variant="primary"
+                    size={40}
+                    type="regular"
+                  />
+                }
+              >
+                Editar Produto
+              </Button>
+            </div>
           </MediaQuery>
           <MediaQuery lessThan="medium">
             <ButtonBase>
@@ -78,8 +79,7 @@ const generateItem = (line: Product): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 2
+      )
     },
     {
       value: '',
@@ -99,8 +99,7 @@ const generateItem = (line: Product): ListItemComponentProps[] => {
             </ButtonBase>
           </MediaQuery>
         </>
-      ),
-      lg: 1
+      )
     }
   ]
 }
@@ -123,9 +122,9 @@ const labelItems: ListLabelItemProps[] = [
       </Typography>
     ),
     sortable: true,
-    lg: 4,
-    sm: 3,
-    xs: 5
+    sx: {
+      flexGrow: 1
+    }
   }
 ]
 
