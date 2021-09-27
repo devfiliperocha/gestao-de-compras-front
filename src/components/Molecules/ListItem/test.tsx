@@ -5,14 +5,9 @@ import ListItem from '.'
 describe('<ListItem/>', () => {
   it('should render the ListItem', () => {
     renderWithTheme(
-      <ListItem
-        items={[
-          {
-            component: <h1>TESTE</h1>,
-            value: 'teste'
-          }
-        ]}
-      />
+      <ListItem>
+        <h1>TESTE</h1>
+      </ListItem>
     )
     expect(screen.getByRole('heading', { name: /TESTE/i })).toBeInTheDocument()
   })

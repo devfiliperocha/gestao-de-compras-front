@@ -6,3 +6,5 @@ export type Vendors = {
     text: string
   }
 }
+
+export type VendorColumns = keyof Vendors

@@ -5,7 +5,7 @@ import VendorList from '.'
 
 describe('<VendorList/>', () => {
   it('should render the VendorList', () => {
-    renderWithTheme(<VendorList vendorsData={VendorsMockData} />)
+    renderWithTheme(<VendorList data={VendorsMockData} />)
     expect(
       screen.getByRole('button', { name: /Razão Social/i })
     ).toBeInTheDocument()
