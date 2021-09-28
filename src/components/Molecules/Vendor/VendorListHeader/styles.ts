@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components'
-import VendorListHeaderBase from 'components/Molecules/ListItem'
+import VendorListHeaderBase from 'components/Atoms/ListItem'
 import media from 'styled-media-query'
 
 export const Wrapper = styled(VendorListHeaderBase)`
-  border-radius: none;
-  background: transparent;
-  box-shadow: none;
-  opacity: 1;
-  height: 4.2rem;
+  && {
+    border-radius: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    height: 4.2rem;
+  }
 `
 export const ColumnOneWrapper = styled.div``
 export const ColumnTwoWrapper = styled.div`

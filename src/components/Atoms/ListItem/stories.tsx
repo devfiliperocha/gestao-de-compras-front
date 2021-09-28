@@ -2,7 +2,7 @@ import ListItem, { ListItemProps } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Design System/Molecules/ListItem',
+  title: 'Design System/Atoms/ListItem',
   component: ListItem
 } as Meta
 

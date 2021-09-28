@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import VendorListItemBase from 'components/Molecules/ListItem'
+import VendorListItemBase from 'components/Atoms/ListItem'
 import media from 'styled-media-query'
 
 export const Wrapper = styled(VendorListItemBase)``
