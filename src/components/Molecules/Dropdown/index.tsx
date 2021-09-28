@@ -55,7 +55,9 @@ const Dropdown = ({
       options={options}
       loading={isLoading}
       getOptionLabel={(option: any): string => option[listLabelKey]}
-      isOptionEqualToValue={(option: any, value) => option[valueKey] === value}
+      isOptionEqualToValue={(option: any, value: any) =>
+        option[valueKey] === value[valueKey]
+      }
       size="small"
       fullWidth={false}
       openOnFocus
