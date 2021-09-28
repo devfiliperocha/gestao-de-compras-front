@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0'
 import { Vendors } from 'types/vendors'
 
 export default {
-  title: 'Design System/Templates/Vendor/VendorPage',
+  title: 'Design System/Templates/Vendor/VendorsPage',
   component: VendorPage,
   argTypes: {
     data: { table: { disable: true } }
