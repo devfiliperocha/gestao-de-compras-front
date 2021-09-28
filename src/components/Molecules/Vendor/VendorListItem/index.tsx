@@ -6,12 +6,20 @@ import Icon from 'components/Atoms/Icon'
 import Status from 'components/Molecules/Status'
 import Typography from 'components/Atoms/Typography'
 import { IconButton } from '@material-ui/core'
+import React from 'react'
 
 type VendorListItemProps = {
   vendor: Vendors
+  onStatusClick?: (status: Vendors['status']['type']) => void
+  onActionClick?: (event: React.SyntheticEvent) => void
 }
 
-const VendorListItem = ({ vendor, ...props }: VendorListItemProps) => (
+const VendorListItem = ({
+  vendor,
+  onStatusClick,
+  onActionClick,
+  ...props
+}: VendorListItemProps) => (
   <S.Wrapper {...props}>
     <S.TitleWrapper>
       <MediaQuery greaterThan="medium">
@@ -30,7 +38,11 @@ const VendorListItem = ({ vendor, ...props }: VendorListItemProps) => (
       <S.StatusWrapper>
         <MediaQuery greaterThan="medium">
           <span style={{ width: '25rem' }}>
-            <Status type={vendor.status.type} text={vendor.status.text} />
+            <Status
+              onClick={onStatusClick}
+              type={vendor.status.type}
+              text={vendor.status.text}
+            />
           </span>
         </MediaQuery>
         <MediaQuery lessThan="medium">
@@ -39,10 +51,10 @@ const VendorListItem = ({ vendor, ...props }: VendorListItemProps) => (
       </S.StatusWrapper>
       <S.ShowWrapper>
         <MediaQuery greaterThan="large">
-          <Button>Visualizar</Button>
+          <Button onClick={onActionClick}>Visualizar</Button>
         </MediaQuery>
         <MediaQuery lessThan="large">
-          <IconButton>
+          <IconButton onClick={onActionClick}>
             <Icon
               name="IosArrowRight"
               type="regular"
