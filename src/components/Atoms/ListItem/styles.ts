@@ -12,15 +12,15 @@ export const Wrapper = styled.div`
     box-shadow: 0px 0.3rem 0.6rem #00000029;
     border-radius: 0.8rem;
     opacity: 1;
-    height: 8.2rem;
-    padding: 0 ${theme.spacings.xsmall};
+    height: auto;
+    padding: 2.1rem 1.8rem;
     margin: ${theme.spacings.xxsmall} 0;
     ${media.lessThan('large')`
-        height: 6rem;
-      `}
+      padding: 2rem 1.5rem;
+    `}
     ${media.lessThan('medium')`
-        height: 5rem;
-      `}
+      padding: 1rem 1rem;
+    `}
     && {
     }
   `}

@@ -46,7 +46,7 @@ const VendorListItem = ({
           </span>
         </MediaQuery>
         <MediaQuery lessThan="medium">
-          <Status type={vendor.status.type} />
+          <Status onClick={onStatusClick} type={vendor.status.type} />
         </MediaQuery>
       </S.StatusWrapper>
       <S.ShowWrapper>
