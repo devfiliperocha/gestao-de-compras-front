@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 import Status from '.'
 
@@ -20,5 +20,18 @@ describe('<Status/>', () => {
     expect(screen.getByRole('button')).toHaveStyle({
       color: '#f54531'
     })
+  })
+
+  it('should fire event on click in fullButton', () => {
+    const handler = jest.fn()
+    renderWithTheme(<Status type="error" text="Ok!" onClick={handler} />)
+    fireEvent.click(screen.getByRole('button'))
+    expect(handler).toBeCalledTimes(1)
+  })
+  it('should fire event on click in iconButonn', () => {
+    const handler = jest.fn()
+    renderWithTheme(<Status type="error" onClick={handler} />)
+    fireEvent.click(screen.getByRole('button'))
+    expect(handler).toBeCalledTimes(1)
   })
 })
