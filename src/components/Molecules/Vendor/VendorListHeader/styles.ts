@@ -3,31 +3,34 @@ import VendorListHeaderBase from 'components/Atoms/ListItem'
 import media from 'styled-media-query'
 
 export const Wrapper = styled(VendorListHeaderBase)`
+  display: flex;
+  justify-content: space-between;
   && {
     border-radius: none;
     background: transparent;
     box-shadow: none;
     opacity: 1;
-    height: 4.2rem;
+    height: 5.2rem;
   }
 `
 export const ColumnOneWrapper = styled.div``
 export const ColumnTwoWrapper = styled.div`
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: flex-end;
+  width: 25rem;
+  padding: 0;
+  ${media.lessThan('medium')`
+    width: auto;
+  `}
 `
 export const InvisibleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   ${({ theme }) => css`
+    color: transparent;
     margin-left: ${theme.spacings.large};
-    width: 26rem;
 
-    ${media.lessThan('large')`
-      width: 15rem;
-      ${media.lessThan('medium')`
-      width: 0.1rem;
-      `}
+    ${media.lessThan('medium')`
+      display:none;
     `}
   `}
 `

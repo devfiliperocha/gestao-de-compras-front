@@ -1,27 +1,26 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import VendorListItemBase from 'components/Atoms/ListItem'
 import media from 'styled-media-query'
 
-export const Wrapper = styled(VendorListItemBase)``
-export const TitleWrapper = styled.div`
+export const Wrapper = styled(VendorListItemBase)`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+`
+export const TitleWrapper = styled.div`
+  ${media.lessThan('medium')`
+    width: 100%;
+  `}
 `
 export const StatusWrapper = styled.div`
-  ${({ theme }) => css`
-    margin-left: ${theme.spacings.large};
-    button {
-      font-size: 12px;
-    }
-    ${media.greaterThan('medium')`
-      width: 25rem;
-    `}
-  `}
+  width: 25rem;
+  padding: 0;
 `
 export const ShowWrapper = styled.div``
 export const ActionWrapper = styled.div`
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
   align-items: center;
+  ${media.lessThan('medium')`
+    flex-grow:1;
+  `}
 `

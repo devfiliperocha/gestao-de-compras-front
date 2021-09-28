@@ -30,7 +30,6 @@ const VendorListHeader = ({ onSort, ...props }: VendorListHeaderProps) => {
       <S.ColumnOneWrapper>
         <Button
           variant="text"
-          size="small"
           disableRipple
           endIcon={
             sortColumn === 'corporateName' ? (
@@ -50,7 +49,6 @@ const VendorListHeader = ({ onSort, ...props }: VendorListHeaderProps) => {
       <S.ColumnTwoWrapper>
         <Button
           variant="text"
-          size="small"
           disableRipple
           endIcon={
             sortColumn === 'status' ? (
@@ -66,8 +64,8 @@ const VendorListHeader = ({ onSort, ...props }: VendorListHeaderProps) => {
         >
           Status
         </Button>
-        <S.InvisibleWrapper></S.InvisibleWrapper>
       </S.ColumnTwoWrapper>
+      <S.InvisibleWrapper>#</S.InvisibleWrapper>
     </S.Wrapper>
   )
 }

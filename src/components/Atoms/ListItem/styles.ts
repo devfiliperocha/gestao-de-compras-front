@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-
+    flex-wrap: wrap;
     border-radius: 0.8rem;
     background: ${theme.palette.common.white} 0% 0% no-repeat padding-box;
     box-shadow: 0px 0.3rem 0.6rem #00000029;
@@ -21,7 +21,8 @@ export const Wrapper = styled.div`
     ${media.lessThan('medium')`
       padding: 1rem 1rem;
     `}
-    && {
+    h5, h3 {
+      font-weight: bold;
     }
   `}
 `
