@@ -3,8 +3,8 @@ import Dropdown from 'components/Molecules/Dropdown'
 import { Grid } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
-import VendorList from 'components/Organisms/Vendor/VendorList'
 import { Vendors } from 'types/vendors'
+import { sortVendors } from 'components/Templates/VendorPage/utils'
 
 export type VendorProps = {
   data?: Vendors[]
@@ -56,13 +56,19 @@ const VendorPage = ({ data = [] }: VendorProps) => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <VendorList
-            data={vendors.filter((vendor) =>
-              situation.value === 'all'
-                ? true
-                : vendor.status.type === situation.value
-            )}
+          <S.ListHeader
+            onSort={(sortColumn, sortDirection) => {
+              setVendors(sortVendors(sortColumn, sortDirection, vendors))
+            }}
           />
+          {vendors &&
+            vendors
+              .filter((vendor) =>
+                situation.value === 'all'
+                  ? true
+                  : vendor.status.type === situation.value
+              )
+              .map((vendor, i) => <S.ListItem key={i} vendor={vendor} />)}
         </Grid>
       </Grid>
     </S.Wrapper>
