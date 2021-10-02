@@ -6,10 +6,7 @@ export type TextFieldPropsBase = {
   value?: string
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode
-} & Pick<
-  TextFieldProps,
-  'label' | 'error' | 'helperText' | 'onChange' | 'inputProps'
->
+} & TextFieldProps
 
 const TextField = ({
   value,
