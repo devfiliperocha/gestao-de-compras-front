@@ -9,10 +9,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 export type PdfViewerProps = {
   file: string
-  width?: number
 }
 
-const PdfViewer = ({ file, width = 800 }: PdfViewerProps) => {
+const PdfViewer = ({ file }: PdfViewerProps) => {
   const theme = useTheme()
   const [numPages, setNumPages] = useState(0)
 
@@ -42,9 +41,18 @@ const PdfViewer = ({ file, width = 800 }: PdfViewerProps) => {
 
   return (
     <S.Wrapper>
-      <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+      <Document
+        noData="Nenhum arquivo encontrado."
+        loading="Carregando PDF..."
+        error="Erro ao carregar PDF."
+        file={file}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
         {Array.from(new Array(numPages), (el, index) => (
           <Page
+            noData="Nenhum arquivo encontrado."
+            loading="Carregando PDF..."
+            error="Erro ao carregar PDF."
             key={`page_${index + 1}`}
             pageNumber={index + 1}
             width={widthByBreak}
