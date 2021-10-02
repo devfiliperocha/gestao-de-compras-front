@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
 import * as S from './styles' /** S = Styles */
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useTheme } from '@material-ui/core'
+import useResponsive from 'components/Helpers/Hooks/useResponsive'
 
 export type ModalProps = {
   children: React.ReactNode
@@ -20,19 +19,8 @@ const Modal = ({
   onClose = () => null
 }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const theme = useTheme()
 
-  const md = useMediaQuery(theme.breakpoints.only('md'))
-  const sm = useMediaQuery(theme.breakpoints.only('sm'))
-
-  const smallMobile = useMediaQuery(
-    `@media (min-width:0px) and (max-width:320px)`
-  )
-  const largeMobile = useMediaQuery(
-    `@media (min-width:321px) and (max-width:414px)`
-  )
-
-  const fullScreen = smallMobile || largeMobile || sm
+  const breakPoint = useResponsive()
 
   const closeDialog = (event: React.SyntheticEvent) => {
     setIsOpen(false)
@@ -45,14 +33,19 @@ const Modal = ({
 
   return (
     <S.Wrapper
-      fullScreen={fullScreen}
-      fullWidth={md}
+      fullScreen={breakPoint !== 'desktop'}
+      fullWidth={breakPoint === 'desktop'}
       maxWidth="md"
       open={open}
       onClose={closeDialog}
     >
       <S.TitleWrapper>
-        <Typography variant={md || sm ? 'h1' : 'h3'} color="secondary">
+        <Typography
+          variant={
+            breakPoint === 'desktop' || breakPoint === 'tablet' ? 'h1' : 'h3'
+          }
+          color="secondary"
+        >
           {title}
         </Typography>
         <S.IconWrapper name="Dismiss" onClick={closeDialog} />
