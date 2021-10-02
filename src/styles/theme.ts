@@ -4,7 +4,7 @@ const fontSizes = {
   medium: '1.6rem',
   large: '1.8rem',
   xlarge: '2.0rem',
-  xxlarge: '2.2rem',
+  xxlarge: '2.6rem',
   xxxlarge: '3.8rem'
 }
 const fontWeights = {

@@ -6,14 +6,11 @@ export type TextFieldPropsBase = {
   value?: string
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode
-} & Pick<
-  TextFieldProps,
-  'label' | 'error' | 'helperText' | 'onChange' | 'inputProps'
->
+} & TextFieldProps
 
 const TextField = ({
   value,
-  label = 'Text',
+  label,
   error = false,
   helperText = '',
   onChange,
@@ -33,7 +30,7 @@ const TextField = ({
       size="small"
       color="info"
       onChange={onChange}
-      label={label}
+      {...(label ? { label } : { hiddenLabel: true })}
       error={error}
       helperText={helperText}
       FormHelperTextProps={{

@@ -15,7 +15,7 @@ export type ButtonPropsBase = {
   variant?: 'contained' | 'outlined' | 'text'
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode
-} & Pick<ButtonProps, 'onClick'>
+} & ButtonProps
 
 const Button = ({
   children,
@@ -23,7 +23,8 @@ const Button = ({
   variant = 'contained',
   iconLeft,
   iconRight,
-  onClick
+  onClick,
+  ...props
 }: ButtonPropsBase) => (
   <S.Wrapper
     color={color}
@@ -32,6 +33,7 @@ const Button = ({
     endIcon={iconRight}
     disableElevation
     onClick={onClick}
+    {...props}
   >
     {!!children && <span>{children} </span>}
   </S.Wrapper>

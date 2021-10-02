@@ -34,6 +34,7 @@ const wrapperModifiers: any = {
 
 export const Wrapper = styled(IconBase)`
   ${({ htmlColor }) => css`
+    cursor: pointer;
     ${!!htmlColor && wrapperModifiers[htmlColor]}
   `}
 `
