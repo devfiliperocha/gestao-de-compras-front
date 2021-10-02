@@ -3,7 +3,10 @@ import Button from 'components/Atoms/Button'
 import Typography from 'components/Atoms/Typography'
 import { Vendors } from 'types/vendors'
 import Status from 'components/Molecules/Status'
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from 'components/Atoms/Modal'
+import PdfViewer from 'components/Atoms/PdfViewer'
+import { Container } from '@material-ui/core'
 
 export type VendorAprovationHeaderProps = {
   vendor: Vendors
@@ -19,6 +22,44 @@ const VendorAprovationHeader = ({
   onReject,
   ...props
 }: VendorAprovationHeaderProps) => {
+  const [isDocumentShowing, setIsDocumentShowing] = useState(false)
+
+  const renderByStatus = (
+    status: VendorAprovationHeaderProps['vendor']['status']['type']
+  ) => {
+    switch (status) {
+      case 'success':
+        return (
+          <S.ActionItem>
+            <Button onClick={() => setIsDocumentShowing(true)}>
+              Visualizar Declaração
+            </Button>
+          </S.ActionItem>
+        )
+      case 'error':
+        return (
+          <>
+            <S.ActionItem>
+              <Button onClick={onAprove}>Aprovar Cadastro</Button>
+            </S.ActionItem>
+          </>
+        )
+      default:
+        return (
+          <>
+            <S.ActionItem>
+              <Button onClick={onReject} variant="outlined" color="error">
+                Rejeitar Cadastro
+              </Button>
+            </S.ActionItem>
+            <S.ActionItem>
+              <Button onClick={onAprove}>Aprovar Cadastro</Button>
+            </S.ActionItem>
+          </>
+        )
+    }
+  }
+
   return (
     <S.Wrapper {...props}>
       <Typography color="primary" variant="h3">
@@ -30,18 +71,16 @@ const VendorAprovationHeader = ({
       </S.StatusWrapper>
 
       <S.ActionWrapper>
-        {showAction && (
-          <>
-            <S.ActionItem>
-              <Button onClick={onReject} variant="outlined" color="error">
-                Rejeitar Cadastro
-              </Button>
-            </S.ActionItem>
-            <S.ActionItem>
-              <Button onClick={onAprove}>Aprovar Cadastro</Button>
-            </S.ActionItem>
-          </>
-        )}
+        {showAction && renderByStatus(vendor.status?.type)}
+        <Modal
+          title="Declaração do Fornecedor"
+          open={isDocumentShowing}
+          onClose={() => setIsDocumentShowing(false)}
+        >
+          <Container maxWidth="lg">
+            <PdfViewer file={vendor.declaration?.file || ''} />
+          </Container>
+        </Modal>
       </S.ActionWrapper>
     </S.Wrapper>
   )
