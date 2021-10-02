@@ -3,8 +3,7 @@ import * as S from './styles' /** S = Styles */
 import { Document, Page } from 'react-pdf'
 import { useState } from 'react'
 import { pdfjs } from 'react-pdf'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useTheme } from '@material-ui/core'
+import useResponsive from 'components/Helpers/Hooks/useResponsive'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 export type PdfViewerProps = {
@@ -12,32 +11,20 @@ export type PdfViewerProps = {
 }
 
 const PdfViewer = ({ file }: PdfViewerProps) => {
-  const theme = useTheme()
   const [numPages, setNumPages] = useState(0)
 
   function onDocumentLoadSuccess({ numPages }: any) {
     setNumPages(numPages)
   }
 
-  const md = useMediaQuery(theme.breakpoints.only('md'))
-  const sm = useMediaQuery(theme.breakpoints.only('sm'))
+  const breakPoint = useResponsive()
 
-  const smallMobile = useMediaQuery(
-    `@media (min-width:0px) and (max-width:320px)`
-  )
-  const largeMobile = useMediaQuery(
-    `@media (min-width:321px) and (max-width:414px)`
-  )
-
-  const widthByBreak = smallMobile
-    ? 280
-    : largeMobile
-    ? 400
-    : sm
-    ? 700
-    : md
-    ? 800
-    : 300
+  const widthByBreak = {
+    smallMobile: 280,
+    largeMobile: 400,
+    tablet: 700,
+    desktop: 800
+  }
 
   return (
     <S.Wrapper>
@@ -55,7 +42,7 @@ const PdfViewer = ({ file }: PdfViewerProps) => {
             error="Erro ao carregar PDF."
             key={`page_${index + 1}`}
             pageNumber={index + 1}
-            width={widthByBreak}
+            width={widthByBreak[breakPoint]}
           />
         ))}
       </Document>
