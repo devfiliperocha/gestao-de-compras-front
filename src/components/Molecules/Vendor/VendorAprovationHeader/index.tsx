@@ -1,32 +1,30 @@
 import * as S from './styles' /** S = Styles */
 import Button from 'components/Atoms/Button'
 import Typography from 'components/Atoms/Typography'
-import { Vendors } from 'types/vendors'
 import Status from 'components/Molecules/Status'
-import React, { useState } from 'react'
 import Modal from 'components/Atoms/Modal'
 import PdfViewer from 'components/Atoms/PdfViewer'
 import { Container } from '@material-ui/core'
+import React, { useState, useContext } from 'react'
+import { VendorContext } from 'contexts/vendor'
+import { Status as StatusProps } from 'types/utils'
 
 export type VendorAprovationHeaderProps = {
-  vendor: Vendors
   showAction?: boolean
   onAprove?: (ev: React.SyntheticEvent) => void
   onReject?: (ev: React.SyntheticEvent) => void
 }
 
 const VendorAprovationHeader = ({
-  vendor,
   showAction = false,
   onAprove,
   onReject,
   ...props
 }: VendorAprovationHeaderProps) => {
   const [isDocumentShowing, setIsDocumentShowing] = useState(false)
+  const context = useContext(VendorContext)
 
-  const renderByStatus = (
-    status: VendorAprovationHeaderProps['vendor']['status']['type']
-  ) => {
+  const renderByStatus = (status: StatusProps['type']) => {
     switch (status) {
       case 'success':
         return (
@@ -63,22 +61,25 @@ const VendorAprovationHeader = ({
   return (
     <S.Wrapper {...props}>
       <Typography color="primary" variant="h3">
-        {vendor.corporateName}
+        {context.vendor.corporateName}
       </Typography>
 
       <S.StatusWrapper>
-        <Status type={vendor.status.type} text={vendor.status.text} />
+        <Status
+          type={context.vendor.status.type}
+          text={context.vendor.status.text}
+        />
       </S.StatusWrapper>
 
       <S.ActionWrapper>
-        {showAction && renderByStatus(vendor.status?.type)}
+        {showAction && renderByStatus(context.vendor.status?.type)}
         <Modal
           title="Declaração do Fornecedor"
           open={isDocumentShowing}
           onClose={() => setIsDocumentShowing(false)}
         >
           <Container maxWidth="lg">
-            <PdfViewer file={vendor.declaration?.file || ''} />
+            <PdfViewer file={context.vendor.declaration?.file?.url || ''} />
           </Container>
         </Modal>
       </S.ActionWrapper>

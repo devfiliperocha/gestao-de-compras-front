@@ -1,27 +1,25 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as S from './styles' /** S = Styles */
-import { Vendors } from 'types/vendors'
 import VendorForm from 'components/Molecules/Vendor/VendorForm'
-import React from 'react'
+import React, { useContext } from 'react'
+import { VendorContext } from 'contexts/vendor'
+import VendorAprovationHeader from 'components/Molecules/Vendor/VendorAprovationHeader'
 
-export type VendorAprovationPageProps = {
-  vendor: Vendors
-}
-
-const VendorAprovationPage = ({ vendor }: VendorAprovationPageProps) => {
-  const aproveVendor = () => null
-  const rejectVendor = () => null
+const VendorAprovationPage = () => {
+  const context = useContext(VendorContext)
 
   return (
     <S.Wrapper maxWidth="lg">
-      <S.Header
-        vendor={vendor}
+      <VendorAprovationHeader
         showAction={true}
-        onAprove={aproveVendor}
-        onReject={rejectVendor}
-      ></S.Header>
-      <S.FormWrapper>
-        <VendorForm vendor={vendor} disabled />
-      </S.FormWrapper>
+        onAprove={() => {
+          context.updateVendorStatus('success')
+        }}
+        onReject={() => {
+          context.updateVendorStatus('error')
+        }}
+      ></VendorAprovationHeader>
+      <VendorForm disabled />
     </S.Wrapper>
   )
 }

@@ -1,5 +1,9 @@
+import { Status } from './utils'
+
 export type File = {
-  file?: string
+  file?: {
+    url?: string
+  }
   expirationDate?: string
-  status?: 'error' | 'success'
+  status?: Status
 }

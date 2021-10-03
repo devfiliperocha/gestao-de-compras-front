@@ -1,19 +1,18 @@
 import { Address } from './address'
 import { File } from './file'
+import { Status } from './utils'
 
 export type Vendors = {
+  id: number
   corporateName: string
   fantasyName: string
   corporateDocNumber: string
-  email?: string
-  phone?: string
+  email?: string | null
+  phone?: string | null
   responsible: string
   responsibleDocNumber: string
-  address?: Address
-  status: {
-    type: 'error' | 'warning' | 'success'
-    text: string
-  }
+  address?: Address | null
+  status: Status
   corporateDocPdf?: File
   federalCertificatePdf?: File
   municipalCertificatePdf?: File
