@@ -20,8 +20,8 @@ const PdfViewer = ({ file }: PdfViewerProps) => {
   const breakPoint = useResponsive()
 
   const widthByBreak = {
-    smallMobile: 280,
-    largeMobile: 400,
+    smallMobile: 265,
+    largeMobile: 380,
     tablet: 700,
     desktop: 800
   }

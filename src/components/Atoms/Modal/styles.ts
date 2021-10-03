@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import ModalBase from '@material-ui/core/Dialog'
-import { DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
+import { DialogActions, DialogContent } from '@material-ui/core'
 import Icon from 'components/Atoms/Icon'
 
 export const Wrapper = styled(ModalBase)``
@@ -8,7 +8,7 @@ export const ActionWrapper = styled(DialogActions)`
   && {
     display: flex;
     justify-content: center;
-    padding: 50px;
+    padding: 2rem;
   }
 `
 export const ContentWrapper = styled(DialogContent)`
@@ -18,9 +18,10 @@ export const ContentWrapper = styled(DialogContent)`
   }
 `
 
-export const TitleWrapper = styled(DialogTitle)`
+export const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 2rem;
 `
 
 export const IconWrapper = styled(Icon)`
