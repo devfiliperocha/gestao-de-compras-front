@@ -32,9 +32,9 @@ const mapProps = (vendor: Vendors): Vendors => {
   ]
   for (const doc of docs) {
     if (vendor[doc]?.file?.url) {
-      vendor[doc]!.file!.url! = `${process.env.API_URL}${
-        vendor[doc]!.file!.url
-      }`
+      vendor[doc]!.file!.url! = `${
+        process.env.NEXT_PUBLIC_API_URL || process.env.API_URL
+      }${vendor[doc]!.file!.url}`
     }
   }
   return vendor

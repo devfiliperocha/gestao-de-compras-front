@@ -28,6 +28,9 @@ const material = {
       dark: '#006a96',
       contrastText: '#FCFCFC'
     },
+    action: {
+      hover: '#204372'
+    },
     accent: {
       light: '#ffd952',
       main: '#f5a818',

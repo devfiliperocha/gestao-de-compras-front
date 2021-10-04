@@ -3,7 +3,7 @@ import * as S from './styles' /** S = Styles */
 const Main = ({
   title = 'JP Gestão de Compras',
   description = 'Sistema para otimização do fluxo de gestão de compras para órgãos públicos.',
-  logo = '/img/logo-light.png',
+  logo = '/img/logo-dark.png',
   illustration = '/img/hero-illustration.svg'
 }) => (
   <S.Wrapper>

@@ -4,11 +4,16 @@ import Icon from 'components/Atoms/Icon'
 
 export type DashboardCardProps = {
   icon:
+    | 'Box'
     | 'VehicleTruckProfile'
-    | 'BuildingGovernment'
+    | 'Building'
     | 'DocumentOnePage'
     | 'Receipt'
+    | 'ReceiptCube'
+    | 'ReceiptMoney'
+    | 'RibbonStar'
     | 'ChartPerson'
+    | 'TaskListSquareLtr'
   title: string
 }
 

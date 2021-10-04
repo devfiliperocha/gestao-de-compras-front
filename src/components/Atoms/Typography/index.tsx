@@ -3,7 +3,14 @@ import * as S from './styles' /** S = Styles */
 
 export type TypographyPropsBase = {
   children: React.ReactNode
-  color?: 'dark' | 'light' | 'primary' | 'secondary' | 'accent' | 'info'
+  color?:
+    | 'dark'
+    | 'light'
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'info'
+    | 'white'
 } & Pick<TypographyProps, 'variant'>
 
 const Typography = ({
