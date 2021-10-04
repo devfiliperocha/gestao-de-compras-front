@@ -1,9 +1,9 @@
 import * as S from './styles' /** S = Styles */
 import Dropdown from 'components/Molecules/Dropdown'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
 import { sortVendors } from 'components/Templates/Vendor/VendorPage/utils'
-import { VendorsContext } from 'contexts/vendor'
+import { VendorsContext } from 'contexts/vendors'
 
 export type VendorProps = {
   onVendorClick: (id: number) => void
@@ -14,16 +14,11 @@ type Situation = {
 }
 
 const VendorPage = ({ onVendorClick = () => null }: VendorProps) => {
-  const context = useContext(VendorsContext)
-  const data = context.vendors
+  const vendorContext = useContext(VendorsContext)
+  const { vendors, setVendors } = vendorContext
 
   const initialSituation: Situation = { title: 'Todos', value: 'all' }
   const [situation, setStituation] = useState(initialSituation)
-  const [vendors, setVendors] = useState(data)
-
-  useEffect(() => {
-    setVendors(data)
-  }, [data])
 
   const situations: Situation[] = [
     { title: 'Todos', value: 'all' },
