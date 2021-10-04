@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0'
 import Button from 'components/Atoms/Button'
 
 export default {
-  title: 'Modal',
+  title: 'Design System/Atoms/Modal',
   component: Modal,
   args: {
     title: 'Cartão CNPJ',

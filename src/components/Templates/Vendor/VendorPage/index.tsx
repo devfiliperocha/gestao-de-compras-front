@@ -1,26 +1,24 @@
 import * as S from './styles' /** S = Styles */
 import Dropdown from 'components/Molecules/Dropdown'
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
-import { Vendors } from 'types/vendors'
 import { sortVendors } from 'components/Templates/Vendor/VendorPage/utils'
+import { VendorsContext } from 'contexts/vendors'
 
 export type VendorProps = {
-  data?: Vendors[]
+  onVendorClick: (id: number) => void
 }
 type Situation = {
   title: string
   value: 'all' | 'warning' | 'success' | 'error'
 }
 
-const VendorPage = ({ data = [] }: VendorProps) => {
+const VendorPage = ({ onVendorClick = () => null }: VendorProps) => {
+  const vendorContext = useContext(VendorsContext)
+  const { vendors, setVendors } = vendorContext
+
   const initialSituation: Situation = { title: 'Todos', value: 'all' }
   const [situation, setStituation] = useState(initialSituation)
-  const [vendors, setVendors] = useState(data)
-
-  useEffect(() => {
-    setVendors(data)
-  }, [data])
 
   const situations: Situation[] = [
     { title: 'Todos', value: 'all' },
@@ -58,7 +56,13 @@ const VendorPage = ({ data = [] }: VendorProps) => {
                 ? true
                 : vendor.status.type === situation.value
             )
-            .map((vendor, i) => <S.ListItem key={i} vendor={vendor} />)}
+            .map((vendor, i) => (
+              <S.ListItem
+                key={i}
+                vendor={vendor}
+                onActionClick={() => onVendorClick(vendor.id)}
+              />
+            ))}
       </S.ListWrapper>
     </S.Wrapper>
   )

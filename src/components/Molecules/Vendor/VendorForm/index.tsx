@@ -1,37 +1,41 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as S from './styles' /** S = Styles */
 
 import TextField from 'components/Atoms/TextField'
 import SectionTitle from 'components/Atoms/SectionTitle'
 import { Grid } from '@material-ui/core'
-import { Vendors } from 'types/vendors'
-import React, { useState, useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import debounce from '@material-ui/utils/debounce'
-import DocIcon from 'components/Molecules/DocIcon'
+import DocIcon from 'components/Molecules/Vendor/DocIcon'
+import { VendorContext } from 'contexts/vendor'
+import { Docs, DocsNames } from 'types/utils'
 
 export type VendorFormProps = {
-  vendor: Vendors
-  onChange?: (formData: Vendors) => void
   disabled?: boolean
 }
 
-const VendorForm = ({
-  vendor,
-  onChange = () => null,
-  disabled = false
-}: VendorFormProps) => {
-  const [formData, setFormData] = useState<Vendors>(vendor)
+const VendorForm = ({ disabled = false }: VendorFormProps) => {
+  const context = useContext(VendorContext)
+
+  const formData = context.vendor
+
+  const certidoes: Partial<Docs[]> = [
+    'federalCertificatePdf',
+    'fgtsCertificatePdf',
+    'laborCertificatePdf',
+    'municipalCertificatePdf',
+    'stateCertificatePdf'
+  ]
 
   const debouncedSave = useRef(
-    debounce((newFormData) => onChange(newFormData), 400)
+    debounce(
+      (field: string, value: string) => context.updateFormData(field, value),
+      400
+    )
   ).current
 
   const updateFormData = (field: string, value: string) => {
-    const newFormData = {
-      ...formData,
-      [field]: value
-    }
-    setFormData(newFormData)
-    debouncedSave(newFormData)
+    debouncedSave(field, value)
   }
 
   return (
@@ -152,61 +156,22 @@ const VendorForm = ({
       <SectionTitle>Certidões</SectionTitle>
       <br />
       <Grid container>
-        <Grid item>
-          <DocIcon
-            variant={vendor.federalCertificatePdf?.status}
-            {...{
-              // TODO: Modal Actions (aprove, reject)
-              fileName: 'Certidão Federal',
-              ...vendor.federalCertificatePdf
-            }}
-          />
-        </Grid>
-        <Grid item>
-          <DocIcon
-            variant={vendor.stateCertificatePdf?.status}
-            {...{
-              fileName: 'Certidão Estadual',
-              ...vendor.stateCertificatePdf
-            }}
-          />
-        </Grid>
-        <Grid item>
-          <DocIcon
-            variant={vendor.municipalCertificatePdf?.status}
-            {...{
-              fileName: 'Certidão Municipal',
-              ...vendor.municipalCertificatePdf
-            }}
-          />
-        </Grid>
-        <Grid item>
-          <DocIcon
-            variant={vendor.fgtsCertificatePdf?.status}
-            {...{
-              fileName: 'Certidão FGTS',
-              ...vendor.fgtsCertificatePdf
-            }}
-          />
-        </Grid>
-        <Grid item>
-          <DocIcon
-            variant={vendor.laborCertificatePdf?.status}
-            {...{
-              fileName: 'Certidão Trabalhista',
-              ...vendor.laborCertificatePdf
-            }}
-          />
-        </Grid>
+        {certidoes.map((cert, i) => (
+          <Grid item key={i}>
+            <DocIcon
+              docName={cert}
+              docData={formData[cert!]}
+              fileName={DocsNames[cert!]}
+            />
+          </Grid>
+        ))}
       </Grid>
 
       <SectionTitle>CNPJ</SectionTitle>
       <DocIcon
-        variant={vendor.corporateDocPdf?.status}
-        {...{
-          fileName: 'Cartão CNPJ',
-          ...vendor.corporateDocPdf
-        }}
+        docName="corporateDocPdf"
+        docData={formData.corporateDocPdf}
+        fileName="Certidão Federal"
       />
     </S.Wrapper>
   )

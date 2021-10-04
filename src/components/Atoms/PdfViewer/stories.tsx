@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react/types-6-0'
 import { Container } from '@material-ui/core'
 
 export default {
-  title: 'PdfViewer',
+  title: 'Design System/Atoms/PdfViewer',
   component: PdfViewer,
   args: {
     file: 'http://localhost:3000/pdf-test.pdf'

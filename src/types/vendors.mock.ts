@@ -2,6 +2,7 @@ import { Vendors } from 'types/vendors'
 
 export const VendorsMockData: Vendors[] = [
   {
+    id: 1,
     corporateName: 'Little Church Altar',
     corporateDocNumber: '07899008409',
     fantasyName: 'Test',
@@ -23,31 +24,32 @@ export const VendorsMockData: Vendors[] = [
       complement: 'Ao lado do...'
     },
     corporateDocPdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     municipalCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     stateCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     laborCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     fgtsCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     declaration: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     }
   },
   {
+    id: 2,
     corporateName: 'Seven Lakes',
     corporateDocNumber: '07899008409',
     fantasyName: 'Test',
@@ -69,35 +71,36 @@ export const VendorsMockData: Vendors[] = [
       complement: 'Ao lado do...'
     },
     corporateDocPdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     federalCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     municipalCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     stateCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     laborCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     fgtsCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     declaration: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     }
   },
   {
+    id: 3,
     corporateName: 'Saint Louize Dimas',
     corporateDocNumber: '07899008409',
     fantasyName: 'Test',
@@ -119,32 +122,63 @@ export const VendorsMockData: Vendors[] = [
       complement: 'Ao lado do...'
     },
     corporateDocPdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     federalCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     municipalCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     stateCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     laborCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     fgtsCertificatePdf: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     },
     declaration: {
-      file: 'http://localhost:3000/pdf-test.pdf',
+      file: { url: 'http://localhost:3000/pdf-test.pdf' },
       expirationDate: '21/12/2021'
     }
   }
 ]
+
+export const VendorDefaultData: Vendors = {
+  id: 3,
+  corporateName: '',
+  corporateDocNumber: '',
+  fantasyName: '',
+  status: {
+    type: 'warning',
+    text: 'Aguardando Aprovação'
+  },
+  email: '',
+  phone: '',
+  responsible: '',
+  responsibleDocNumber: '',
+  address: {
+    address: '',
+    number: '',
+    CEP: '',
+    district: '',
+    city: '',
+    state: '',
+    complement: ''
+  },
+  corporateDocPdf: {},
+  federalCertificatePdf: {},
+  municipalCertificatePdf: {},
+  stateCertificatePdf: {},
+  laborCertificatePdf: {},
+  fgtsCertificatePdf: {},
+  declaration: {}
+}
