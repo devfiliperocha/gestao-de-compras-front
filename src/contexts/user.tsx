@@ -10,6 +10,7 @@ type UserContextProps = {
   setGlobalError: (errorMsg: string | undefined) => void
   setGlobalLoading: (state: boolean) => void
   login: (email: string, password: string) => void
+  logout: () => void
   hasError?: boolean
   errorMsg?: string
   mobileOpen: boolean
@@ -56,6 +57,13 @@ export const UserContextProvider: React.FC = ({ children }) => {
     setIsLoading(state)
   }
 
+  const logout = () => {
+    setUserData({} as User)
+    setIsLogged(false)
+    axios.defaults.headers = {}
+    localStorage.removeItem('userToken')
+  }
+
   const login = async (email: string, password: string) => {
     setIsLoading(true)
     const getUser = await LogIn(email, password)
@@ -88,6 +96,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
         isLoading,
         isLogged,
         login,
+        logout,
         hasError,
         errorMsg,
         setGlobalError,

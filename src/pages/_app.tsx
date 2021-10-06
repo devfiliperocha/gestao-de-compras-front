@@ -34,19 +34,15 @@ function App({ Component, pageProps }: AppProps) {
           <GlobalStyles />
           <UserContextProvider>
             <UserContext.Consumer>
-              {({ isLoading, isLogged }) => {
-                if (isLoading) {
-                  return <>Carregando...</>
+              {({ isLogged }) => {
+                if (isLogged) {
+                  return (
+                    <AppLeftMenu>
+                      <Component {...pageProps} />
+                    </AppLeftMenu>
+                  )
                 } else {
-                  if (isLogged) {
-                    return (
-                      <AppLeftMenu>
-                        <Component {...pageProps} />
-                      </AppLeftMenu>
-                    )
-                  } else {
-                    return <Login />
-                  }
+                  return <Login />
                 }
               }}
             </UserContext.Consumer>

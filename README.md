@@ -24,3 +24,6 @@ Protótipo Fornecedor:
 https://xd.adobe.com/view/1f4f74cc-3fc7-4ab8-977a-21752e2b7533-4a1c/screen/1224842a-896d-46cb-bd9f-a92471ac00fb/specs/
 
 
+Mobile:
+https://xd.adobe.com/view/f1de393e-9c3c-4591-9f64-39fdaeabb80b-a48d/?fullscreen
+
