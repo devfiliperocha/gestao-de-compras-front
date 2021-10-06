@@ -3,7 +3,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider
+  Divider,
+  ListItemSecondaryAction
 } from '@material-ui/core'
 import Icon from 'components/Atoms/Icon'
 import { useRouter } from 'next/dist/client/router'
@@ -20,7 +21,7 @@ const NavList = () => {
   const [userType, setUserType] = useState('')
   const router = useRouter()
   const userContext = useContext(UserContext)
-  const { user } = userContext
+  const { user, logout, setMobileOpen } = userContext
 
   useEffect(() => {
     if (user?.role?.name) {
@@ -33,6 +34,16 @@ const NavList = () => {
       ? (Object.keys(VendorMenus) as AppMenus[])
       : (Object.keys(OrganMenus) as AppMenus[])
   const items = userType === 'vendor' ? VendorMenus : OrganMenus
+
+  const goTo = (menu: string) => {
+    setMobileOpen(false)
+    router.push(`/${menu === 'home' ? '' : menu}`)
+  }
+
+  const LogOut = () => {
+    setMobileOpen(false)
+    logout()
+  }
 
   return (
     <S.Wrapper>
@@ -50,6 +61,9 @@ const NavList = () => {
             </>
           }
         />
+        <ListItemSecondaryAction>
+          <Icon name="SignOut" variant="accent" onClick={() => LogOut()} />
+        </ListItemSecondaryAction>
       </ListItem>
       <Divider />
       <S.List>
@@ -72,7 +86,7 @@ const NavList = () => {
                   borderLeft: menuActive ? '0.3rem solid' : 'none',
                   borderColor: menuActive ? 'accent.main' : 'transparent'
                 }}
-                onClick={() => router.push(`/${menu === 'home' ? '' : menu}`)}
+                onClick={() => goTo(menu)}
               >
                 <ListItemIcon>
                   <Icon

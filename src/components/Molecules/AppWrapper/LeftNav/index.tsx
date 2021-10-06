@@ -1,14 +1,9 @@
 import * as S from './styles' /** S = Styles */
-import { Divider, Grid } from '@material-ui/core'
-import React, { useContext } from 'react'
+import { Grid } from '@material-ui/core'
 import NavList from 'components/Molecules/AppWrapper/NavList'
-import { UserContext } from 'contexts/user'
 import Typography from 'components/Atoms/Typography'
 
 const LeftNav = () => {
-  const userContext = useContext(UserContext)
-  const { user } = userContext
-
   return (
     <S.Wrapper>
       <S.UserCard>
