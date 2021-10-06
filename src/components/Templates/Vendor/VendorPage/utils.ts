@@ -8,8 +8,8 @@ export const sortVendors = (
 ): Vendors[] => {
   const sortedVendors = [...vendors]
   sortedVendors.sort((a, b) => {
-    let aValue = a[sortColumn]
-    let bValue = b[sortColumn]
+    let aValue = a[sortColumn] || 0
+    let bValue = b[sortColumn] || 0
 
     if (sortColumn === 'status') {
       aValue = a.status.text

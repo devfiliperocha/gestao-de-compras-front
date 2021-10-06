@@ -92,6 +92,7 @@ const material = {
   },
   shape: { borderRadius: '0.4rem' },
   typography: {
+    htmlFontSize: 14,
     fontFamily:
       "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     fontWeightRegular: fontWeights.normal,
