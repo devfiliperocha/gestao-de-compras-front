@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps } from 'types/organs'
-import { getOrgans } from 'services/organs'
+import { OrganProps, UpdateOrganProps } from 'types/organs'
+import { createOrgan, getOrgans } from 'services/organs'
 import { AppContext } from './app'
 
 type OrgansContextProps = {
@@ -11,12 +11,21 @@ type OrgansContextProps = {
   errorMsg?: string
   setOrgans: (organs: OrganProps[]) => void
   setError?: (errorMsg: string | undefined) => void
+  create: () => void
+  newOrgan: OrganProps
+  updateFormData: UpdateOrganProps
 }
 export const OrgansContext = createContext({} as OrgansContextProps)
 
 export const OrgansContextProvider: React.FC = ({ children }) => {
-  const { setContainerLoading, setContainerError } = useContext(AppContext)
+  const {
+    setContainerLoading,
+    setContainerError,
+    setGlobalError,
+    setGlobalLoading
+  } = useContext(AppContext)
   const [organsData, setOrgansData] = useState([] as OrganProps[])
+  const [newOrganData, setNewOrganData] = useState({} as OrganProps)
 
   const setOrgans = (data: OrganProps[]) => {
     setOrgansData(data)
@@ -31,6 +40,23 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
     }
     setContainerLoading(false)
   }
+  const updateFormData: UpdateOrganProps = (field, value) => {
+    const newFormData = {
+      ...newOrganData,
+      [field]: value
+    }
+    setNewOrganData(newFormData)
+  }
+  const create = async () => {
+    setGlobalLoading(true)
+    const create = await createOrgan(newOrganData)
+    if (create.success) {
+      await getData()
+    } else {
+      setGlobalError(create.error)
+    }
+    setGlobalLoading(false)
+  }
 
   useEffect(() => {
     getData()
@@ -40,7 +66,10 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
     <OrgansContext.Provider
       value={{
         organs: organsData,
-        setOrgans
+        setOrgans,
+        newOrgan: newOrganData,
+        updateFormData,
+        create
       }}
     >
       {children}

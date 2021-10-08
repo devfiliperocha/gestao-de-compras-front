@@ -1,4 +1,4 @@
-import OrganPage from 'components/Templates/Organ/OrganPage'
+import OrganList from 'components/Templates/Organ/OrganList'
 import { OrgansContextProvider } from 'contexts/organs'
 import React from 'react'
 import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
@@ -8,7 +8,7 @@ function OrgansPage() {
   return (
     <OrgansContextProvider>
       <AppLeftMenu>
-        <OrganPage />
+        <OrganList />
       </AppLeftMenu>
     </OrgansContextProvider>
   )

@@ -41,3 +41,52 @@ export const getOrgan = async (id: number) => {
     }
   }
 }
+
+export const createOrgan = async (data: Partial<OrganProps>) => {
+  try {
+    const save: OrganResponse = await api.post('/organ', data)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as OrganProps,
+      success: false,
+      error: 'Erro ao criar registro.'
+    }
+  }
+}
+export const updateOrgan = async (
+  data: Partial<OrganProps>,
+  id: OrganProps['id']
+) => {
+  try {
+    const save: OrganResponse = await api.put(`/organ/${id}`, data)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as OrganProps,
+      success: false,
+      error: 'Erro ao salvar registro.'
+    }
+  }
+}
+export const deleteOrgan = async (id: OrganProps['id']) => {
+  try {
+    const save: OrganResponse = await api.delete(`/organ/${id}`)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as OrganProps,
+      success: false,
+      error: 'Erro ao deletar dados.'
+    }
+  }
+}
