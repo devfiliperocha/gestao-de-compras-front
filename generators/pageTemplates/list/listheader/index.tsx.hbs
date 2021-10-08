@@ -1,0 +1,54 @@
+import * as S from './styles' /** S = Styles */
+import Button from 'components/Atoms/Button'
+import Icon from 'components/Atoms/Icon'
+import { useState } from 'react'
+import { {{pascalCase name}}Columns } from 'types/{{lowerCase name}}s'
+import { SortDirections } from 'types/utils'
+
+export type {{pascalCase name}}ListHeaderProps = {
+  onSort?: (sortColumn: {{pascalCase name}}Columns, sortDirection: SortDirections) => void
+}
+
+const {{pascalCase name}}ListHeader = ({ onSort, ...props }: {{pascalCase name}}ListHeaderProps) => {
+  const [sortDirection, setSortDirection] = useState<SortDirections>('asc')
+  const [sortColumn, setSortColumn] = useState<{{pascalCase name}}Columns>('id')
+
+  const toggleSortDirection = () =>
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+
+  const onColumnClick = (column: {{pascalCase name}}Columns) => {
+    if (sortColumn === column) {
+      toggleSortDirection()
+    } else {
+      setSortColumn(column)
+    }
+    !!onSort && onSort(sortColumn, sortDirection)
+  }
+
+  return (
+    <S.Wrapper {...props}>
+      <S.ColumnOneWrapper>
+        <Button
+          variant="text"
+          disableRipple
+          endIcon={
+            sortColumn === 'id' ? (
+              <Icon
+                name={sortDirection === 'asc' ? 'ChevronUp' : 'ChevronDown'}
+                variant="primary"
+              />
+            ) : (
+              <></>
+            )
+          }
+          onClick={() => onColumnClick('id')}
+        >
+          Razão Social
+        </Button>
+      </S.ColumnOneWrapper>
+      <S.InvisibleWrapper>#</S.InvisibleWrapper>
+    </S.Wrapper>
+  )
+}
+
+export default {{pascalCase name}}ListHeader

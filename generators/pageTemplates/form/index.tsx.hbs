@@ -1,0 +1,73 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import * as S from './styles' /** S = Styles */
+
+import TextField from 'components/Atoms/TextField'
+import SectionTitle from 'components/Atoms/SectionTitle'
+import { Grid } from '@material-ui/core'
+import React, { useRef, useState } from 'react'
+import debounce from '@material-ui/utils/debounce'
+import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from 'types/{{lowerCase name}}s'
+
+export type {{pascalCase name}}FormProps = {
+  disabled?: boolean
+  onUpdateForm: Update{{pascalCase name}}Props
+  {{lowerCase name}}: {{pascalCase name}}Props
+}
+
+const {{pascalCase name}}Form = ({
+  disabled = false,
+  {{lowerCase name}},
+  onUpdateForm
+}: {{pascalCase name}}FormProps) => {
+  const [formData, setFormData] = useState({{lowerCase name}})
+
+  const debouncedSave = useRef(
+    debounce((field, value) => onUpdateForm(field, value), 400)
+  ).current
+
+  const update{{pascalCase name}}Data: Update{{pascalCase name}}Props = (field, value) => {
+    const data: {{pascalCase name}}Props = {
+      ...formData,
+      [field]: value
+    }
+    setFormData(data)
+    debouncedSave(field, value)
+  }
+
+  return (
+    <S.Wrapper>
+      <SectionTitle>Identificação</SectionTitle>
+
+      <Grid container>
+        <Grid item xs={12} sm={6}>
+          <S.Input>
+            <TextField
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                update{{pascalCase name}}Data('id', e.target.value)
+              }
+              fullWidth
+              disabled={disabled}
+              placeholder="ID"
+              value={formData.id + ''}
+            />
+          </S.Input>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <S.Input>
+            <TextField
+              fullWidth
+              disabled={disabled}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                update{{pascalCase name}}Data('id', e.target.value)
+              }
+              placeholder="CNPJ"
+              value={formData.id + ''}
+            />
+          </S.Input>
+        </Grid>
+      </Grid>
+    </S.Wrapper>
+  )
+}
+
+export default {{pascalCase name}}Form

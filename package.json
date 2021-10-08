@@ -12,7 +12,8 @@
     "release": "standard-version",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook -s ./public",
-    "generate": "yarn plop --plopfile ./generators/plopfile.js"
+    "generate:component": "yarn plop --plopfile ./generators/component.js",
+    "generate:page": "yarn plop --plopfile ./generators/page.js"
   },
   "husky": {
     "hooks": {

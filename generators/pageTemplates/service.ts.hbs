@@ -1,0 +1,92 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { {{pascalCase name}}Props } from 'types/{{lowerCase name}}s'
+import api from './api'
+
+type {{pascalCase name}}Response = {
+  data: {{pascalCase name}}Props
+}
+type {{pascalCase name}}sResponse = {
+  data: {{pascalCase name}}Props[]
+}
+
+export const get{{pascalCase name}}s = async () => {
+  try {
+    const {{lowerCase name}}s: {{pascalCase name}}sResponse = await api.get('/{{lowerCase name}}')
+    return {
+      data: {{lowerCase name}}s.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: [] as {{pascalCase name}}Props[],
+      success: false,
+      error: 'Erro ao recuperar dados.'
+    }
+  }
+}
+
+export const get{{pascalCase name}} = async (id: number) => {
+  try {
+    const {{lowerCase name}}: {{pascalCase name}}Response = await api.get(`{{lowerCase name}}/${id}`)
+
+    return {
+      data: {{lowerCase name}}.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as {{pascalCase name}}Props,
+      success: false,
+      error: 'Erro ao recuperar dados.'
+    }
+  }
+}
+
+export const create{{pascalCase name}} = async (data: Partial<{{pascalCase name}}Props>) => {
+  try {
+    const save: {{pascalCase name}}Response = await api.post('/{{lowerCase name}}', data)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as {{pascalCase name}}Props,
+      success: false,
+      error: 'Erro ao criar registro.'
+    }
+  }
+}
+export const update{{pascalCase name}} = async (
+  data: Partial<{{pascalCase name}}Props>,
+  id: {{pascalCase name}}Props['id']
+) => {
+  try {
+    const save: {{pascalCase name}}Response = await api.put(`/{{lowerCase name}}/${id}`, data)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as {{pascalCase name}}Props,
+      success: false,
+      error: 'Erro ao salvar registro.'
+    }
+  }
+}
+export const delete{{pascalCase name}} = async (id: {{pascalCase name}}Props['id']) => {
+  try {
+    const save: {{pascalCase name}}Response = await api.delete(`/{{lowerCase name}}/${id}`)
+    return {
+      data: save.data,
+      success: true
+    }
+  } catch (err) {
+    return {
+      data: {} as {{pascalCase name}}Props,
+      success: false,
+      error: 'Erro ao deletar dados.'
+    }
+  }
+}

@@ -13,22 +13,22 @@ module.exports = function (plop) {
       {
         type: 'add',
         path: '../src/components/{{pascalCase name}}/index.tsx',
-        templateFile: 'templates/index.tsx.hbs'
+        templateFile: 'componentTemplates/index.tsx.hbs'
       },
-      // {
-      //   type: 'add',
-      //   path: '../src/components/{{pascalCase name}}/stories.tsx',
-      //   templateFile: 'templates/stories.tsx.hbs'
-      // },
-      //{
-      //   type: 'add',
-      //   path: '../src/components/{{pascalCase name}}/test.tsx',
-      //   templateFile: 'templates/test.tsx.hbs'
-      // },
+      {
+        type: 'add',
+        path: '../src/components/{{pascalCase name}}/stories.tsx',
+        templateFile: 'componentTemplates/stories.tsx.hbs'
+      },
+      {
+        type: 'add',
+        path: '../src/components/{{pascalCase name}}/test.tsx',
+        templateFile: 'componentTemplates/test.tsx.hbs'
+      },
       {
         type: 'add',
         path: '../src/components/{{pascalCase name}}/styles.ts',
-        templateFile: 'templates/styles.ts.hbs'
+        templateFile: 'componentTemplates/styles.ts.hbs'
       }
     ]
   })

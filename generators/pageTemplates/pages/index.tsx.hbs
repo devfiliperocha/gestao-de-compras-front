@@ -1,0 +1,17 @@
+import {{pascalCase name}}List from 'components/Templates/{{pascalCase name}}/{{pascalCase name}}List'
+import { {{pascalCase name}}sContextProvider } from 'contexts/{{lowerCase name}}s'
+import React from 'react'
+import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
+import { withAuth } from 'components/hoc/Auth'
+
+function {{pascalCase name}}sPage() {
+  return (
+    <{{pascalCase name}}sContextProvider>
+      <AppLeftMenu>
+        <{{pascalCase name}}List />
+      </AppLeftMenu>
+    </{{pascalCase name}}sContextProvider>
+  )
+}
+
+export default withAuth({{pascalCase name}}sPage)

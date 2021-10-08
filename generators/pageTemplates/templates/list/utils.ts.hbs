@@ -1,0 +1,33 @@
+import { {{pascalCase name}}Columns, {{pascalCase name}}Props } from 'types/{{lowerCase name}}s'
+import { SortDirections } from 'types/utils'
+
+export const sort{{pascalCase name}}s = (
+  sortColumn: {{pascalCase name}}Columns,
+  sortDirection: SortDirections,
+  {{lowerCase name}}: {{pascalCase name}}Props[]
+): {{pascalCase name}}Props[] => {
+  const sorted{{pascalCase name}} = [...{{lowerCase name}}]
+  sorted{{pascalCase name}}.sort((a, b) => {
+    const aValue = a[sortColumn] || 0
+    const bValue = b[sortColumn] || 0
+
+    if (sortDirection === 'asc') {
+      if (bValue > aValue) {
+        return 1
+      }
+      if (bValue < aValue) {
+        return -1
+      }
+      return 0
+    } else {
+      if (bValue < aValue) {
+        return 1
+      }
+      if (bValue > aValue) {
+        return -1
+      }
+      return 0
+    }
+  })
+  return sorted{{pascalCase name}}
+}
