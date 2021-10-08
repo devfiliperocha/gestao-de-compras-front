@@ -25,7 +25,7 @@ export const AppContextProvider: React.FC = ({ children }) => {
     string | undefined
   >()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [isGlobalLoading, setGlobalLoading] = useState(true)
+  const [isGlobalLoading, setGlobalLoading] = useState(false)
   const [hasGlobalError, setHasGlobalError] = useState(false)
   const [globalErrorMsg, setGlobalErrorMsg] = useState<string | undefined>()
 

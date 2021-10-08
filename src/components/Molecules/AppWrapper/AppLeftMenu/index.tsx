@@ -18,7 +18,7 @@ const AppLeftMenu: React.FC = ({ children }) => {
       <S.Container component="main">
         {isContainerLoading && (
           <FullSizeContainer>
-            <Loading />
+            <Loading size={45} />
           </FullSizeContainer>
         )}
         {!isContainerLoading && !hasContainerError && (

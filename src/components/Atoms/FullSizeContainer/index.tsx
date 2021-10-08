@@ -10,7 +10,8 @@ const FullSizeContainer = ({ ...props }: ContainerProps) => (
       height: '100vh',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      bgcolor: 'transparent'
     }}
   />
 )
