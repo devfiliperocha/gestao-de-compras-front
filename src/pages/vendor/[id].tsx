@@ -1,18 +1,21 @@
+import React from 'react'
+import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
+import { withAuth } from 'components/hoc/Auth'
 import { VendorContextProvider, VendorContext } from 'contexts/vendor'
 import VendorAprovationPage from 'components/Templates/Vendor/VendorAprovationPage'
 
-export default function VendorApprovePage() {
+function VendorApprovePage() {
   return (
     <VendorContextProvider>
       <VendorContext.Consumer>
-        {({ isLoading }) => {
-          if (isLoading) {
-            return <>Carregando...</>
-          } else {
-            return <VendorAprovationPage />
-          }
+        {({ vendor }) => {
+          return (
+            <AppLeftMenu>{vendor.id && <VendorAprovationPage />}</AppLeftMenu>
+          )
         }}
       </VendorContext.Consumer>
     </VendorContextProvider>
   )
 }
+
+export default withAuth(VendorApprovePage)

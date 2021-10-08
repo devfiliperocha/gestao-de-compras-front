@@ -1,28 +1,17 @@
 import VendorPage from 'components/Templates/Vendor/VendorPage'
-import { useRouter } from 'next/dist/client/router'
-import { VendorsContextProvider, VendorsContext } from 'contexts/vendors'
+import { VendorsContextProvider } from 'contexts/vendors'
+import React from 'react'
+import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
+import { withAuth } from 'components/hoc/Auth'
 
-export default function VendorsPage() {
-  const router = useRouter()
-
+function VendorsPage() {
   return (
     <VendorsContextProvider>
-      <VendorsContext.Consumer>
-        {({ isLoading }) => {
-          if (isLoading) {
-            return <>Carregando...</>
-          } else {
-            return (
-              <VendorPage
-                onVendorClick={(id: number) => {
-                  router.push(`/vendor/${id}`)
-                  return
-                }}
-              />
-            )
-          }
-        }}
-      </VendorsContext.Consumer>
+      <AppLeftMenu>
+        <VendorPage />
+      </AppLeftMenu>
     </VendorsContextProvider>
   )
 }
+
+export default withAuth(VendorsPage)

@@ -1,29 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { Docs } from 'types/utils'
 import { Vendors } from 'types/vendors'
 import { File } from 'types/file'
 import { getVendor } from 'services/vendors'
 import { useRouter } from 'next/dist/client/router'
+import { AppContext } from './app'
 
 type VendorContextProps = {
   vendor: Vendors
   updateFormData: (field: string, value: string) => void
   updateDocStatus: (field: Docs, value: File) => void
   updateVendorStatus: (status: 'error' | 'success') => void
-  setError?: (errorMsg: string | undefined) => void
-  isLoading?: boolean
-  hasError?: boolean
-  errorMsg?: string
 }
 
 export const VendorContext = createContext({} as VendorContextProps)
 
 export const VendorContextProvider: React.FC = ({ children }) => {
+  const { setContainerLoading, setContainerError } = useContext(AppContext)
   const [vendorData, setVendorData] = useState({} as Vendors)
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [errorMsg, setErrorMsg] = useState<string | undefined>()
   const router = useRouter()
   const { id } = router.query
 
@@ -61,7 +57,7 @@ export const VendorContextProvider: React.FC = ({ children }) => {
     if (status === 'success') {
       const allHaveFiles = docs.every((d) => vendorData[d]?.file?.url)
       if (!allHaveFiles) {
-        setError(
+        setContainerError(
           'Para ser aprovado, o fornecedor precisa enviar todos os documentos.'
         )
         return
@@ -88,21 +84,16 @@ export const VendorContextProvider: React.FC = ({ children }) => {
     setVendorData(data)
   }
 
-  const setError = (errorMsg: string | undefined) => {
-    setHasError(!!errorMsg)
-    setErrorMsg(errorMsg)
-  }
-
   useEffect(() => {
     const getData = async (id: number) => {
-      setIsLoading(true)
+      setContainerLoading(true)
       const vendor = await getVendor(id)
       if (vendor.success) {
         setVendor(vendor.data)
       } else {
-        setError(vendor.error)
+        setContainerError(vendor.error)
       }
-      setIsLoading(false)
+      setContainerLoading(false)
     }
 
     const vendorId = typeof id === 'string' ? parseInt(id) : 0
@@ -117,11 +108,7 @@ export const VendorContextProvider: React.FC = ({ children }) => {
         vendor: vendorData,
         updateFormData,
         updateDocStatus,
-        updateVendorStatus,
-        setError,
-        hasError,
-        errorMsg,
-        isLoading
+        updateVendorStatus
       }}
     >
       {children}

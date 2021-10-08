@@ -1,32 +1,38 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react'
 import { User } from 'types/user'
 import { AuthCheck, LogIn } from 'services/user'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 type UserContextProps = {
   user: User
   isLoading: boolean
   isLogged: boolean
-  setGlobalError: (errorMsg: string | undefined) => void
-  setGlobalLoading: (state: boolean) => void
+  setError: (errorMsg: string | undefined) => void
+  setLoading: (state: boolean) => void
   login: (email: string, password: string) => void
   logout: () => void
   hasError?: boolean
   errorMsg?: string
-  mobileOpen: boolean
-  setMobileOpen: (open: boolean) => void
-  drawerWidth: number
 }
 
 export const UserContext = createContext({} as UserContextProps)
 
 export const UserContextProvider: React.FC = ({ children }) => {
   const [userData, setUserData] = useState({} as User)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [isLogged, setIsLogged] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | undefined>()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const router = useRouter()
+
+  const logout = useCallback(() => {
+    setUserData({} as User)
+    setIsLogged(false)
+    axios.defaults.headers = {}
+    localStorage.removeItem('userToken')
+    router.push('/login')
+  }, [router])
 
   useEffect(() => {
     setIsLoading(true)
@@ -43,25 +49,15 @@ export const UserContextProvider: React.FC = ({ children }) => {
         setIsLoading(false)
       })
       .catch((err) => {
-        setGlobalError(err)
+        setLoginError(err)
         setIsLoading(false)
+        logout()
       })
-  }, [])
+  }, [logout])
 
-  const setGlobalError = (errorMsg: string | undefined) => {
+  const setLoginError = (errorMsg: string | undefined) => {
     setHasError(!!errorMsg)
     setErrorMsg(errorMsg)
-  }
-
-  const setGlobalLoading = (state: boolean) => {
-    setIsLoading(state)
-  }
-
-  const logout = () => {
-    setUserData({} as User)
-    setIsLogged(false)
-    axios.defaults.headers = {}
-    localStorage.removeItem('userToken')
   }
 
   const login = async (email: string, password: string) => {
@@ -77,13 +73,21 @@ export const UserContextProvider: React.FC = ({ children }) => {
         axios.defaults.headers = {
           Authorization: `Bearer ${userData.jwt}`
         }
+        if (
+          window.history.length > 1 &&
+          document.referrer.indexOf(window.location.host) !== -1
+        ) {
+          router.back()
+        } else {
+          router.replace('/')
+        }
       } else {
         setUserData({} as User)
         setIsLogged(false)
-        setGlobalError('Erro ao fazer login.')
+        setLoginError('Erro ao fazer login.')
       }
     } else {
-      setGlobalError(getUser.error)
+      setLoginError(getUser.error)
     }
 
     setIsLoading(false)
@@ -99,11 +103,8 @@ export const UserContextProvider: React.FC = ({ children }) => {
         logout,
         hasError,
         errorMsg,
-        setGlobalError,
-        setGlobalLoading,
-        mobileOpen,
-        setMobileOpen,
-        drawerWidth: 250
+        setError: setLoginError,
+        setLoading: setIsLoading
       }}
     >
       {children}

@@ -1,32 +1,26 @@
-import { Alert, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Button from 'components/Atoms/Button'
 import TextField from 'components/Atoms/TextField'
 import Typography from 'components/Atoms/Typography'
 import { UserContext } from 'contexts/user'
-import { useRouter } from 'next/dist/client/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Loading from 'components/Atoms/Loading'
-import useResponsive from 'components/Helpers/Hooks/useResponsive'
+import useResponsive from 'Hooks/useResponsive'
 import Logo from 'components/Atoms/Logo'
+import Alert from 'components/Atoms/Alert'
 
+//TODO: Rever responsividade
 const Login = () => {
-  const context = useContext(UserContext)
-  const { login, isLoading, isLogged, hasError, errorMsg, setGlobalError } =
-    context
-  const router = useRouter()
+  const { login, isLoading, hasError, errorMsg, setError } =
+    useContext(UserContext)
+
   const [identifier, setIdentifier] = useState('test@test.com')
   const [password, setPassword] = useState('test')
 
   const breakPoint = useResponsive()
 
-  useEffect(() => {
-    if (isLogged) {
-      router.push('/')
-    }
-  }, [router, isLogged])
-
   const LogIn = async () => {
-    setGlobalError('')
+    setError('')
     await login(identifier, password)
   }
 

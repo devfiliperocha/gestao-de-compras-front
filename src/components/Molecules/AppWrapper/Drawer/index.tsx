@@ -2,11 +2,10 @@ import { Drawer } from '@material-ui/core'
 import LeftNav from 'components/Molecules/AppWrapper/LeftNav'
 import React, { useContext } from 'react'
 import * as S from './styles' /** S = Styles */
-import { UserContext } from 'contexts/user'
+import { AppContext } from 'contexts/app'
 
 const AppDrawer = () => {
-  const context = useContext(UserContext)
-  const { mobileOpen, setMobileOpen, drawerWidth } = context
+  const { mobileOpen, setMobileOpen, drawerWidth } = useContext(AppContext)
 
   const mobileDrawerToggle = () => {
     setMobileOpen(!mobileOpen)

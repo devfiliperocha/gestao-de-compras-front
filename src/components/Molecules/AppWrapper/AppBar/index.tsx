@@ -4,15 +4,14 @@ import React, { useContext } from 'react'
 import IconButton from 'components/Atoms/IconButton'
 import Icon from 'components/Atoms/Icon'
 import Typography from 'components/Atoms/Typography'
-import { UserContext } from 'contexts/user'
+import { AppContext } from 'contexts/app'
 
 type AppBarProps = {
   title: string
 }
 
 const AppBar = ({ title }: AppBarProps) => {
-  const context = useContext(UserContext)
-  const { mobileOpen, setMobileOpen, drawerWidth } = context
+  const { mobileOpen, setMobileOpen, drawerWidth } = useContext(AppContext)
 
   const mobileDrawerToggle = () => {
     setMobileOpen(!mobileOpen)

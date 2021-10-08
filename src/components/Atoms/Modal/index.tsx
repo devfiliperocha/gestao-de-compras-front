@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
 import * as S from './styles' /** S = Styles */
-import useResponsive from 'components/Helpers/Hooks/useResponsive'
+import useResponsive from 'Hooks/useResponsive'
 
 export type ModalProps = {
   children: React.ReactNode

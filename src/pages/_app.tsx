@@ -9,9 +9,8 @@ import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
-import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
-import Login from 'components/Templates/Login'
-import { UserContextProvider, UserContext } from 'contexts/user'
+import { UserContextProvider } from 'contexts/user'
+import { AppContextProvider } from 'contexts/app'
 
 const materialTheme = createTheme(theme)
 
@@ -32,21 +31,11 @@ function App({ Component, pageProps }: AppProps) {
             />
           </Head>
           <GlobalStyles />
-          <UserContextProvider>
-            <UserContext.Consumer>
-              {({ isLogged }) => {
-                if (isLogged) {
-                  return (
-                    <AppLeftMenu>
-                      <Component {...pageProps} />
-                    </AppLeftMenu>
-                  )
-                } else {
-                  return <Login />
-                }
-              }}
-            </UserContext.Consumer>
-          </UserContextProvider>
+          <AppContextProvider>
+            <UserContextProvider>
+              <Component {...pageProps} />
+            </UserContextProvider>
+          </AppContextProvider>
         </StyledThemeProvider>
       </MaterialThemeProvider>
     </EmotionThemeProvider>

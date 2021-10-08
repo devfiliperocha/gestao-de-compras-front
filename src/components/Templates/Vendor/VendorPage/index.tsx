@@ -4,18 +4,16 @@ import { useContext, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
 import { sortVendors } from 'components/Templates/Vendor/VendorPage/utils'
 import { VendorsContext } from 'contexts/vendors'
+import { useRouter } from 'next/router'
 
-export type VendorProps = {
-  onVendorClick: (id: number) => void
-}
 type Situation = {
   title: string
   value: 'all' | 'warning' | 'success' | 'error'
 }
 
-const VendorPage = ({ onVendorClick = () => null }: VendorProps) => {
-  const vendorContext = useContext(VendorsContext)
-  const { vendors, setVendors } = vendorContext
+const VendorPage = () => {
+  const { vendors, setVendors } = useContext(VendorsContext)
+  const router = useRouter()
 
   const initialSituation: Situation = { title: 'Todos', value: 'all' }
   const [situation, setStituation] = useState(initialSituation)
@@ -26,6 +24,11 @@ const VendorPage = ({ onVendorClick = () => null }: VendorProps) => {
     { title: 'Aprovado', value: 'success' },
     { title: 'Rejeitado', value: 'error' }
   ]
+
+  const onVendorClick = (id: number) => {
+    router.push(`/vendor/${id}`)
+    return
+  }
 
   return (
     <S.Wrapper maxWidth="lg">

@@ -3,7 +3,7 @@ import * as S from './styles' /** S = Styles */
 import { Document, Page } from 'react-pdf'
 import { useState } from 'react'
 import { pdfjs } from 'react-pdf'
-import useResponsive from 'components/Helpers/Hooks/useResponsive'
+import useResponsive from 'Hooks/useResponsive'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 export type PdfViewerProps = {

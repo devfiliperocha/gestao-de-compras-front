@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useContext, useEffect, useState } from 'react'
 import { Vendors } from 'types/vendors'
 import { getVendors } from 'services/vendors'
+import { AppContext } from './app'
 
 type VendorsContextProps = {
   vendors: Vendors[]
@@ -10,35 +12,27 @@ type VendorsContextProps = {
   setVendors: (vendors: Vendors[]) => void
   setError?: (errorMsg: string | undefined) => void
 }
-
 export const VendorsContext = createContext({} as VendorsContextProps)
 
 export const VendorsContextProvider: React.FC = ({ children }) => {
+  const { setContainerLoading, setContainerError } = useContext(AppContext)
   const [vendorsData, setVendorsData] = useState([] as Vendors[])
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [errorMsg, setErrorMsg] = useState<string | undefined>()
 
   const setVendors = (data: Vendors[]) => {
     setVendorsData(data)
   }
-
-  const setError = (errorMsg: string | undefined) => {
-    setHasError(!!errorMsg)
-    setErrorMsg(errorMsg)
+  const getData = async () => {
+    setContainerLoading(true)
+    const vendors = await getVendors()
+    if (vendors.success) {
+      setVendors(vendors.data)
+    } else {
+      setContainerError(vendors.error)
+    }
+    setContainerLoading(false)
   }
 
   useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true)
-      const vendors = await getVendors()
-      if (vendors.success) {
-        setVendors(vendors.data)
-      } else {
-        setError(vendors.error)
-      }
-      setIsLoading(false)
-    }
     getData()
   }, [])
 
@@ -46,11 +40,7 @@ export const VendorsContextProvider: React.FC = ({ children }) => {
     <VendorsContext.Provider
       value={{
         vendors: vendorsData,
-        isLoading,
-        hasError,
-        errorMsg,
-        setVendors,
-        setError
+        setVendors
       }}
     >
       {children}

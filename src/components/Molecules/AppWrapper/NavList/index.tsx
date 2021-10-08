@@ -12,6 +12,7 @@ import { AppMenus, OrganMenus, VendorMenus } from 'types/utils'
 import { UserContext } from 'contexts/user'
 import React, { useContext, useEffect, useState } from 'react'
 import Typography from 'components/Atoms/Typography'
+import { AppContext } from 'contexts/app'
 
 export type NavListProps = {
   items: typeof OrganMenus | typeof VendorMenus
@@ -20,8 +21,8 @@ export type NavListProps = {
 const NavList = () => {
   const [userType, setUserType] = useState('')
   const router = useRouter()
-  const userContext = useContext(UserContext)
-  const { user, logout, setMobileOpen } = userContext
+  const { user, logout } = useContext(UserContext)
+  const { setMobileOpen } = useContext(AppContext)
 
   useEffect(() => {
     if (user?.role?.name) {

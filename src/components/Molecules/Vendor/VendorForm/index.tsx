@@ -4,20 +4,27 @@ import * as S from './styles' /** S = Styles */
 import TextField from 'components/Atoms/TextField'
 import SectionTitle from 'components/Atoms/SectionTitle'
 import { Grid } from '@material-ui/core'
-import React, { useRef, useContext } from 'react'
+import React, { useRef } from 'react'
 import debounce from '@material-ui/utils/debounce'
 import DocIcon from 'components/Molecules/Vendor/DocIcon'
-import { VendorContext } from 'contexts/vendor'
 import { Docs, DocsNames } from 'types/utils'
+import { Vendors } from 'types/vendors'
+import { File } from 'types/file'
 
 export type VendorFormProps = {
   disabled?: boolean
+  onUpdateForm: (field: string, value: string) => void
+  onUpdateDocument: (field: Docs, value: File) => void
+  vendor: Vendors
 }
 
-const VendorForm = ({ disabled = false }: VendorFormProps) => {
-  const context = useContext(VendorContext)
-
-  const formData = context.vendor
+const VendorForm = ({
+  disabled = false,
+  vendor,
+  onUpdateForm,
+  onUpdateDocument
+}: VendorFormProps) => {
+  const formData = vendor
 
   const certidoes: Partial<Docs[]> = [
     'federalCertificatePdf',
@@ -28,13 +35,10 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
   ]
 
   const debouncedSave = useRef(
-    debounce(
-      (field: string, value: string) => context.updateFormData(field, value),
-      400
-    )
+    debounce((field: string, value: string) => onUpdateForm(field, value), 400)
   ).current
 
-  const updateFormData = (field: string, value: string) => {
+  const updateVendorData = (field: string, value: string) => {
     debouncedSave(field, value)
   }
 
@@ -47,7 +51,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
           <S.Input>
             <TextField
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('corporateName', e.target.value)
+                updateVendorData('corporateName', e.target.value)
               }
               fullWidth
               disabled={disabled}
@@ -62,7 +66,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
               fullWidth
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('corporateDocNumber', e.target.value)
+                updateVendorData('corporateDocNumber', e.target.value)
               }
               placeholder="CNPJ"
               value={formData.corporateDocNumber}
@@ -78,7 +82,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('address', e.target.value)
+                updateVendorData('address', e.target.value)
               }
               fullWidth
               placeholder="Logradouro"
@@ -91,7 +95,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('number', e.target.value)
+                updateVendorData('number', e.target.value)
               }
               fullWidth
               placeholder="Nº"
@@ -104,7 +108,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('complement', e.target.value)
+                updateVendorData('complement', e.target.value)
               }
               fullWidth
               placeholder="Complemento"
@@ -117,7 +121,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('CEP', e.target.value)
+                updateVendorData('CEP', e.target.value)
               }
               fullWidth
               placeholder="CEP"
@@ -130,7 +134,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('state', e.target.value)
+                updateVendorData('state', e.target.value)
               }
               fullWidth
               placeholder="Estado"
@@ -143,7 +147,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
             <TextField
               disabled={disabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                updateFormData('city', e.target.value)
+                updateVendorData('city', e.target.value)
               }
               fullWidth
               placeholder="Cidade"
@@ -162,6 +166,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
               docName={cert}
               docData={formData[cert!]}
               fileName={DocsNames[cert!]}
+              onUpdateDoc={onUpdateDocument}
             />
           </Grid>
         ))}
@@ -172,6 +177,7 @@ const VendorForm = ({ disabled = false }: VendorFormProps) => {
         docName="corporateDocPdf"
         docData={formData.corporateDocPdf}
         fileName="Certidão Federal"
+        onUpdateDoc={onUpdateDocument}
       />
     </S.Wrapper>
   )
