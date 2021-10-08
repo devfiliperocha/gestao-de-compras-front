@@ -1,17 +1,14 @@
-import Button from 'components/Atoms/Button'
-import Typography from 'components/Atoms/Typography'
 import * as S from './styles' /** S = Styles */
 
 type EmptyStateProps = {
-  menuName: string
+  title: React.ReactNode
+  button: React.ReactNode
 }
 
-const EmptyState = ({ menuName }: EmptyStateProps) => (
+const EmptyState = ({ title, button }: EmptyStateProps) => (
   <S.Wrapper>
-    <Typography variant="h5">
-      Você ainda não tem nenhum {menuName} cadastrado.
-    </Typography>
-    <Button>Cadastrar {menuName}</Button>
+    {title}
+    {button}
   </S.Wrapper>
 )
 
