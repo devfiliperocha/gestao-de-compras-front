@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { OrganProps } from 'types/organs'
-import api from './api'
+import { OrganProps } from '../types/organs'
+import api from 'services/api'
 
 type OrganResponse = {
   data: OrganProps

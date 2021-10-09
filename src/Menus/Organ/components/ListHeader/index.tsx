@@ -2,7 +2,7 @@ import * as S from './styles' /** S = Styles */
 import Button from 'components/Atoms/Button'
 import Icon from 'components/Atoms/Icon'
 import { useState } from 'react'
-import { OrganColumns } from 'types/organs'
+import { OrganColumns } from '../../types/organs'
 import { SortDirections } from 'types/utils'
 
 export type OrganListHeaderProps = {

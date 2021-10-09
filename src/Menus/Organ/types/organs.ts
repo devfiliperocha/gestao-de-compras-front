@@ -1,5 +1,5 @@
-import { Address } from './address'
-import { ValueOf } from './utils'
+import { Address } from 'types/address'
+import { ValueOf } from 'types/utils'
 
 export type OrganProps = {
   id: number

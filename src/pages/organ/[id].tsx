@@ -1,19 +1,9 @@
 import React from 'react'
-import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
 import { withAuth } from 'components/hoc/Auth'
-import { OrganContextProvider, OrganContext } from 'contexts/organ'
-import OrganPage from 'components/Templates/Organ/OrganPage'
+import OrganPage from 'Menus/Organ/organ'
 
-function OrganApprovePage() {
-  return (
-    <OrganContextProvider>
-      <OrganContext.Consumer>
-        {({ organ }) => {
-          return <AppLeftMenu>{organ.id && <OrganPage />}</AppLeftMenu>
-        }}
-      </OrganContext.Consumer>
-    </OrganContextProvider>
-  )
+function Organ() {
+  return <OrganPage />
 }
 
-export default withAuth(OrganApprovePage)
+export default withAuth(Organ)

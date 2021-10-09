@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import OrganPageBase from '@material-ui/core/Container'
-import OrganListHeader from 'components/Molecules/Organ/OrganListHeader'
-import OrganListItem from 'components/Molecules/Organ/OrganListItem'
+import OrganListHeader from '../ListHeader'
+import OrganListItem from '../ListItem'
 import media from 'styled-media-query'
 
 export const Wrapper = styled(OrganPageBase)``

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as S from './styles' /** S = Styles */
-import OrganForm from 'components/Molecules/Organ/OrganForm'
 import React, { useContext, useState } from 'react'
-import { OrganContext } from 'contexts/organ'
+import { Container } from '@material-ui/core'
 import { AppContext } from 'contexts/app'
 import Button from 'components/Atoms/Button'
-import { Container } from '@material-ui/core'
 import Modal from 'components/Atoms/Modal'
+import OrganForm from '../Form'
+import { OrganContext } from '../../context/organ'
 
 const OrganPage = () => {
   const { organ, updateFormData, update, remove } = useContext(OrganContext)

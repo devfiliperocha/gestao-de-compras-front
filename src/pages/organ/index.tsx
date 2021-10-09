@@ -1,17 +1,9 @@
-import OrganList from 'components/Templates/Organ/OrganList'
-import { OrgansContextProvider } from 'contexts/organs'
 import React from 'react'
-import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
 import { withAuth } from 'components/hoc/Auth'
+import OrgansMain from 'Menus/Organ/organs'
 
-function OrgansPage() {
-  return (
-    <OrgansContextProvider>
-      <AppLeftMenu>
-        <OrganList />
-      </AppLeftMenu>
-    </OrgansContextProvider>
-  )
+function Organs() {
+  return <OrgansMain />
 }
 
-export default withAuth(OrgansPage)
+export default withAuth(Organs)

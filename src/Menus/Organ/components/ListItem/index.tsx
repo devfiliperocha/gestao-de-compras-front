@@ -1,5 +1,5 @@
 import * as S from './styles' /** S = Styles */
-import { OrganProps } from 'types/organs'
+import { OrganProps } from '../../types/organs'
 import Button from 'components/Atoms/Button'
 import Typography from 'components/Atoms/Typography'
 

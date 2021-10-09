@@ -1,4 +1,4 @@
-import { OrganColumns, OrganProps } from 'types/organs'
+import { OrganColumns, OrganProps } from '../../types/organs'
 import { SortDirections } from 'types/utils'
 
 export const sortOrgans = (

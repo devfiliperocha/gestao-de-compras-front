@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps, UpdateOrganProps } from 'types/organs'
-import { createOrgan, getOrgans } from 'services/organs'
-import { AppContext } from './app'
+import { OrganProps, UpdateOrganProps } from '../types/organs'
+import { createOrgan, getOrgans } from '../service/organs'
+import { AppContext } from 'contexts/app'
 
 type OrgansContextProps = {
   organs: OrganProps[]

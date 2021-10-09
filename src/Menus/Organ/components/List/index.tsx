@@ -1,14 +1,14 @@
 import * as S from './styles' /** S = Styles */
 import React, { useContext, useState } from 'react'
-import Typography from 'components/Atoms/Typography'
-import { sortOrgans } from 'components/Templates/Organ/OrganList/utils'
-import { OrgansContext } from 'contexts/organs'
+import Container from '@material-ui/core/Container'
 import { useRouter } from 'next/router'
+import Typography from 'components/Atoms/Typography'
 import EmptyState from 'components/Atoms/EmptyState'
 import Button from 'components/Atoms/Button'
-import Container from '@material-ui/core/Container'
-import OrganForm from 'components/Molecules/Organ/OrganForm'
 import Modal from 'components/Atoms/Modal'
+import OrganForm from '../Form'
+import { sortOrgans } from './utils'
+import { OrgansContext } from '../../context/organs'
 
 const OrganList = () => {
   const { organs, setOrgans, create, newOrgan, updateFormData } =

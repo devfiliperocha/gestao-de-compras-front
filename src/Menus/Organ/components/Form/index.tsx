@@ -6,7 +6,7 @@ import SectionTitle from 'components/Atoms/SectionTitle'
 import { Grid } from '@material-ui/core'
 import React, { useRef, useState } from 'react'
 import debounce from '@material-ui/utils/debounce'
-import { OrganProps, UpdateOrganProps } from 'types/organs'
+import { OrganProps, UpdateOrganProps } from '../../types/organs'
 
 export type OrganFormProps = {
   disabled?: boolean

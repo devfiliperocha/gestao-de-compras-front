@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps, UpdateOrganProps } from 'types/organs'
-import { getOrgan, updateOrgan, deleteOrgan } from 'services/organs'
+import { OrganProps, UpdateOrganProps } from '../types/organs'
+import { getOrgan, updateOrgan, deleteOrgan } from '../service/organs'
 import { useRouter } from 'next/dist/client/router'
-import { AppContext } from './app'
+import { AppContext } from 'contexts/app'
 
 type OrganContextProps = {
   organ: OrganProps
