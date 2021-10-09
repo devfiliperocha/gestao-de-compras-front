@@ -8,12 +8,12 @@ import Alert from 'components/Atoms/Alert'
 import FullSizeContainer from 'components/Atoms/FullSizeContainer'
 
 const AppLeftMenu: React.FC = ({ children }) => {
-  const { isContainerLoading, hasContainerError, containerErrorMsg } =
+  const { isContainerLoading, hasContainerError, containerErrorMsg, title } =
     useContext(AppContext)
 
   return (
     <S.Wrapper>
-      <AppBar title="JP Gestão de Compras" />
+      <AppBar title={title} />
       <Drawer />
       <S.Container component="main">
         {isContainerLoading && (

@@ -37,7 +37,9 @@ const AppBar = ({ title }: AppBarProps) => {
         >
           <Icon name="LineHorizontal3" variant="primary" />
         </IconButton>
-        <Typography variant="h5">{title}</Typography>
+        <Typography variant="h5" color="primary">
+          {title}
+        </Typography>
       </Toolbar>
     </S.Wrapper>
   )

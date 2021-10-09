@@ -14,6 +14,8 @@ type AppContextProps = {
   mobileOpen: boolean
   setMobileOpen: (open: boolean) => void
   drawerWidth: number
+  title: string
+  setTitle: (title: string) => void
 }
 
 export const AppContext = createContext({} as AppContextProps)
@@ -25,6 +27,7 @@ export const AppContextProvider: React.FC = ({ children }) => {
     string | undefined
   >()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [title, setTitle] = useState('JP Gestão de Compras')
   const [isGlobalLoading, setGlobalLoading] = useState(false)
   const [hasGlobalError, setHasGlobalError] = useState(false)
   const [globalErrorMsg, setGlobalErrorMsg] = useState<string | undefined>()
@@ -37,6 +40,10 @@ export const AppContextProvider: React.FC = ({ children }) => {
   const containerError = (errorMsg: string | undefined) => {
     setHasContainerError(!!errorMsg)
     setContainerErrorMsg(errorMsg)
+  }
+
+  const setPageTitle = (title: string) => {
+    setTitle(title)
   }
 
   return (
@@ -54,7 +61,9 @@ export const AppContextProvider: React.FC = ({ children }) => {
         setGlobalLoading,
         mobileOpen,
         setMobileOpen,
-        drawerWidth: 250
+        drawerWidth: 250,
+        title,
+        setTitle: setPageTitle
       }}
     >
       {children}

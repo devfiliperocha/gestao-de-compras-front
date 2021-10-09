@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps, UpdateOrganProps } from '../types/organs'
+import { OrganProps } from '../types/organs'
 import { getOrgan, updateOrgan, deleteOrgan } from '../service/organs'
 import { useRouter } from 'next/dist/client/router'
 import { AppContext } from 'contexts/app'
 
 type OrganContextProps = {
-  organ: OrganProps
-  updateFormData: UpdateOrganProps
+  organ: Partial<OrganProps>
+  setFormData: (organ: Partial<OrganProps>) => void
   update: () => void
   remove: () => void
 }
@@ -18,16 +18,12 @@ export const OrganContext = createContext({} as OrganContextProps)
 export const OrganContextProvider: React.FC = ({ children }) => {
   const { setContainerLoading, setContainerError, setGlobalError } =
     useContext(AppContext)
-  const [organData, setOrganData] = useState({} as OrganProps)
+  const [organData, setOrganData] = useState({} as OrganContextProps['organ'])
   const router = useRouter()
   const { id } = router.query
 
-  const updateFormData: UpdateOrganProps = (field, value) => {
-    const newFormData = {
-      ...organData,
-      [field]: value
-    }
-    setOrganData(newFormData)
+  const setFormData = (organ: OrganContextProps['organ']) => {
+    setOrganData(organ)
   }
 
   const update = async () => {
@@ -54,7 +50,7 @@ export const OrganContextProvider: React.FC = ({ children }) => {
     setContainerLoading(false)
   }
 
-  const setOrgan = (data: OrganProps) => {
+  const setOrgan = (data: OrganContextProps['organ']) => {
     setOrganData(data)
   }
   const getData = async (id: number) => {
@@ -79,7 +75,7 @@ export const OrganContextProvider: React.FC = ({ children }) => {
     <OrganContext.Provider
       value={{
         organ: organData,
-        updateFormData,
+        setFormData,
         update,
         remove
       }}

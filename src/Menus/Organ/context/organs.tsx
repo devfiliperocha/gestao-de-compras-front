@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps, UpdateOrganProps } from '../types/organs'
+import { OrganProps } from '../types/organs'
 import { createOrgan, getOrgans } from '../service/organs'
 import { AppContext } from 'contexts/app'
 
@@ -13,7 +13,7 @@ type OrgansContextProps = {
   setError?: (errorMsg: string | undefined) => void
   create: () => void
   newOrgan: Partial<OrganProps>
-  updateFormData: UpdateOrganProps
+  setFormData: (organ: Partial<OrganProps>) => void
 }
 export const OrgansContext = createContext({} as OrgansContextProps)
 
@@ -25,7 +25,9 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
     setGlobalLoading
   } = useContext(AppContext)
   const [organsData, setOrgansData] = useState([] as OrganProps[])
-  const [newOrganData, setNewOrganData] = useState({
+  const [newOrganData, setNewOrganData] = useState<
+    OrgansContextProps['newOrgan']
+  >({
     name: '',
     corporateDocNumber: '',
     address: {
@@ -54,12 +56,8 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
     }
     setContainerLoading(false)
   }
-  const updateFormData: UpdateOrganProps = (field, value) => {
-    const newFormData = {
-      ...newOrganData,
-      [field]: value
-    }
-    setNewOrganData(newFormData)
+  const setFormData = (organ: OrgansContextProps['newOrgan']) => {
+    setNewOrganData(organ)
   }
   const create = async () => {
     setGlobalLoading(true)
@@ -82,7 +80,7 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
         organs: organsData,
         setOrgans,
         newOrgan: newOrganData,
-        updateFormData,
+        setFormData,
         create
       }}
     >

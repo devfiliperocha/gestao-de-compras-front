@@ -7,18 +7,21 @@ import Button from 'components/Atoms/Button'
 import Modal from 'components/Atoms/Modal'
 import OrganForm from '../Form'
 import { OrganContext } from '../../context/organ'
+import useTitle from 'Hooks/useTitle'
 
 const OrganPage = () => {
-  const { organ, updateFormData, update, remove } = useContext(OrganContext)
+  const { organ, update, remove, setFormData } = useContext(OrganContext)
   const { isContainerLoading } = useContext(AppContext)
   const [isConfirmModalOpen, openConfirmModal] = useState(false)
   const [isRemoveModalOpen, openRemoveModal] = useState(false)
+
+  useTitle(`Órgãos > ${organ.name || ''}`)
 
   return (
     <S.Wrapper maxWidth="lg">
       {!isContainerLoading && (
         <>
-          <OrganForm organ={organ} onUpdateForm={updateFormData} />
+          <OrganForm organ={organ} onUpdateForm={setFormData} />
           <S.Actions>
             <Button
               onClick={() => openRemoveModal(true)}

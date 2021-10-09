@@ -9,9 +9,10 @@ import Modal from 'components/Atoms/Modal'
 import OrganForm from '../Form'
 import { sortOrgans } from './utils'
 import { OrgansContext } from '../../context/organs'
+import useTitle from 'Hooks/useTitle'
 
 const OrganList = () => {
-  const { organs, setOrgans, create, newOrgan, updateFormData } =
+  const { organs, setOrgans, create, newOrgan, setFormData } =
     useContext(OrgansContext)
   const [isNewOrgaoModalOpen, setNewOrgaoModalOpen] = useState(false)
   const router = useRouter()
@@ -20,12 +21,12 @@ const OrganList = () => {
     router.push(`/organ/${id}`)
     return
   }
+  useTitle(`Órgãos`)
 
   return (
     <S.Wrapper maxWidth="lg">
       {organs.length > 0 && (
         <>
-          <S.HeaderWrapper></S.HeaderWrapper>
           <S.Actions>
             <Button onClick={() => setNewOrgaoModalOpen(true)}>
               Cadastrar Novo Órgão
@@ -52,7 +53,7 @@ const OrganList = () => {
         }
       >
         <Container maxWidth="lg">
-          <OrganForm organ={newOrgan} onUpdateForm={updateFormData} />
+          <OrganForm organ={newOrgan} onUpdateForm={setFormData} />
         </Container>
       </Modal>
 

@@ -11,7 +11,7 @@ import Switch from 'components/Atoms/Switch'
 
 export type OrganFormProps = {
   disabled?: boolean
-  onUpdateForm: UpdateOrganProps
+  onUpdateForm: (organ: Partial<OrganProps>) => void
   organ: Partial<OrganProps>
 }
 
@@ -21,9 +21,8 @@ const OrganForm = ({
   onUpdateForm
 }: OrganFormProps) => {
   const [formData, setFormData] = useState(organ)
-  //TODO: FormData só atualiza o ultimo alterado
   const debouncedSave = useRef(
-    debounce((field, value) => onUpdateForm(field, value), 400)
+    debounce((data) => onUpdateForm(data), 400)
   ).current
 
   const updateOrganData: UpdateOrganProps = (field, value) => {
@@ -32,7 +31,7 @@ const OrganForm = ({
       [field]: value
     }
     setFormData(data)
-    debouncedSave(field, value)
+    debouncedSave(data)
   }
 
   return (
