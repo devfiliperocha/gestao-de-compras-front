@@ -7,6 +7,7 @@ import { Grid } from '@material-ui/core'
 import React, { useRef, useState } from 'react'
 import debounce from '@material-ui/utils/debounce'
 import { OrganProps, UpdateOrganProps } from '../../types/organs'
+import Switch from 'components/Atoms/Switch'
 
 export type OrganFormProps = {
   disabled?: boolean
@@ -20,7 +21,7 @@ const OrganForm = ({
   onUpdateForm
 }: OrganFormProps) => {
   const [formData, setFormData] = useState(organ)
-
+  //TODO: FormData só atualiza o ultimo alterado
   const debouncedSave = useRef(
     debounce((field, value) => onUpdateForm(field, value), 400)
   ).current
@@ -62,6 +63,25 @@ const OrganForm = ({
               }
               placeholder="CNPJ"
               value={formData.corporateDocNumber}
+            />
+          </S.Input>
+        </Grid>
+        <Grid item xs={12}>
+          <S.Input>
+            <span>Autarquia: </span>
+            <Switch
+              checked={formData.autarchy}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>, value) => {
+                updateOrganData('autarchy', value)
+              }}
+            />
+
+            <span>Secretaria: </span>
+            <Switch
+              checked={formData.secretariat}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>, value) =>
+                updateOrganData('secretariat', value)
+              }
             />
           </S.Input>
         </Grid>
