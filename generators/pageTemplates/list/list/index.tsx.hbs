@@ -9,23 +9,37 @@ import Modal from 'components/Atoms/Modal'
 import {{pascalCase name}}Form from '../Form'
 import { sort{{pascalCase name}}s } from './utils'
 import { {{pascalCase name}}sContext } from '../../context/{{lowerCase name}}s'
+import useTitle from 'Hooks/useTitle'
 
 const {{pascalCase name}}List = () => {
-  const { {{lowerCase name}}s, set{{pascalCase name}}s, create, new{{pascalCase name}}, updateFormData } =
-    useContext({{pascalCase name}}sContext)
+  const {
+    {{lowerCase name}}s,
+    set{{pascalCase name}}s,
+    create,
+    new{{pascalCase name}},
+    setFormData,
+    errors,
+    clearErrors
+  } = useContext({{pascalCase name}}sContext)
   const [isNew{{pascalCase name}}ModalOpen, setNew{{pascalCase name}}ModalOpen] = useState(false)
   const router = useRouter()
+
+  const closeModalNew{{pascalCase name}} = () => {
+    setFormData({})
+    clearErrors()
+    setNew{{pascalCase name}}ModalOpen(false)
+  }
 
   const on{{pascalCase name}}Click = (id: number) => {
     router.push(`/{{lowerCase name}}/${id}`)
     return
   }
+  useTitle(`{{pluralLabel}}`)
 
   return (
     <S.Wrapper maxWidth="lg">
       { {{lowerCase name}}s.length > 0 && (
         <>
-          <S.HeaderWrapper></S.HeaderWrapper>
           <S.Actions>
             <Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>
               Cadastrar Novo {{singularLabel}}
@@ -37,11 +51,11 @@ const {{pascalCase name}}List = () => {
       <Modal
         title="Cadastrar Novo {{singularLabel}}"
         open={isNew{{pascalCase name}}ModalOpen}
-        onClose={() => setNew{{pascalCase name}}ModalOpen(false)}
+        onClose={() => closeModalNew{{pascalCase name}}()}
         action={
           <S.Actions>
             <Button
-              onClick={() => setNew{{pascalCase name}}ModalOpen(false)}
+              onClick={() => closeModalNew{{pascalCase name}}()}
               variant="outlined"
               color="error"
             >
@@ -52,7 +66,11 @@ const {{pascalCase name}}List = () => {
         }
       >
         <Container maxWidth="lg">
-          <{{pascalCase name}}Form {{lowerCase name}}={new{{pascalCase name}} } onUpdateForm={updateFormData} />
+          <{{pascalCase name}}Form
+            {{lowerCase name}}={new{{pascalCase name}} }
+            onUpdateForm={setFormData}
+            errors={errors}
+          />
         </Container>
       </Modal>
 
@@ -64,7 +82,11 @@ const {{pascalCase name}}List = () => {
               Clique em <strong>Cadastrar {{singularLabel}}</strong>
             </Typography>
           }
-          button={<Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>Cadastrar {{singularLabel}}</Button>}
+          button={
+            <Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>
+              Cadastrar {{singularLabel}}
+            </Button>
+          }
         />
       )}
       { {{lowerCase name}}s.length > 0 && (

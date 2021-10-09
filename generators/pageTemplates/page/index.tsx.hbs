@@ -7,18 +7,22 @@ import Button from 'components/Atoms/Button'
 import Modal from 'components/Atoms/Modal'
 import {{pascalCase name}}Form from '../Form'
 import { {{pascalCase name}}Context } from '../../context/{{lowerCase name}}'
+import useTitle from 'Hooks/useTitle'
 
 const {{pascalCase name}}Page = () => {
-  const { {{lowerCase name}}, updateFormData, update, remove } = useContext({{pascalCase name}}Context)
+  const { {{lowerCase name}}, update, remove, setFormData, errors } =
+    useContext({{pascalCase name}}Context)
   const { isContainerLoading } = useContext(AppContext)
   const [isConfirmModalOpen, openConfirmModal] = useState(false)
   const [isRemoveModalOpen, openRemoveModal] = useState(false)
+
+  useTitle(`Órgãos > ${ {{lowerCase name}}.name || ''}`)
 
   return (
     <S.Wrapper maxWidth="lg">
       {!isContainerLoading && (
         <>
-          <{{pascalCase name}}Form {{lowerCase name}}={ {{lowerCase name}} } onUpdateForm={updateFormData} />
+          <{{pascalCase name}}Form {{lowerCase name}}={ {{lowerCase name}} } onUpdateForm={setFormData} errors={errors} />
           <S.Actions>
             <Button
               onClick={() => openRemoveModal(true)}

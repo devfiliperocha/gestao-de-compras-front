@@ -1,33 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { {{pascalCase name}}FormErrors, {{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
 import { get{{pascalCase name}}, update{{pascalCase name}}, delete{{pascalCase name}} } from '../service/{{lowerCase name}}s'
 import { useRouter } from 'next/dist/client/router'
 import { AppContext } from 'contexts/app'
 
 type {{pascalCase name}}ContextProps = {
-  {{lowerCase name}}: {{pascalCase name}}Props
-  updateFormData: Update{{pascalCase name}}Props
+  {{lowerCase name}}: Partial<{{pascalCase name}}Props>
+  setFormData: ({{lowerCase name}}: Partial<{{pascalCase name}}Props>) => void
   update: () => void
   remove: () => void
+  errors: {{pascalCase name}}FormErrors | undefined
 }
 
 export const {{pascalCase name}}Context = createContext({} as {{pascalCase name}}ContextProps)
 
 export const {{pascalCase name}}ContextProvider: React.FC = ({ children }) => {
-  const { setContainerLoading, setContainerError, setGlobalError } =
+  const { setContainerLoading, setContainerError, setGlobalMessage } =
     useContext(AppContext)
-  const [{{lowerCase name}}Data, set{{pascalCase name}}Data] = useState({} as {{pascalCase name}}Props)
+  const [{{lowerCase name}}Data, set{{pascalCase name}}Data] = useState({} as {{pascalCase name}}ContextProps['{{lowerCase name}}'])
+  const [errors, setErrors] = useState({} as {{pascalCase name}}ContextProps['errors'])
   const router = useRouter()
   const { id } = router.query
 
-  const updateFormData: Update{{pascalCase name}}Props = (field, value) => {
-    const newFormData = {
-      ...{{lowerCase name}}Data,
-      [field]: value
-    }
-    set{{pascalCase name}}Data(newFormData)
+  const setFormData = ({{lowerCase name}}: {{pascalCase name}}ContextProps['{{lowerCase name}}']) => {
+    set{{pascalCase name}}Data({{lowerCase name}})
   }
 
   const update = async () => {
@@ -37,7 +35,12 @@ export const {{pascalCase name}}ContextProvider: React.FC = ({ children }) => {
     if (save.success) {
       await getData({{lowerCase name}}Id)
     } else {
-      setGlobalError(save.error)
+      if (typeof save.error === 'string') {
+        setGlobalMessage({ type: 'error', text: save.error })
+      } else {
+        setGlobalMessage({ type: 'error', text: 'Erro ao atualizar registro!' })
+        setErrors(save.error as {{pascalCase name}}FormErrors)
+      }
     }
     setContainerLoading(false)
   }
@@ -49,21 +52,31 @@ export const {{pascalCase name}}ContextProvider: React.FC = ({ children }) => {
     if (remove.success) {
       router.push('/{{lowerCase name}}')
     } else {
-      setGlobalError(remove.error)
+      if (typeof remove.error === 'string') {
+        setGlobalMessage({ type: 'error', text: remove.error })
+      } else {
+        setGlobalMessage({ type: 'error', text: 'Erro ao remover registro!' })
+        setErrors(remove.error as {{pascalCase name}}FormErrors)
+      }
     }
     setContainerLoading(false)
   }
 
-  const set{{pascalCase name}} = (data: {{pascalCase name}}Props) => {
+  const set{{pascalCase name}} = (data: {{pascalCase name}}ContextProps['{{lowerCase name}}']) => {
     set{{pascalCase name}}Data(data)
   }
   const getData = async (id: number) => {
     setContainerLoading(true)
     const {{lowerCase name}} = await get{{pascalCase name}}(id)
     if ({{lowerCase name}}.success) {
-      set{{pascalCase name}}({{lowerCase name}}.data)
+      set{{pascalCase name}}({{lowerCase name}}.data as {{pascalCase name}}Props)
     } else {
-      setContainerError({{lowerCase name}}.error)
+      if (typeof {{lowerCase name}}.error === 'string') {
+        setContainerError({{lowerCase name}}.error)
+      } else {
+        setContainerError('Erro ao carregar registros!')
+        setErrors({{lowerCase name}}.error as {{pascalCase name}}FormErrors)
+      }
     }
     setContainerLoading(false)
   }
@@ -78,10 +91,11 @@ export const {{pascalCase name}}ContextProvider: React.FC = ({ children }) => {
   return (
     <{{pascalCase name}}Context.Provider
       value={ {
-        '{{lowerCase name}}': {{lowerCase name}}Data,
-        updateFormData,
+        {{lowerCase name}}: {{lowerCase name}}Data,
+        setFormData,
         update,
-        remove
+        remove,
+        errors
       } }
     >
       {children}
