@@ -10,7 +10,8 @@ import { OrganContext } from '../../context/organ'
 import useTitle from 'Hooks/useTitle'
 
 const OrganPage = () => {
-  const { organ, update, remove, setFormData } = useContext(OrganContext)
+  const { organ, update, remove, setFormData, errors } =
+    useContext(OrganContext)
   const { isContainerLoading } = useContext(AppContext)
   const [isConfirmModalOpen, openConfirmModal] = useState(false)
   const [isRemoveModalOpen, openRemoveModal] = useState(false)
@@ -21,7 +22,7 @@ const OrganPage = () => {
     <S.Wrapper maxWidth="lg">
       {!isContainerLoading && (
         <>
-          <OrganForm organ={organ} onUpdateForm={setFormData} />
+          <OrganForm organ={organ} onUpdateForm={setFormData} errors={errors} />
           <S.Actions>
             <Button
               onClick={() => openRemoveModal(true)}

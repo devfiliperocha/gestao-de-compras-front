@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { OrganProps } from '../types/organs'
+import { OrganFormErrors, OrganProps } from '../types/organs'
 import { getOrgan, updateOrgan, deleteOrgan } from '../service/organs'
 import { useRouter } from 'next/dist/client/router'
 import { AppContext } from 'contexts/app'
@@ -11,14 +11,16 @@ type OrganContextProps = {
   setFormData: (organ: Partial<OrganProps>) => void
   update: () => void
   remove: () => void
+  errors: OrganFormErrors | undefined
 }
 
 export const OrganContext = createContext({} as OrganContextProps)
 
 export const OrganContextProvider: React.FC = ({ children }) => {
-  const { setContainerLoading, setContainerError, setGlobalError } =
+  const { setContainerLoading, setContainerError, setGlobalMessage } =
     useContext(AppContext)
   const [organData, setOrganData] = useState({} as OrganContextProps['organ'])
+  const [errors, setErrors] = useState({} as OrganContextProps['errors'])
   const router = useRouter()
   const { id } = router.query
 
@@ -33,7 +35,12 @@ export const OrganContextProvider: React.FC = ({ children }) => {
     if (save.success) {
       await getData(organId)
     } else {
-      setGlobalError(save.error)
+      if (typeof save.error === 'string') {
+        setGlobalMessage({ type: 'error', text: save.error })
+      } else {
+        setGlobalMessage({ type: 'error', text: 'Erro ao atualizar registro!' })
+        setErrors(save.error as OrganFormErrors)
+      }
     }
     setContainerLoading(false)
   }
@@ -45,7 +52,12 @@ export const OrganContextProvider: React.FC = ({ children }) => {
     if (remove.success) {
       router.push('/organ')
     } else {
-      setGlobalError(remove.error)
+      if (typeof remove.error === 'string') {
+        setGlobalMessage({ type: 'error', text: remove.error })
+      } else {
+        setGlobalMessage({ type: 'error', text: 'Erro ao remover registro!' })
+        setErrors(remove.error as OrganFormErrors)
+      }
     }
     setContainerLoading(false)
   }
@@ -57,9 +69,14 @@ export const OrganContextProvider: React.FC = ({ children }) => {
     setContainerLoading(true)
     const organ = await getOrgan(id)
     if (organ.success) {
-      setOrgan(organ.data)
+      setOrgan(organ.data as OrganProps)
     } else {
-      setContainerError(organ.error)
+      if (typeof organ.error === 'string') {
+        setContainerError(organ.error)
+      } else {
+        setContainerError('Erro ao carregar registros!')
+        setErrors(organ.error as OrganFormErrors)
+      }
     }
     setContainerLoading(false)
   }
@@ -77,7 +94,8 @@ export const OrganContextProvider: React.FC = ({ children }) => {
         organ: organData,
         setFormData,
         update,
-        remove
+        remove,
+        errors
       }}
     >
       {children}
