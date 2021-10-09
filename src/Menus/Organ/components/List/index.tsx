@@ -23,34 +23,38 @@ const OrganList = () => {
 
   return (
     <S.Wrapper maxWidth="lg">
-      <S.HeaderWrapper></S.HeaderWrapper>
+      {organs.length > 0 && (
+        <>
+          <S.HeaderWrapper></S.HeaderWrapper>
+          <S.Actions>
+            <Button onClick={() => setNewOrgaoModalOpen(true)}>
+              Cadastrar Novo Órgão
+            </Button>
+          </S.Actions>
+        </>
+      )}
 
-      <S.Actions>
-        <Button onClick={() => setNewOrgaoModalOpen(true)}>
-          Cadastrar Novo Órgão
-        </Button>
-        <Modal
-          title="Cadastrar Novo Órgão"
-          open={isNewOrgaoModalOpen}
-          onClose={() => setNewOrgaoModalOpen(false)}
-          action={
-            <S.Actions>
-              <Button
-                onClick={() => setNewOrgaoModalOpen(false)}
-                variant="outlined"
-                color="error"
-              >
-                Cancelar
-              </Button>
-              <Button onClick={() => create()}>Confirmar</Button>
-            </S.Actions>
-          }
-        >
-          <Container maxWidth="lg">
-            <OrganForm organ={newOrgan} onUpdateForm={updateFormData} />
-          </Container>
-        </Modal>
-      </S.Actions>
+      <Modal
+        title="Cadastrar Novo Órgão"
+        open={isNewOrgaoModalOpen}
+        onClose={() => setNewOrgaoModalOpen(false)}
+        action={
+          <S.Actions>
+            <Button
+              onClick={() => setNewOrgaoModalOpen(false)}
+              variant="outlined"
+              color="error"
+            >
+              Cancelar
+            </Button>
+            <Button onClick={() => create()}>Confirmar</Button>
+          </S.Actions>
+        }
+      >
+        <Container maxWidth="lg">
+          <OrganForm organ={newOrgan} onUpdateForm={updateFormData} />
+        </Container>
+      </Modal>
 
       {organs.length === 0 && (
         <EmptyState
@@ -60,7 +64,11 @@ const OrganList = () => {
               Clique em <strong>Cadastrar Órgão</strong>
             </Typography>
           }
-          button={<Button>Cadastrar Órgão</Button>}
+          button={
+            <Button onClick={() => setNewOrgaoModalOpen(true)}>
+              Cadastrar Órgão
+            </Button>
+          }
         />
       )}
       {organs.length > 0 && (
