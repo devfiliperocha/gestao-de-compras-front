@@ -1,0 +1,18 @@
+import React from 'react'
+import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
+import { {{pascalCase name}}ContextProvider, {{pascalCase name}}Context } from './context/{{lowerCase name}}'
+import Page from './components/Page'
+
+function {{pascalCase name}}Page() {
+  return (
+    <{{pascalCase name}}ContextProvider>
+      <{{pascalCase name}}Context.Consumer>
+        {({ {{lowerCase name}} }) => {
+          return <AppLeftMenu>{ {{lowerCase name}}.id && <Page />}</AppLeftMenu>
+        }}
+      </{{pascalCase name}}Context.Consumer>
+    </{{pascalCase name}}ContextProvider>
+  )
+}
+
+export default {{pascalCase name}}Page

@@ -1,14 +1,14 @@
 import * as S from './styles' /** S = Styles */
 import React, { useContext, useState } from 'react'
-import Typography from 'components/Atoms/Typography'
-import { sort{{pascalCase name}}s } from 'components/Templates/{{pascalCase name}}/{{pascalCase name}}List/utils'
-import { {{pascalCase name}}sContext } from 'contexts/{{lowerCase name}}s'
+import Container from '@material-ui/core/Container'
 import { useRouter } from 'next/router'
+import Typography from 'components/Atoms/Typography'
 import EmptyState from 'components/Atoms/EmptyState'
 import Button from 'components/Atoms/Button'
-import Container from '@material-ui/core/Container'
-import {{pascalCase name}}Form from 'components/Molecules/{{pascalCase name}}/{{pascalCase name}}Form'
 import Modal from 'components/Atoms/Modal'
+import {{pascalCase name}}Form from '../Form'
+import { sort{{pascalCase name}}s } from './utils'
+import { {{pascalCase name}}sContext } from '../../context/{{lowerCase name}}s'
 
 const {{pascalCase name}}List = () => {
   const { {{lowerCase name}}s, set{{pascalCase name}}s, create, new{{pascalCase name}}, updateFormData } =
@@ -23,7 +23,7 @@ const {{pascalCase name}}List = () => {
 
   return (
     <S.Wrapper maxWidth="lg">
-      { {{lowerCase name}}.length > 0 && (
+      { {{lowerCase name}}s.length > 0 && (
         <>
           <S.HeaderWrapper></S.HeaderWrapper>
           <S.Actions>
@@ -33,6 +33,7 @@ const {{pascalCase name}}List = () => {
           </S.Actions>
         </>
       )}
+
       <Modal
         title="Cadastrar Novo {{singularLabel}}"
         open={isNew{{pascalCase name}}ModalOpen}
@@ -63,7 +64,7 @@ const {{pascalCase name}}List = () => {
               Clique em <strong>Cadastrar {{singularLabel}}</strong>
             </Typography>
           }
-          button={<Button  onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>Cadastrar {{singularLabel}}</Button>}
+          button={<Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>Cadastrar {{singularLabel}}</Button>}
         />
       )}
       { {{lowerCase name}}s.length > 0 && (

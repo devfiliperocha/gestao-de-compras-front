@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from 'types/{{lowerCase name}}s'
-import { get{{pascalCase name}}, update{{pascalCase name}}, delete{{pascalCase name}} } from 'services/{{lowerCase name}}s'
+import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { get{{pascalCase name}}, update{{pascalCase name}}, delete{{pascalCase name}} } from '../service/{{lowerCase name}}s'
 import { useRouter } from 'next/dist/client/router'
-import { AppContext } from './app'
+import { AppContext } from 'contexts/app'
 
 type {{pascalCase name}}ContextProps = {
   {{lowerCase name}}: {{pascalCase name}}Props

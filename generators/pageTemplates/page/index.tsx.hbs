@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as S from './styles' /** S = Styles */
-import {{pascalCase name}}Form from 'components/Molecules/{{pascalCase name}}/{{pascalCase name}}Form'
 import React, { useContext, useState } from 'react'
-import { {{pascalCase name}}Context } from 'contexts/{{lowerCase name}}'
+import { Container } from '@material-ui/core'
 import { AppContext } from 'contexts/app'
 import Button from 'components/Atoms/Button'
-import { Container } from '@material-ui/core'
 import Modal from 'components/Atoms/Modal'
+import {{pascalCase name}}Form from '../Form'
+import { {{pascalCase name}}Context } from '../../context/{{lowerCase name}}'
 
 const {{pascalCase name}}Page = () => {
   const { {{lowerCase name}}, updateFormData, update, remove } = useContext({{pascalCase name}}Context)

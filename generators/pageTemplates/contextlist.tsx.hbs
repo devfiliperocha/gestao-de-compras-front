@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from 'types/{{lowerCase name}}s'
-import { create{{pascalCase name}}, get{{pascalCase name}}s } from 'services/{{lowerCase name}}s'
-import { AppContext } from './app'
+import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { create{{pascalCase name}}, get{{pascalCase name}}s } from '../service/{{lowerCase name}}s'
+import { AppContext } from 'contexts/app'
 
 type {{pascalCase name}}sContextProps = {
   {{lowerCase name}}s: {{pascalCase name}}Props[]

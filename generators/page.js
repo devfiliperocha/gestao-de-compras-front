@@ -24,80 +24,91 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}Form/index.tsx',
+        path: '../src/Menus/{{pascalCase name}}/components/Form/index.tsx',
         templateFile: 'pageTemplates/form/index.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}Form/styles.ts',
+        path: '../src/Menus/{{pascalCase name}}/components/Form/styles.ts',
         templateFile: 'pageTemplates/form/styles.ts.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}ListHeader/index.tsx',
+        path: '../src/Menus/{{pascalCase name}}/components/ListHeader/index.tsx',
         templateFile: 'pageTemplates/list/listheader/index.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}ListHeader/styles.ts',
+        path: '../src/Menus/{{pascalCase name}}/components/ListHeader/styles.ts',
         templateFile: 'pageTemplates/list/listheader/styles.ts.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}ListItem/index.tsx',
+        path: '../src/Menus/{{pascalCase name}}/components/ListItem/index.tsx',
         templateFile: 'pageTemplates/list/listitem/index.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Molecules/{{pascalCase name}}/{{pascalCase name}}ListItem/styles.ts',
+        path: '../src/Menus/{{pascalCase name}}/components/ListItem/styles.ts',
         templateFile: 'pageTemplates/list/listitem/styles.ts.hbs'
       },
 
       {
         type: 'add',
-        path: '../src/components/Templates/{{pascalCase name}}/{{pascalCase name}}List/index.tsx',
-        templateFile: 'pageTemplates/templates/list/index.tsx.hbs'
+        path: '../src/Menus/{{pascalCase name}}/components/List/index.tsx',
+        templateFile: 'pageTemplates/list/list/index.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Templates/{{pascalCase name}}/{{pascalCase name}}List/utils.ts',
-        templateFile: 'pageTemplates/templates/list/utils.ts.hbs'
+        path: '../src/Menus/{{pascalCase name}}/components/List/utils.ts',
+        templateFile: 'pageTemplates/list/list/utils.ts.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Templates/{{pascalCase name}}/{{pascalCase name}}List/styles.ts',
-        templateFile: 'pageTemplates/templates/list/styles.ts.hbs'
+        path: '../src/Menus/{{pascalCase name}}/components/List/styles.ts',
+        templateFile: 'pageTemplates/list/list/styles.ts.hbs'
       },
 
       {
         type: 'add',
-        path: '../src/components/Templates/{{pascalCase name}}/{{pascalCase name}}Page/index.tsx',
-        templateFile: 'pageTemplates/templates/page/index.tsx.hbs'
+        path: '../src/Menus/{{pascalCase name}}/components/Page/index.tsx',
+        templateFile: 'pageTemplates/page/index.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/Templates/{{pascalCase name}}/{{pascalCase name}}Page/styles.ts',
-        templateFile: 'pageTemplates/templates/page/styles.ts.hbs'
+        path: '../src/Menus/{{pascalCase name}}/components/Page/styles.ts',
+        templateFile: 'pageTemplates/page/styles.ts.hbs'
       },
       {
         type: 'add',
-        path: '../src/contexts/{{lowerCase name}}.tsx',
+        path: '../src/Menus/{{pascalCase name}}/context/{{lowerCase name}}.tsx',
         templateFile: 'pageTemplates/context.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/contexts/{{lowerCase name}}s.tsx',
+        path: '../src/Menus/{{pascalCase name}}/context/{{lowerCase name}}s.tsx',
         templateFile: 'pageTemplates/contextlist.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/services/{{lowerCase name}}s.ts',
+        path: '../src/Menus/{{pascalCase name}}/service/{{lowerCase name}}s.ts',
         templateFile: 'pageTemplates/service.ts.hbs'
       },
       {
         type: 'add',
-        path: '../src/types/{{lowerCase name}}s.ts',
+        path: '../src/Menus/{{pascalCase name}}/types/{{lowerCase name}}s.ts',
         templateFile: 'pageTemplates/type.ts.hbs'
+      },
+
+      {
+        type: 'add',
+        path: '../src/Menus/{{pascalCase name}}/{{lowerCase name}}.tsx',
+        templateFile: 'pageTemplates/reg.tsx.hbs'
+      },
+      {
+        type: 'add',
+        path: '../src/Menus/{{pascalCase name}}/{{lowerCase name}}s.tsx',
+        templateFile: 'pageTemplates/main.tsx.hbs'
       },
 
       {

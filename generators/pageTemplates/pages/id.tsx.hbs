@@ -1,19 +1,9 @@
 import React from 'react'
-import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
 import { withAuth } from 'components/hoc/Auth'
-import { {{pascalCase name}}ContextProvider, {{pascalCase name}}Context } from 'contexts/{{lowerCase name}}'
-import {{pascalCase name}}Page from 'components/Templates/{{pascalCase name}}/{{pascalCase name}}Page'
+import {{pascalCase name}}Page from 'Menus/{{pascalCase name}}/{{lowerCase name}}'
 
-function {{pascalCase name}}ApprovePage() {
-  return (
-    <{{pascalCase name}}ContextProvider>
-      <{{pascalCase name}}Context.Consumer>
-        {({ {{lowerCase name}} }) => {
-          return <AppLeftMenu>{ {{lowerCase name}}.id && <{{pascalCase name}}Page />}</AppLeftMenu>
-        }}
-      </{{pascalCase name}}Context.Consumer>
-    </{{pascalCase name}}ContextProvider>
-  )
+function {{pascalCase name}}() {
+  return <{{pascalCase name}}Page />
 }
 
-export default withAuth({{pascalCase name}}ApprovePage)
+export default withAuth({{pascalCase name}})
