@@ -1,21 +1,26 @@
 import { createContext, useState } from 'react'
 
+type GlobalMessageProps = {
+  type: 'success' | 'warning' | 'error'
+  text: string
+}
+
 type AppContextProps = {
   isContainerLoading?: boolean
   isGlobalLoading?: boolean
   hasContainerError?: boolean
   containerErrorMsg?: string
-  hasGlobalError?: boolean
-  globalErrorMsg?: string
   setContainerError: (errorMsg: string | undefined) => void
   setContainerLoading: (state: boolean) => void
-  setGlobalError: (errorMsg: string | undefined) => void
   setGlobalLoading: (state: boolean) => void
   mobileOpen: boolean
   setMobileOpen: (open: boolean) => void
   drawerWidth: number
   title: string
   setTitle: (title: string) => void
+  hasGlobalMessage: boolean
+  globalMessage: GlobalMessageProps | null | undefined
+  setGlobalMessage: (msg: GlobalMessageProps | null) => void
 }
 
 export const AppContext = createContext({} as AppContextProps)
@@ -29,12 +34,12 @@ export const AppContextProvider: React.FC = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [title, setTitle] = useState('JP Gestão de Compras')
   const [isGlobalLoading, setGlobalLoading] = useState(false)
-  const [hasGlobalError, setHasGlobalError] = useState(false)
-  const [globalErrorMsg, setGlobalErrorMsg] = useState<string | undefined>()
+  const [hasGlobalMsg, setHasGlobalMsg] = useState(false)
+  const [globalMsg, setGlobalMsg] = useState<GlobalMessageProps | null>()
 
-  const globalError = (errorMsg: string | undefined) => {
-    setHasGlobalError(!!errorMsg)
-    setGlobalErrorMsg(errorMsg)
+  const globalMessage = (message: GlobalMessageProps | null) => {
+    setHasGlobalMsg(!!message)
+    setGlobalMsg(message)
   }
 
   const containerError = (errorMsg: string | undefined) => {
@@ -53,11 +58,11 @@ export const AppContextProvider: React.FC = ({ children }) => {
         hasContainerError,
         containerErrorMsg,
         isGlobalLoading,
-        hasGlobalError,
-        globalErrorMsg,
+        hasGlobalMessage: hasGlobalMsg,
+        globalMessage: globalMsg,
+        setGlobalMessage: globalMessage,
         setContainerError: containerError,
         setContainerLoading,
-        setGlobalError: globalError,
         setGlobalLoading,
         mobileOpen,
         setMobileOpen,

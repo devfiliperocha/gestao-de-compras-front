@@ -9,10 +9,13 @@ import { ThemeProvider as EmotionThemeProvider } from 'emotion-theming'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
+import { Snackbar } from '@material-ui/core'
 import { UserContextProvider } from 'contexts/user'
 import { AppContext, AppContextProvider } from 'contexts/app'
 import React from 'react'
 import GlobalLoading from 'components/Atoms/GlobalLoading'
+//import Alert from 'components/Atoms/Alert'
+import { Alert } from '@material-ui/core'
 
 const materialTheme = createTheme(theme)
 
@@ -35,10 +38,30 @@ function App({ Component, pageProps }: AppProps) {
           <GlobalStyles />
           <AppContextProvider>
             <AppContext.Consumer>
-              {({ isGlobalLoading }) => (
+              {({
+                isGlobalLoading,
+                hasGlobalMessage,
+                setGlobalMessage,
+                globalMessage
+              }) => (
                 <>
                   {isGlobalLoading && (
                     <GlobalLoading size={45} variant="accent" />
+                  )}
+                  {hasGlobalMessage && (
+                    <Snackbar
+                      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                      open
+                      autoHideDuration={6000}
+                      onClose={() => setGlobalMessage(null)}
+                    >
+                      <Alert
+                        severity={globalMessage?.type || 'info'}
+                        sx={{ width: '100%' }}
+                      >
+                        {globalMessage?.text}
+                      </Alert>
+                    </Snackbar>
                   )}
                 </>
               )}
