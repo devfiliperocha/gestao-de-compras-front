@@ -32,7 +32,7 @@ const OrganListHeader = ({ onSort, ...props }: OrganListHeaderProps) => {
           variant="text"
           disableRipple
           endIcon={
-            sortColumn === 'id' ? (
+            sortColumn === 'name' ? (
               <Icon
                 name={sortDirection === 'asc' ? 'ChevronUp' : 'ChevronDown'}
                 variant="primary"
@@ -41,7 +41,7 @@ const OrganListHeader = ({ onSort, ...props }: OrganListHeaderProps) => {
               <></>
             )
           }
-          onClick={() => onColumnClick('id')}
+          onClick={() => onColumnClick('name')}
         >
           Razão Social
         </Button>

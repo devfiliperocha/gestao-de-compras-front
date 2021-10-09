@@ -16,7 +16,7 @@ const OrganListItem = ({
   <S.Wrapper {...props}>
     <S.TitleWrapper>
       <Typography color="primary" variant="h3">
-        {organ.id}
+        {organ.name}
       </Typography>
     </S.TitleWrapper>
     <S.ActionWrapper>

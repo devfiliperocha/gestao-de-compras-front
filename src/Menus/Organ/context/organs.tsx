@@ -12,7 +12,7 @@ type OrgansContextProps = {
   setOrgans: (organs: OrganProps[]) => void
   setError?: (errorMsg: string | undefined) => void
   create: () => void
-  newOrgan: OrganProps
+  newOrgan: Partial<OrganProps>
   updateFormData: UpdateOrganProps
 }
 export const OrgansContext = createContext({} as OrgansContextProps)
@@ -25,7 +25,21 @@ export const OrgansContextProvider: React.FC = ({ children }) => {
     setGlobalLoading
   } = useContext(AppContext)
   const [organsData, setOrgansData] = useState([] as OrganProps[])
-  const [newOrganData, setNewOrganData] = useState({} as OrganProps)
+  const [newOrganData, setNewOrganData] = useState({
+    name: '',
+    corporateDocNumber: '',
+    address: {
+      address: '',
+      number: '',
+      CEP: '',
+      district: '',
+      city: '',
+      state: '',
+      complement: ''
+    },
+    secretariat: false,
+    autarchy: false
+  })
 
   const setOrgans = (data: OrganProps[]) => {
     setOrgansData(data)

@@ -42,7 +42,7 @@ const Modal = ({
       <S.TitleWrapper>
         <Typography
           variant={
-            breakPoint === 'desktop' || breakPoint === 'tablet' ? 'h1' : 'h3'
+            breakPoint === 'desktop' || breakPoint === 'tablet' ? 'h3' : 'h5'
           }
           color="secondary"
         >
