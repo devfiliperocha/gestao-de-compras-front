@@ -2,6 +2,7 @@
 import * as S from './styles' /** S = Styles */
 
 import TextField from 'components/Atoms/TextField'
+import MaskedInput from 'components/Atoms/MaskedInput'
 import SectionTitle from 'components/Atoms/SectionTitle'
 import { Grid } from '@material-ui/core'
 import React, { useRef, useState } from 'react'
@@ -54,12 +55,21 @@ const OrganForm = ({
         </Grid>
         <Grid item xs={12}>
           <S.Input>
-            <TextField
+            <MaskedInput
               fullWidth
+              mask="99.999.999/9999-99"
               disabled={disabled}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 updateOrganData('corporateDocNumber', e.target.value)
-              }
+              }}
+              onBlur={() => {
+                updateOrganData(
+                  'corporateDocNumber',
+                  formData.corporateDocNumber
+                )
+              }}
+              requiredCharCount={14}
+              requiredCharCountRegex={/[^0-9]/g}
               placeholder="CNPJ"
               value={formData.corporateDocNumber}
             />
