@@ -1,0 +1,91 @@
+import * as S from './styles' /** S = Styles */
+import React, { useContext, useState } from 'react'
+import Container from '@material-ui/core/Container'
+import { useRouter } from 'next/router'
+import Typography from 'components/Atoms/Typography'
+import EmptyState from 'components/Atoms/EmptyState'
+import Button from 'components/Atoms/Button'
+import Modal from 'components/Atoms/Modal'
+import {{pascalCase name}}Form from '../Form'
+import { sort{{pascalCase name}}s } from './utils'
+import { {{pascalCase name}}sContext } from '../../context/{{lowerCase name}}s'
+
+const {{pascalCase name}}List = () => {
+  const { {{lowerCase name}}s, set{{pascalCase name}}s, create, new{{pascalCase name}}, updateFormData } =
+    useContext({{pascalCase name}}sContext)
+  const [isNew{{pascalCase name}}ModalOpen, setNew{{pascalCase name}}ModalOpen] = useState(false)
+  const router = useRouter()
+
+  const on{{pascalCase name}}Click = (id: number) => {
+    router.push(`/{{lowerCase name}}/${id}`)
+    return
+  }
+
+  return (
+    <S.Wrapper maxWidth="lg">
+      { {{lowerCase name}}s.length > 0 && (
+        <>
+          <S.HeaderWrapper></S.HeaderWrapper>
+          <S.Actions>
+            <Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>
+              Cadastrar Novo {{singularLabel}}
+            </Button>
+          </S.Actions>
+        </>
+      )}
+
+      <Modal
+        title="Cadastrar Novo {{singularLabel}}"
+        open={isNew{{pascalCase name}}ModalOpen}
+        onClose={() => setNew{{pascalCase name}}ModalOpen(false)}
+        action={
+          <S.Actions>
+            <Button
+              onClick={() => setNew{{pascalCase name}}ModalOpen(false)}
+              variant="outlined"
+              color="error"
+            >
+              Cancelar
+            </Button>
+            <Button onClick={() => create()}>Confirmar</Button>
+          </S.Actions>
+        }
+      >
+        <Container maxWidth="lg">
+          <{{pascalCase name}}Form {{lowerCase name}}={new{{pascalCase name}} } onUpdateForm={updateFormData} />
+        </Container>
+      </Modal>
+
+      { {{lowerCase name}}s.length === 0 && (
+        <EmptyState
+          title={
+            <Typography variant="body2" color="primary">
+              Você ainda não tem nenhum <strong>{{singularLabel}}</strong> cadastrado.
+              Clique em <strong>Cadastrar {{singularLabel}}</strong>
+            </Typography>
+          }
+          button={<Button onClick={() => setNew{{pascalCase name}}ModalOpen(true)}>Cadastrar {{singularLabel}}</Button>}
+        />
+      )}
+      { {{lowerCase name}}s.length > 0 && (
+        <S.ListWrapper>
+          <S.ListHeader
+            onSort={(sortColumn, sortDirection) => {
+              set{{pascalCase name}}s(sort{{pascalCase name}}s(sortColumn, sortDirection, {{lowerCase name}}s))
+            }}
+          />
+          { {{lowerCase name}}s &&
+            {{lowerCase name}}s.map(({{lowerCase name}}, i) => (
+              <S.ListItem
+                key={i}
+                {{lowerCase name}}={ {{lowerCase name}} }
+                onActionClick={() => on{{pascalCase name}}Click({{lowerCase name}}.id)}
+              />
+            ))}
+        </S.ListWrapper>
+      )}
+    </S.Wrapper>
+  )
+}
+
+export default {{pascalCase name}}List

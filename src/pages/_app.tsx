@@ -10,7 +10,9 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
 import { UserContextProvider } from 'contexts/user'
-import { AppContextProvider } from 'contexts/app'
+import { AppContext, AppContextProvider } from 'contexts/app'
+import React from 'react'
+import GlobalLoading from 'components/Atoms/GlobalLoading'
 
 const materialTheme = createTheme(theme)
 
@@ -32,6 +34,15 @@ function App({ Component, pageProps }: AppProps) {
           </Head>
           <GlobalStyles />
           <AppContextProvider>
+            <AppContext.Consumer>
+              {({ isGlobalLoading }) => (
+                <>
+                  {isGlobalLoading && (
+                    <GlobalLoading size={45} variant="accent" />
+                  )}
+                </>
+              )}
+            </AppContext.Consumer>
             <UserContextProvider>
               <Component {...pageProps} />
             </UserContextProvider>

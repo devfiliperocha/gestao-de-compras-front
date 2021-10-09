@@ -3,6 +3,9 @@ export type Status = {
   type: 'error' | 'warning' | 'success'
   text: string
 }
+
+export type ValueOf<T> = T[keyof T]
+
 export type Docs =
   | 'corporateDocPdf'
   | 'federalCertificatePdf'

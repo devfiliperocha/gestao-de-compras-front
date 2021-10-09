@@ -1,0 +1,12 @@
+import { ValueOf } from 'types/utils'
+
+export type {{pascalCase name}}Props = {
+  id: number
+}
+
+export type {{pascalCase name}}Columns = keyof {{pascalCase name}}Props
+
+export type Update{{pascalCase name}}Props = (
+  field: keyof {{pascalCase name}}Props,
+  value: ValueOf<{{pascalCase name}}Props>
+) => void

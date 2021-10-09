@@ -1,0 +1,78 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useContext, useEffect, useState } from 'react'
+import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { create{{pascalCase name}}, get{{pascalCase name}}s } from '../service/{{lowerCase name}}s'
+import { AppContext } from 'contexts/app'
+
+type {{pascalCase name}}sContextProps = {
+  {{lowerCase name}}s: {{pascalCase name}}Props[]
+  isLoading?: boolean
+  hasError?: boolean
+  errorMsg?: string
+  set{{pascalCase name}}s: ({{lowerCase name}}s: {{pascalCase name}}Props[]) => void
+  setError?: (errorMsg: string | undefined) => void
+  create: () => void
+  new{{pascalCase name}}: {{pascalCase name}}Props
+  updateFormData: Update{{pascalCase name}}Props
+}
+export const {{pascalCase name}}sContext = createContext({} as {{pascalCase name}}sContextProps)
+
+export const {{pascalCase name}}sContextProvider: React.FC = ({ children }) => {
+  const {
+    setContainerLoading,
+    setContainerError,
+    setGlobalError,
+    setGlobalLoading
+  } = useContext(AppContext)
+  const [{{lowerCase name}}sData, set{{pascalCase name}}sData] = useState([] as {{pascalCase name}}Props[])
+  const [new{{pascalCase name}}Data, setNew{{pascalCase name}}Data] = useState({} as {{pascalCase name}}Props)
+
+  const set{{pascalCase name}}s = (data: {{pascalCase name}}Props[]) => {
+    set{{pascalCase name}}sData(data)
+  }
+  const getData = async () => {
+    setContainerLoading(true)
+    const {{lowerCase name}}s = await get{{pascalCase name}}s()
+    if ({{lowerCase name}}s.success) {
+      set{{pascalCase name}}s({{lowerCase name}}s.data)
+    } else {
+      setContainerError({{lowerCase name}}s.error)
+    }
+    setContainerLoading(false)
+  }
+  const updateFormData: Update{{pascalCase name}}Props = (field, value) => {
+    const newFormData = {
+      ...new{{pascalCase name}}Data,
+      [field]: value
+    }
+    setNew{{pascalCase name}}Data(newFormData)
+  }
+  const create = async () => {
+    setGlobalLoading(true)
+    const create = await create{{pascalCase name}}(new{{pascalCase name}}Data)
+    if (create.success) {
+      await getData()
+    } else {
+      setGlobalError(create.error)
+    }
+    setGlobalLoading(false)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  return (
+    <{{pascalCase name}}sContext.Provider
+      value={ {
+        '{{lowerCase name}}s': {{lowerCase name}}sData,
+        set{{pascalCase name}}s,
+        new{{pascalCase name}}: new{{pascalCase name}}Data,
+        updateFormData,
+        create
+      } }
+    >
+      {children}
+    </{{pascalCase name}}sContext.Provider>
+  )
+}

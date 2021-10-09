@@ -1,0 +1,30 @@
+import * as S from './styles' /** S = Styles */
+import { {{pascalCase name}}Props } from '../../types/{{lowerCase name}}s'
+import Button from 'components/Atoms/Button'
+import Typography from 'components/Atoms/Typography'
+
+type {{pascalCase name}}ListItemProps = {
+  {{lowerCase name}}: {{pascalCase name}}Props
+  onActionClick?: (event: React.SyntheticEvent) => void
+}
+
+const {{pascalCase name}}ListItem = ({
+  {{lowerCase name}},
+  onActionClick,
+  ...props
+}: {{pascalCase name}}ListItemProps) => (
+  <S.Wrapper {...props}>
+    <S.TitleWrapper>
+      <Typography color="primary" variant="h3">
+        { {{lowerCase name}}.id}
+      </Typography>
+    </S.TitleWrapper>
+    <S.ActionWrapper>
+      <S.ShowWrapper>
+        <Button onClick={onActionClick}>Visualizar</Button>
+      </S.ShowWrapper>
+    </S.ActionWrapper>
+  </S.Wrapper>
+)
+
+export default {{pascalCase name}}ListItem

@@ -50,6 +50,7 @@ export const getVendors = async () => {
       success: true
     }
   } catch (err) {
+    //console.log(err.response.data.statusCode)
     return {
       data: [] as Vendors[],
       success: false,

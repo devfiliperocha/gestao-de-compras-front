@@ -1,0 +1,90 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { createContext, useContext, useEffect, useState } from 'react'
+import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { get{{pascalCase name}}, update{{pascalCase name}}, delete{{pascalCase name}} } from '../service/{{lowerCase name}}s'
+import { useRouter } from 'next/dist/client/router'
+import { AppContext } from 'contexts/app'
+
+type {{pascalCase name}}ContextProps = {
+  {{lowerCase name}}: {{pascalCase name}}Props
+  updateFormData: Update{{pascalCase name}}Props
+  update: () => void
+  remove: () => void
+}
+
+export const {{pascalCase name}}Context = createContext({} as {{pascalCase name}}ContextProps)
+
+export const {{pascalCase name}}ContextProvider: React.FC = ({ children }) => {
+  const { setContainerLoading, setContainerError, setGlobalError } =
+    useContext(AppContext)
+  const [{{lowerCase name}}Data, set{{pascalCase name}}Data] = useState({} as {{pascalCase name}}Props)
+  const router = useRouter()
+  const { id } = router.query
+
+  const updateFormData: Update{{pascalCase name}}Props = (field, value) => {
+    const newFormData = {
+      ...{{lowerCase name}}Data,
+      [field]: value
+    }
+    set{{pascalCase name}}Data(newFormData)
+  }
+
+  const update = async () => {
+    const {{lowerCase name}}Id = typeof id === 'string' ? parseInt(id) : 0
+    setContainerLoading(true)
+    const save = await update{{pascalCase name}}({{lowerCase name}}Data, {{lowerCase name}}Id)
+    if (save.success) {
+      await getData({{lowerCase name}}Id)
+    } else {
+      setGlobalError(save.error)
+    }
+    setContainerLoading(false)
+  }
+
+  const remove = async () => {
+    const {{lowerCase name}}Id = typeof id === 'string' ? parseInt(id) : 0
+    setContainerLoading(true)
+    const remove = await delete{{pascalCase name}}({{lowerCase name}}Id)
+    if (remove.success) {
+      router.push('/{{lowerCase name}}')
+    } else {
+      setGlobalError(remove.error)
+    }
+    setContainerLoading(false)
+  }
+
+  const set{{pascalCase name}} = (data: {{pascalCase name}}Props) => {
+    set{{pascalCase name}}Data(data)
+  }
+  const getData = async (id: number) => {
+    setContainerLoading(true)
+    const {{lowerCase name}} = await get{{pascalCase name}}(id)
+    if ({{lowerCase name}}.success) {
+      set{{pascalCase name}}({{lowerCase name}}.data)
+    } else {
+      setContainerError({{lowerCase name}}.error)
+    }
+    setContainerLoading(false)
+  }
+
+  useEffect(() => {
+    const {{lowerCase name}}Id = typeof id === 'string' ? parseInt(id) : 0
+    if ({{lowerCase name}}Id > 0) {
+      getData({{lowerCase name}}Id)
+    }
+  }, [id])
+
+  return (
+    <{{pascalCase name}}Context.Provider
+      value={ {
+        '{{lowerCase name}}': {{lowerCase name}}Data,
+        updateFormData,
+        update,
+        remove
+      } }
+    >
+      {children}
+    </{{pascalCase name}}Context.Provider>
+  )
+}

@@ -22,7 +22,7 @@ const NavList = () => {
   const [userType, setUserType] = useState('')
   const router = useRouter()
   const { user, logout } = useContext(UserContext)
-  const { setMobileOpen } = useContext(AppContext)
+  const { setMobileOpen, setContainerError } = useContext(AppContext)
 
   useEffect(() => {
     if (user?.role?.name) {
@@ -38,6 +38,7 @@ const NavList = () => {
 
   const goTo = (menu: string) => {
     setMobileOpen(false)
+    setContainerError('')
     router.push(`/${menu === 'home' ? '' : menu}`)
   }
 
