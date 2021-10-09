@@ -13,7 +13,7 @@ export type TextFieldPropsBase = {
   requiredCharCountRegex?: RegExp
 } & TextFieldProps
 
-const TextField = ({
+const MasketInput = ({
   value,
   label,
   error = false,
@@ -78,4 +78,4 @@ const TextField = ({
   )
 }
 
-export default TextField
+export default MasketInput
