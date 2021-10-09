@@ -1,60 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { OrganProps } from '../types/organs'
-import api from 'services/api'
-
-type OrganResponse = {
-  data: OrganProps
-}
-type OrgansResponse = {
-  data: OrganProps[]
-}
+import api, { handleResponse } from 'services/api'
+import { AxiosResponse } from 'axios'
 
 export const getOrgans = async () => {
   try {
-    const organs: OrgansResponse = await api.get('/organ')
-    return {
-      data: organs.data,
-      success: true
-    }
-  } catch (err) {
-    return {
-      data: [] as OrganProps[],
-      success: false,
-      error: 'Erro ao recuperar dados de Órgãos'
-    }
+    const organs: AxiosResponse = await api.get('/organ')
+    return handleResponse(organs, 'array')
+  } catch (err: any) {
+    const response: AxiosResponse = err.response
+    return handleResponse(response, 'array')
   }
 }
 
 export const getOrgan = async (id: number) => {
   try {
-    const organ: OrganResponse = await api.get(`organ/${id}`)
-
-    return {
-      data: organ.data,
-      success: true
-    }
-  } catch (err) {
-    return {
-      data: {} as OrganProps,
-      success: false,
-      error: 'Erro ao recuperar dados de Órgãos.'
-    }
+    const organ: AxiosResponse = await api.get(`organ/${id}`)
+    return handleResponse(organ, 'object')
+  } catch (err: any) {
+    const response: AxiosResponse = err.response
+    return handleResponse(response, 'object')
   }
 }
 
 export const createOrgan = async (data: Partial<OrganProps>) => {
   try {
-    const save: OrganResponse = await api.post('/organ', data)
-    return {
-      data: save.data,
-      success: true
-    }
-  } catch (err) {
-    return {
-      data: {} as OrganProps,
-      success: false,
-      error: 'Erro ao criar registro.'
-    }
+    const save: AxiosResponse = await api.post('/organ', data)
+    return handleResponse(save)
+  } catch (err: any) {
+    const response: AxiosResponse = err.response
+    return handleResponse(response)
   }
 }
 export const updateOrgan = async (
@@ -62,31 +38,19 @@ export const updateOrgan = async (
   id: OrganProps['id']
 ) => {
   try {
-    const save: OrganResponse = await api.put(`/organ/${id}`, data)
-    return {
-      data: save.data,
-      success: true
-    }
-  } catch (err) {
-    return {
-      data: {} as OrganProps,
-      success: false,
-      error: 'Erro ao salvar registro.'
-    }
+    const save: AxiosResponse = await api.put(`/organ/${id}`, data)
+    return handleResponse(save)
+  } catch (err: any) {
+    const response: AxiosResponse = err.response
+    return handleResponse(response)
   }
 }
 export const deleteOrgan = async (id: OrganProps['id']) => {
   try {
-    const save: OrganResponse = await api.delete(`/organ/${id}`)
-    return {
-      data: save.data,
-      success: true
-    }
-  } catch (err) {
-    return {
-      data: {} as OrganProps,
-      success: false,
-      error: 'Erro ao deletar dados.'
-    }
+    const save: AxiosResponse = await api.delete(`/organ/${id}`)
+    return handleResponse(save)
+  } catch (err: any) {
+    const response: AxiosResponse = err.response
+    return handleResponse(response)
   }
 }

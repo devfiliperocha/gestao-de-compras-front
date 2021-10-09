@@ -12,10 +12,23 @@ import { OrgansContext } from '../../context/organs'
 import useTitle from 'Hooks/useTitle'
 
 const OrganList = () => {
-  const { organs, setOrgans, create, newOrgan, setFormData } =
-    useContext(OrgansContext)
+  const {
+    organs,
+    setOrgans,
+    create,
+    newOrgan,
+    setFormData,
+    errors,
+    clearErrors
+  } = useContext(OrgansContext)
   const [isNewOrgaoModalOpen, setNewOrgaoModalOpen] = useState(false)
   const router = useRouter()
+
+  const closeModalNewOrgao = () => {
+    setFormData({})
+    clearErrors()
+    setNewOrgaoModalOpen(false)
+  }
 
   const onOrganClick = (id: number) => {
     router.push(`/organ/${id}`)
@@ -38,11 +51,11 @@ const OrganList = () => {
       <Modal
         title="Cadastrar Novo Órgão"
         open={isNewOrgaoModalOpen}
-        onClose={() => setNewOrgaoModalOpen(false)}
+        onClose={() => closeModalNewOrgao()}
         action={
           <S.Actions>
             <Button
-              onClick={() => setNewOrgaoModalOpen(false)}
+              onClick={() => closeModalNewOrgao()}
               variant="outlined"
               color="error"
             >
@@ -53,7 +66,11 @@ const OrganList = () => {
         }
       >
         <Container maxWidth="lg">
-          <OrganForm organ={newOrgan} onUpdateForm={setFormData} />
+          <OrganForm
+            organ={newOrgan}
+            onUpdateForm={setFormData}
+            errors={errors}
+          />
         </Container>
       </Modal>
 
