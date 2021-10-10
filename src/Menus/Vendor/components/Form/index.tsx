@@ -20,7 +20,7 @@ import Alert from 'components/Atoms/Alert'
 export type VendorFormProps = {
   disabled?: boolean
   onUpdateForm: (vendor: Partial<VendorProps>) => void
-  onUpdateDocument: (field: Docs, value: File) => void
+  onUpdateDocument: (field: Docs, status: 'error' | 'success') => void
   vendor: Partial<VendorProps>
   errors: VendorFormErrors | undefined
 }

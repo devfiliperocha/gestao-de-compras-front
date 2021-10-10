@@ -6,14 +6,12 @@ import { getVendor, updateVendor } from '../service/vendors'
 import { useRouter } from 'next/dist/client/router'
 import { AppContext } from 'contexts/app'
 import { Docs } from 'types/utils'
-import { File } from 'types/file'
 
 type VendorContextProps = {
   vendor: Partial<VendorProps>
   setFormData: (vendor: Partial<VendorProps>) => void
   updateVendorStatus: (status: 'error' | 'success') => void
-  updateDocStatus: (field: Docs, value: File) => void
-  update: () => void
+  updateDocStatus: (field: Docs, status: 'error' | 'success') => void
   errors: VendorFormErrors | undefined
 }
 
@@ -26,6 +24,7 @@ export const VendorContextProvider: React.FC = ({ children }) => {
     {} as Partial<VendorContextProps['vendor']>
   )
   const [errors, setErrors] = useState({} as VendorContextProps['errors'])
+  const [error, setError] = useState('')
   const router = useRouter()
   const { id } = router.query
 
@@ -33,16 +32,14 @@ export const VendorContextProvider: React.FC = ({ children }) => {
     setVendorData(vendor)
   }
 
-  const updateVendorStatus = (status: 'error' | 'success') => {
-    //TODO: Rever essa função, pois não está alterando o status dos docs, apenas do vendor
+  const updateVendorStatus = async (status: 'error' | 'success') => {
     const docs: Docs[] = [
       'corporateDocPdf',
       'federalCertificatePdf',
       'fgtsCertificatePdf',
       'laborCertificatePdf',
       'municipalCertificatePdf',
-      'stateCertificatePdf',
-      'declaration'
+      'stateCertificatePdf'
     ]
 
     if (status === 'success') {
@@ -56,10 +53,15 @@ export const VendorContextProvider: React.FC = ({ children }) => {
       }
     }
 
+    const toUpdate: VendorContextProps['vendor'] = {}
     for (const doc of docs) {
-      updateDocStatus(doc, {
-        status: { text: '', type: status }
-      })
+      toUpdate[doc] = {
+        ...vendorData[doc],
+        status: {
+          type: status,
+          text: ' '
+        }
+      }
     }
 
     const newFormData = {
@@ -69,32 +71,56 @@ export const VendorContextProvider: React.FC = ({ children }) => {
         text: status === 'error' ? 'Cadastro Rejeitado' : 'Cadastro Aprovado'
       }
     }
-    setVendorData(newFormData)
+    await update({
+      status: newFormData.status,
+      ...toUpdate
+    })
+    if (!error) {
+      setVendorData(newFormData)
+    }
   }
 
-  const updateDocStatus = (field: Docs, value: File) => {
+  const updateDocStatus = async (field: Docs, status: 'error' | 'success') => {
     const newFormData = {
       ...vendorData,
       [field]: {
         ...vendorData[field],
-        ...value
+        status: {
+          type: status,
+          text: ''
+        }
       }
     }
-    setVendorData(newFormData)
+    await update({
+      [field]: {
+        ...newFormData[field],
+        status: {
+          type: status,
+          text: ' '
+        }
+      }
+    })
+    if (!error) {
+      setVendorData(newFormData)
+    }
   }
 
-  const update = async () => {
+  const update = async (data: VendorContextProps['vendor']) => {
     const vendorId = typeof id === 'string' ? parseInt(id) : 0
     setContainerLoading(true)
-    const save = await updateVendor(vendorData, vendorId)
+    setError('')
+    setErrors({} as VendorFormErrors)
+    const save = await updateVendor(data ? data : vendorData, vendorId)
     if (save.success) {
       await getData(vendorId)
     } else {
       if (typeof save.error === 'string') {
         setGlobalMessage({ type: 'error', text: save.error })
+        setError(save.error)
       } else {
         setGlobalMessage({ type: 'error', text: 'Erro ao atualizar registro!' })
         setErrors(save.error as VendorFormErrors)
+        setError('Erro ao atualizar registro!')
       }
     }
     setContainerLoading(false)
@@ -131,7 +157,6 @@ export const VendorContextProvider: React.FC = ({ children }) => {
       value={{
         vendor: vendorData,
         setFormData,
-        update,
         updateVendorStatus,
         updateDocStatus,
         errors

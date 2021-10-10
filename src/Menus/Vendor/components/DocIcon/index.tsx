@@ -9,12 +9,13 @@ import PdfViewer from 'components/Atoms/PdfViewer'
 import { Container } from '@material-ui/core'
 import Button from 'components/Atoms/Button'
 import { Docs } from 'types/utils'
+import moment from 'moment'
 
 export type DocIconProps = {
   docData?: File
   docName?: Docs
   fileName?: string
-  onUpdateDoc: (field: Docs, value: File) => void
+  onUpdateDoc: (field: Docs, status: 'error' | 'success') => void
 }
 
 const DocIcon = ({
@@ -31,23 +32,13 @@ const DocIcon = ({
     return (
       <>
         <Button
-          onClick={() =>
-            onUpdateDoc(docName, {
-              status: { text: '', type: 'error' }
-            })
-          }
+          onClick={() => onUpdateDoc(docName, 'error')}
           variant="outlined"
           color="error"
         >
           Rejeitar Documento
         </Button>
-        <Button
-          onClick={() =>
-            onUpdateDoc(docName, {
-              status: { text: '', type: 'success' }
-            })
-          }
-        >
+        <Button onClick={() => onUpdateDoc(docName, 'success')}>
           Aprovar Documento
         </Button>
       </>
@@ -72,7 +63,8 @@ const DocIcon = ({
         {fileName}
       </Typography>
       <Typography variant="overline" color="accent">
-        {docData?.expirationDate}
+        {docData?.expirationDate &&
+          moment(docData?.expirationDate).format('DD/MM/YYYY')}
       </Typography>
 
       {docData && (
