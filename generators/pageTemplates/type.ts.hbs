@@ -10,3 +10,17 @@ export type Update{{pascalCase name}}Props = (
   field: keyof {{pascalCase name}}Props,
   value: ValueOf<{{pascalCase name}}Props>
 ) => void
+
+
+type {{pascalCase name}}ErrorFields = {
+  address?: string
+  'address.address'?: string
+  'address.number'?: string
+  'address.CEP'?: string
+  'address.district'?: string
+  'address.city'?: string
+  'address.state'?: string
+  'address.complement'?: string
+}
+
+export type {{pascalCase name}}FormErrors = Record<keyof {{pascalCase name}}ErrorFields, string[]>

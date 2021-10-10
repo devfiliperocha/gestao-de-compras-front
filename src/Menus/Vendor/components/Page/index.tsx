@@ -5,38 +5,43 @@ import { Container } from '@material-ui/core'
 import { AppContext } from 'contexts/app'
 import Button from 'components/Atoms/Button'
 import Modal from 'components/Atoms/Modal'
-import {{pascalCase name}}Form from '../Form'
-import { {{pascalCase name}}Context } from '../../context/{{lowerCase name}}'
+import VendorForm from '../Form'
+import { VendorContext } from '../../context/vendor'
+import VendorAprovationHeader from '../AprovationHeader'
 import useTitle from 'Hooks/useTitle'
 
-const {{pascalCase name}}Page = () => {
-  const { {{lowerCase name}}, update, remove, setFormData, errors } =
-    useContext({{pascalCase name}}Context)
+const VendorPage = () => {
+  const { vendor, updateVendorStatus, setFormData, updateDocStatus, errors } =
+    useContext(VendorContext)
   const { isContainerLoading } = useContext(AppContext)
   const [isConfirmModalOpen, openConfirmModal] = useState(false)
   const [isRemoveModalOpen, openRemoveModal] = useState(false)
 
-  useTitle(`Órgãos > ${ {{lowerCase name}}.name || ''}`)
+  useTitle(`Órgãos > ${vendor.corporateName || ''}`)
 
   return (
     <S.Wrapper maxWidth="lg">
       {!isContainerLoading && (
         <>
-          <{{pascalCase name}}Form {{lowerCase name}}={ {{lowerCase name}} } onUpdateForm={setFormData} errors={errors} />
-          <S.Actions>
-            <Button
-              onClick={() => openRemoveModal(true)}
-              variant="outlined"
-              color="error"
-            >
-              Excluir {{singularLabel}}
-            </Button>
-            <Button onClick={() => openConfirmModal(true)}>
-              Salvar alterações
-            </Button>
-          </S.Actions>
+          <VendorAprovationHeader
+            showAction={true}
+            vendor={vendor}
+            onAprove={() => {
+              openConfirmModal(true)
+            }}
+            onReject={() => {
+              openRemoveModal(true)
+            }}
+          ></VendorAprovationHeader>
+          <VendorForm
+            vendor={vendor}
+            onUpdateForm={setFormData}
+            disabled
+            errors={errors}
+            onUpdateDocument={updateDocStatus}
+          />
           <Modal
-            title="Confirmar Alterações?"
+            title="Aprovar Fornecedor?"
             open={isConfirmModalOpen}
             onClose={() => openConfirmModal(false)}
             action={
@@ -48,17 +53,19 @@ const {{pascalCase name}}Page = () => {
                 >
                   Cancelar
                 </Button>
-                <Button onClick={() => update()}>Confirmar</Button>
+                <Button onClick={() => updateVendorStatus('success')}>
+                  Confirmar
+                </Button>
               </S.Actions>
             }
           >
             <Container maxWidth="lg">
-              Tem certeza que deseja salvar as alterações?
+              Tem certeza que deseja aprovar o cadastro desse fornecedor?
             </Container>
           </Modal>
 
           <Modal
-            title="Excluir Registro?"
+            title="Rejeitar Fornecedor?"
             open={isRemoveModalOpen}
             onClose={() => openRemoveModal(false)}
             action={
@@ -70,12 +77,14 @@ const {{pascalCase name}}Page = () => {
                 >
                   Cancelar
                 </Button>
-                <Button onClick={() => remove()}>Excluir</Button>
+                <Button onClick={() => updateVendorStatus('error')}>
+                  Rejeitar
+                </Button>
               </S.Actions>
             }
           >
             <Container maxWidth="lg">
-              Tem certeza que deseja excluir este registro?
+              Tem certeza que deseja rejeitar o cadastro desse fornecedor?
             </Container>
           </Modal>
         </>
@@ -84,4 +93,4 @@ const {{pascalCase name}}Page = () => {
   )
 }
 
-export default {{pascalCase name}}Page
+export default VendorPage

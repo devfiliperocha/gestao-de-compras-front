@@ -7,13 +7,13 @@ import PdfViewer from 'components/Atoms/PdfViewer'
 import { Container } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Status as StatusProps } from 'types/utils'
-import { Vendors } from 'types/vendors'
+import { VendorProps } from 'Menus/Vendor/types/vendors'
 
 export type VendorAprovationHeaderProps = {
   showAction?: boolean
   onAprove?: (ev: React.SyntheticEvent) => void
   onReject?: (ev: React.SyntheticEvent) => void
-  vendor: Vendors
+  vendor: Partial<VendorProps>
 }
 
 const VendorAprovationHeader = ({
@@ -66,11 +66,14 @@ const VendorAprovationHeader = ({
       </Typography>
 
       <S.StatusWrapper>
-        <Status type={vendor.status.type} text={vendor.status.text} />
+        <Status
+          type={vendor?.status?.type || 'warning'}
+          text={vendor?.status?.text || ''}
+        />
       </S.StatusWrapper>
 
       <S.ActionWrapper>
-        {showAction && renderByStatus(vendor.status?.type)}
+        {showAction && renderByStatus(vendor?.status?.type || 'warning')}
         <Modal
           title="Declaração do Fornecedor"
           open={isDocumentShowing}

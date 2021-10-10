@@ -1,7 +1,9 @@
 import styled from 'styled-components'
-import VendorFormBase from '@material-ui/core/FormControl'
+import FormBase from '@material-ui/core/FormControl'
 
-export const Wrapper = styled(VendorFormBase)``
+export const Wrapper = styled(FormBase)`
+  width: 100%;
+`
 
 export const Input = styled.div`
   padding: 1rem;

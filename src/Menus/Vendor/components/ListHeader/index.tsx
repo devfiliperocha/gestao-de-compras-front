@@ -2,7 +2,7 @@ import * as S from './styles' /** S = Styles */
 import Button from 'components/Atoms/Button'
 import Icon from 'components/Atoms/Icon'
 import { useState } from 'react'
-import { VendorColumns } from 'types/vendors'
+import { VendorColumns } from '../../types/vendors'
 import { SortDirections } from 'types/utils'
 
 export type VendorListHeaderProps = {
@@ -11,7 +11,7 @@ export type VendorListHeaderProps = {
 
 const VendorListHeader = ({ onSort, ...props }: VendorListHeaderProps) => {
   const [sortDirection, setSortDirection] = useState<SortDirections>('asc')
-  const [sortColumn, setSortColumn] = useState<VendorColumns>('corporateName')
+  const [sortColumn, setSortColumn] = useState<VendorColumns>('id')
 
   const toggleSortDirection = () =>
     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')

@@ -38,8 +38,12 @@ const NavList = () => {
 
   const goTo = (menu: string) => {
     setMobileOpen(false)
-    setContainerError('')
-    router.push(`/${menu === 'home' ? '' : menu}`)
+    const menuName = `/${menu === 'home' ? '' : menu}`
+    const atualPage = router.pathname
+    if (atualPage !== menuName) {
+      router.push(`/${menu === 'home' ? '' : menu}`)
+      setContainerError('')
+    }
   }
 
   const LogOut = () => {

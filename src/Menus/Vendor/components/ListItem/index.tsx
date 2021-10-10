@@ -1,12 +1,12 @@
 import * as S from './styles' /** S = Styles */
-import { Vendors } from 'types/vendors'
+import { VendorProps } from '../../types/vendors'
 import Button from 'components/Atoms/Button'
 import Status from 'components/Molecules/Status'
 import Typography from 'components/Atoms/Typography'
 
 type VendorListItemProps = {
-  vendor: Vendors
-  onStatusClick?: (status: Vendors['status']['type']) => void
+  vendor: VendorProps
+  onStatusClick?: (status: VendorProps['status']['type']) => void
   onActionClick?: (event: React.SyntheticEvent) => void
 }
 

@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { {{pascalCase name}}Props, Update{{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
+import { {{pascalCase name}}FormErrors, {{pascalCase name}}Props } from '../types/{{lowerCase name}}s'
 import { create{{pascalCase name}}, get{{pascalCase name}}s } from '../service/{{lowerCase name}}s'
 import { AppContext } from 'contexts/app'
 
-type {{pascalCase name}}sContextProps = {
+export type {{pascalCase name}}sContextProps = {
   {{lowerCase name}}s: {{pascalCase name}}Props[]
   isLoading?: boolean
   hasError?: boolean
@@ -12,8 +12,10 @@ type {{pascalCase name}}sContextProps = {
   set{{pascalCase name}}s: ({{lowerCase name}}s: {{pascalCase name}}Props[]) => void
   setError?: (errorMsg: string | undefined) => void
   create: () => void
-  new{{pascalCase name}}: {{pascalCase name}}Props
-  updateFormData: Update{{pascalCase name}}Props
+  new{{pascalCase name}}: Partial<{{pascalCase name}}Props>
+  setFormData: ({{lowerCase name}}: Partial<{{pascalCase name}}Props>) => void
+  errors: {{pascalCase name}}FormErrors | undefined
+  clearErrors: () => void
 }
 export const {{pascalCase name}}sContext = createContext({} as {{pascalCase name}}sContextProps)
 
@@ -21,11 +23,14 @@ export const {{pascalCase name}}sContextProvider: React.FC = ({ children }) => {
   const {
     setContainerLoading,
     setContainerError,
-    setGlobalError,
+    setGlobalMessage,
     setGlobalLoading
   } = useContext(AppContext)
   const [{{lowerCase name}}sData, set{{pascalCase name}}sData] = useState([] as {{pascalCase name}}Props[])
-  const [new{{pascalCase name}}Data, setNew{{pascalCase name}}Data] = useState({} as {{pascalCase name}}Props)
+  const [errors, setErrors] = useState({} as {{pascalCase name}}sContextProps['errors'])
+  const [new{{pascalCase name}}Data, setNew{{pascalCase name}}Data] = useState<
+    {{pascalCase name}}sContextProps['new{{pascalCase name}}']
+  >({})
 
   const set{{pascalCase name}}s = (data: {{pascalCase name}}Props[]) => {
     set{{pascalCase name}}sData(data)
@@ -34,26 +39,34 @@ export const {{pascalCase name}}sContextProvider: React.FC = ({ children }) => {
     setContainerLoading(true)
     const {{lowerCase name}}s = await get{{pascalCase name}}s()
     if ({{lowerCase name}}s.success) {
-      set{{pascalCase name}}s({{lowerCase name}}s.data)
+      set{{pascalCase name}}s({{lowerCase name}}s.data as {{pascalCase name}}Props[])
     } else {
-      setContainerError({{lowerCase name}}s.error)
+      if (typeof {{lowerCase name}}s.error === 'string') {
+        setContainerError({{lowerCase name}}s.error)
+      } else {
+        setContainerError('Erro ao carregar registros!')
+        setErrors({{lowerCase name}}s.error as {{pascalCase name}}FormErrors)
+      }
     }
     setContainerLoading(false)
   }
-  const updateFormData: Update{{pascalCase name}}Props = (field, value) => {
-    const newFormData = {
-      ...new{{pascalCase name}}Data,
-      [field]: value
-    }
-    setNew{{pascalCase name}}Data(newFormData)
+
+  const setFormData = ({{lowerCase name}}: {{pascalCase name}}sContextProps['new{{pascalCase name}}']) => {
+    setNew{{pascalCase name}}Data({{lowerCase name}})
   }
+
   const create = async () => {
     setGlobalLoading(true)
     const create = await create{{pascalCase name}}(new{{pascalCase name}}Data)
     if (create.success) {
       await getData()
     } else {
-      setGlobalError(create.error)
+      if (typeof create.error === 'string') {
+        setGlobalMessage({ type: 'error', text: create.error })
+      } else {
+        setGlobalMessage({ type: 'error', text: 'Erro ao criar registros!' })
+        setErrors(create.error as {{pascalCase name}}FormErrors)
+      }
     }
     setGlobalLoading(false)
   }
@@ -65,11 +78,13 @@ export const {{pascalCase name}}sContextProvider: React.FC = ({ children }) => {
   return (
     <{{pascalCase name}}sContext.Provider
       value={ {
-        '{{lowerCase name}}s': {{lowerCase name}}sData,
+        {{lowerCase name}}s: {{lowerCase name}}sData,
         set{{pascalCase name}}s,
         new{{pascalCase name}}: new{{pascalCase name}}Data,
-        updateFormData,
-        create
+        setFormData,
+        create,
+        errors,
+        clearErrors: () => setErrors(undefined)
       } }
     >
       {children}

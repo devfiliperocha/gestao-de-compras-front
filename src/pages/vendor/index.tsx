@@ -1,17 +1,9 @@
-import VendorPage from 'components/Templates/Vendor/VendorPage'
-import { VendorsContextProvider } from 'contexts/vendors'
 import React from 'react'
-import AppLeftMenu from 'components/Molecules/AppWrapper/AppLeftMenu'
 import { withAuth } from 'components/hoc/Auth'
+import VendorsMain from 'Menus/Vendor/vendors'
 
-function VendorsPage() {
-  return (
-    <VendorsContextProvider>
-      <AppLeftMenu>
-        <VendorPage />
-      </AppLeftMenu>
-    </VendorsContextProvider>
-  )
+function Vendors() {
+  return <VendorsMain />
 }
 
-export default withAuth(VendorsPage)
+export default withAuth(Vendors)
