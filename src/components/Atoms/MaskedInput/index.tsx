@@ -56,6 +56,7 @@ const MasketInput = ({
         <S.Wrapper
           {...inputProps}
           placeholder={placeholder}
+          disabled={disabled}
           fullWidth={fullWidth}
           size="small"
           color="info"

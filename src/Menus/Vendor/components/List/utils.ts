@@ -1,13 +1,13 @@
-import { VendorColumns, Vendors } from 'types/vendors'
+import { VendorColumns, VendorProps } from '../../types/vendors'
 import { SortDirections } from 'types/utils'
 
 export const sortVendors = (
   sortColumn: VendorColumns,
   sortDirection: SortDirections,
-  vendors: Vendors[]
-): Vendors[] => {
-  const sortedVendors = [...vendors]
-  sortedVendors.sort((a, b) => {
+  vendor: VendorProps[]
+): VendorProps[] => {
+  const sortedVendor = [...vendor]
+  sortedVendor.sort((a, b) => {
     let aValue = a[sortColumn] || 0
     let bValue = b[sortColumn] || 0
 
@@ -34,5 +34,5 @@ export const sortVendors = (
       return 0
     }
   })
-  return sortedVendors
+  return sortedVendor
 }
